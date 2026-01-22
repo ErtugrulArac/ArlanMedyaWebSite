@@ -244,9 +244,9 @@ const NedenBiz = () => {
       >
         {/* Header with 3D Cube */}
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 mb-12 sm:mb-20">
-          {/* 3D Rotating Cube - Hidden on mobile, smaller on tablet */}
+          {/* 3D Rotating Cube - Visible on all screens */}
           <motion.div
-            className="flex-shrink-0 hidden sm:block scale-75 lg:scale-100"
+            className="flex-shrink-0 scale-75 sm:scale-75 lg:scale-100"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
