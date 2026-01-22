@@ -100,7 +100,10 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       gsap.set([panel, ...preLayers], { xPercent: offscreen });
 
       gsap.set(plusH, { transformOrigin: '50% 50%', rotate: 0 });
-      gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
+      // ensure bottom line is horizontal initially (not vertical)
+      gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 0 });
+      // ensure middle line is visible and scaled normally
+      if (middleLineRef.current) gsap.set(middleLineRef.current, { opacity: 1, scaleX: 1, transformOrigin: '50% 50%' });
       gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
 
       gsap.set(textInner, { yPercent: 0 });

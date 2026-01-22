@@ -267,7 +267,7 @@ const MainHero = () => {
   }, [])
 
   return (
-    <section ref={containerRef} className="relative overflow-hidden">
+    <section ref={containerRef} className="relative overflow-hidden pt-16 lg:pt-32">
       {/* 3D Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <AnimatedGrid />
