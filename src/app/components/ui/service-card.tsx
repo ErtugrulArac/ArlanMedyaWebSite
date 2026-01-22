@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
+import React, { useRef, useState, useEffect } from 'react'
+import { motion, useMotionValue, useSpring, useTransform, useInView } from 'motion/react'
 
 interface ServiceCardProps {
   title: string
@@ -14,6 +14,26 @@ interface ServiceCardProps {
 const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gradient, delay = 0 }) => {
   const cardRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  
+  // Check if card is in view (for mobile scroll activation)
+  const isInView = useInView(cardRef, { 
+    amount: 0.6, // 60% of card must be visible
+    once: false 
+  })
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // On mobile, activate when in view
+  const isActive = isMobile ? isInView : isHovered
 
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -61,7 +81,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
         {/* Glow Effect */}
         <motion.div
           className={`absolute -inset-1 rounded-3xl bg-gradient-to-r ${gradient} opacity-0 blur-xl transition-opacity duration-500`}
-          animate={{ opacity: isHovered ? 0.4 : 0 }}
+          animate={{ opacity: isActive ? 0.4 : 0 }}
         />
 
         {/* Card */}
@@ -69,7 +89,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
           {/* Animated Background Gradient */}
           <motion.div
             className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 transition-opacity duration-500`}
-            animate={{ opacity: isHovered ? 0.1 : 0 }}
+            animate={{ opacity: isActive ? 0.1 : 0 }}
           />
 
           {/* Grid Pattern */}
@@ -82,15 +102,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
           <motion.div
             className="absolute inset-0 opacity-0"
             animate={{ 
-              opacity: isHovered ? 1 : 0,
-              background: isHovered ? 
+              opacity: isActive ? 1 : 0,
+              background: isActive ? 
                 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 55%, transparent 60%)' : 
                 'none'
             }}
             transition={{ duration: 0.5 }}
             style={{
               backgroundSize: '200% 200%',
-              animation: isHovered ? 'shine 1.5s ease-in-out infinite' : 'none'
+              animation: isActive ? 'shine 1.5s ease-in-out infinite' : 'none'
             }}
           />
 
@@ -100,14 +120,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
             <motion.div
               className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${gradient} p-[1px] mb-4 sm:mb-5`}
               animate={{ 
-                scale: isHovered ? 1.1 : 1,
-                rotateZ: isHovered ? 5 : 0
+                scale: isActive ? 1.1 : 1,
+                rotateZ: isActive ? 5 : 0
               }}
               transition={{ duration: 0.3 }}
             >
               <div className="w-full h-full rounded-2xl bg-[#0F172A] flex items-center justify-center">
                 <motion.div
-                  animate={{ scale: isHovered ? 1.2 : 1 }}
+                  animate={{ scale: isActive ? 1.2 : 1 }}
                   transition={{ duration: 0.3 }}
                   className="text-white"
                 >
@@ -120,7 +140,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
             <motion.h3
               className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 bg-clip-text"
               style={{ color: 'var(--text-primary)' }}
-              animate={{ x: isHovered ? 5 : 0 }}
+              animate={{ x: isActive ? 5 : 0 }}
               transition={{ duration: 0.3 }}
             >
               {title}
@@ -130,7 +150,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
             <motion.p
               className="text-xs sm:text-sm lg:text-base leading-relaxed"
               style={{ color: 'var(--text-secondary)' }}
-              animate={{ x: isHovered ? 5 : 0 }}
+              animate={{ x: isActive ? 5 : 0 }}
               transition={{ duration: 0.3, delay: 0.05 }}
             >
               {description}
@@ -140,7 +160,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
             <motion.div
               className="mt-4 sm:mt-5 flex items-center gap-2 text-[#38BDF8]"
               initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
+              animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -10 }}
               transition={{ duration: 0.3 }}
             >
               <span className="text-sm font-semibold">Detaylı Bilgi</span>
