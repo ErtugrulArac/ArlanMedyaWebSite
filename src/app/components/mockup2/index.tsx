@@ -337,7 +337,7 @@ const FeatureItem = ({
   description,
   delay = 0 
 }: { 
-  icon: React.ElementType
+  icon: React.ComponentType<{ className: string }>
   title: string
   description: string
   delay?: number
