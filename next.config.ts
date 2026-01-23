@@ -7,9 +7,6 @@ const nextConfig: NextConfig = {
   // Optimize production builds
   compress: true,
   
-  // Enable SWC minification for faster builds
-  swcMinify: true,
-  
   // Optimize images
   images: {
     formats: ['image/avif', 'image/webp'],
