@@ -411,20 +411,14 @@ const NasilCalisiyoruz = () => {
           animate={isTitleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Kicker */}
+          {/* Kicker - Simplified */}
           <motion.div
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#38BDF8]/10 border border-[#38BDF8]/20 mb-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isTitleInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ delay: 0.1 }}
           >
-            <motion.span
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="text-sm"
-            >
-              🚀
-            </motion.span>
+            <span className="text-sm">🚀</span>
             <span className="text-xs sm:text-sm font-medium text-[#38BDF8]">Sürecimiz</span>
           </motion.div>
 

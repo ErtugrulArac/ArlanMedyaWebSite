@@ -2,63 +2,24 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
-import ServiceCard from "../ui/service-card"
-import LogoLoop from "../ui/logo-loop"
-import TrueFocus from "../ui/true-focus"
+import dynamic from 'next/dynamic'
+// Heavy UI components are dynamically imported for better performance
+const ServiceCard = dynamic(() => import('../ui/service-card'))
+const LogoLoop = dynamic(() => import('../ui/logo-loop'))
+const TrueFocus = dynamic(() => import('../ui/true-focus'))
 import { SiGoogle, SiMeta, SiLinkedin, SiX, SiInstagram, SiYoutube, SiTiktok, SiSpotify } from 'react-icons/si'
 import { Sparkles, ArrowRight } from 'lucide-react'
 
-// 3D Floating Sphere Component
-const FloatingSphere = ({ 
-  size, 
-  color, 
-  position, 
-  delay = 0,
-  blur = false 
-}: { 
-  size: number
-  color: string
-  position: { x: string, y: string }
-  delay?: number
-  blur?: boolean
-}) => {
-  return (
-    <motion.div
-      className="absolute rounded-full"
-      style={{
-        width: size,
-        height: size,
-        left: position.x,
-        top: position.y,
-        background: `radial-gradient(circle at 30% 30%, ${color}, transparent 70%)`,
-        boxShadow: `0 0 ${size/2}px ${color}40, inset 0 0 ${size/3}px rgba(255,255,255,0.1)`,
-        filter: blur ? 'blur(2px)' : 'none',
-      }}
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ 
-        opacity: [0.4, 0.8, 0.4],
-        scale: [1, 1.1, 1],
-        y: [0, -30, 0],
-        x: [0, 15, 0],
-      }}
-      transition={{
-        duration: 8,
-        delay,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-    />
-  )
-}
+// Removed FloatingSphere for better performance
 
-// 3D Card Component with Tilt
-const Card3D = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
+// Simplified 3D Card Component with Tilt - Lighter version
+const Card3D = React.memo(({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
   const ref = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   
-  const rotateX = useSpring(useTransform(y, [-100, 100], [10, -10]), { stiffness: 300, damping: 30 })
-  const rotateY = useSpring(useTransform(x, [-100, 100], [-10, 10]), { stiffness: 300, damping: 30 })
+  const rotateX = useTransform(y, [-100, 100], [5, -5])
+  const rotateY = useTransform(x, [-100, 100], [-5, 5])
 
   const handleMouse = (e: React.MouseEvent) => {
     if (!ref.current) return
@@ -89,103 +50,34 @@ const Card3D = ({ children, className = "" }: { children: React.ReactNode, class
       {children}
     </motion.div>
   )
-}
+})
+Card3D.displayName = 'Card3D'
 
-// Glowing Ring Component
-const GlowingRing = ({ size, delay = 0 }: { size: number, delay?: number }) => {
-  return (
-    <motion.div
-      className="absolute rounded-full border-2 border-[#38BDF8]/20"
-      style={{
-        width: size,
-        height: size,
-        left: '50%',
-        top: '50%',
-        marginLeft: -size/2,
-        marginTop: -size/2,
-      }}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ 
-        opacity: [0, 0.5, 0],
-        scale: [0.8, 1.2, 0.8],
-      }}
-      transition={{
-        duration: 4,
-        delay,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-    />
-  )
-}
+// Removed GlowingRing for better performance
 
-// Animated Grid Background
-const AnimatedGrid = () => {
+// Simplified Static Grid Background
+const AnimatedGrid = React.memo(() => {
   return (
-    <div className="absolute inset-0 overflow-hidden opacity-20">
+    <div className="absolute inset-0 overflow-hidden opacity-10">
       <div 
         className="absolute inset-0"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px)
+            linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px)
           `,
           backgroundSize: '50px 50px',
-          transform: 'perspective(500px) rotateX(60deg)',
-          transformOrigin: 'center top',
-        }}
-      />
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(15, 23, 42, 1) 100%)',
         }}
       />
     </div>
   )
-}
+})
+AnimatedGrid.displayName = 'AnimatedGrid'
 
-// Particle Effect
-const Particles = () => {
-  const particles = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 3 + 1,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5,
-  }))
+// Removed Particles for better performance
 
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full bg-[#38BDF8]"
-          style={{
-            width: p.size,
-            height: p.size,
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-          }}
-          animate={{
-            y: [0, -100, 0],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
-    </div>
-  )
-}
-
-// Stats Counter Component
-const AnimatedCounter = ({ value, suffix = "", label }: { value: number, suffix?: string, label: string }) => {
+// Stats Counter Component - Optimized with memo
+const AnimatedCounter = React.memo(({ value, suffix = "", label }: { value: number, suffix?: string, label: string }) => {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -210,8 +102,8 @@ const AnimatedCounter = ({ value, suffix = "", label }: { value: number, suffix?
   useEffect(() => {
     if (!isVisible) return
     
-    const duration = 2000
-    const steps = 60
+    const duration = 1500 // Reduced from 2000
+    const steps = 40 // Reduced from 60
     const increment = value / steps
     let current = 0
     
@@ -231,7 +123,7 @@ const AnimatedCounter = ({ value, suffix = "", label }: { value: number, suffix?
   return (
     <div ref={ref}>
       <motion.div 
-        className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#38BDF8] via-cyan-400 to-blue-500 bg-clip-text text-transparent"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold bg-linear-to-r from-[#38BDF8] via-cyan-400 to-blue-500 bg-clip-text text-transparent"
         initial={{ scale: 0.5, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100 }}
@@ -241,7 +133,11 @@ const AnimatedCounter = ({ value, suffix = "", label }: { value: number, suffix?
       <div className="text-xs sm:text-sm md:text-base mt-2" style={{color: 'var(--text-secondary)'}}>{label}</div>
     </div>
   )
-}
+})
+AnimatedCounter.displayName = 'AnimatedCounter'
+// NOT: Görsellerde next/image kullanın ve boyutları optimize edin. Örnek:
+// import Image from 'next/image'
+// <Image src="/path/to/image.jpg" width={400} height={300} alt="Açıklama" priority />
 
 const MainHero = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -268,22 +164,13 @@ const MainHero = () => {
 
   return (
     <section ref={containerRef} className="relative overflow-hidden pt-16 lg:pt-32">
-      {/* 3D Background Elements */}
+      {/* Simplified 3D Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <AnimatedGrid />
-        <Particles />
         
-        {/* 3D Floating Spheres */}
-        <FloatingSphere size={300} color="#38BDF8" position={{ x: '80%', y: '10%' }} delay={0} />
-        <FloatingSphere size={200} color="#8B5CF6" position={{ x: '10%', y: '60%' }} delay={1} blur />
-        <FloatingSphere size={150} color="#EC4899" position={{ x: '70%', y: '70%' }} delay={2} />
-        <FloatingSphere size={100} color="#10B981" position={{ x: '20%', y: '20%' }} delay={3} blur />
-        <FloatingSphere size={80} color="#F59E0B" position={{ x: '85%', y: '50%' }} delay={4} />
-        
-        {/* Glowing Rings */}
-        <GlowingRing size={600} delay={0} />
-        <GlowingRing size={800} delay={1} />
-        <GlowingRing size={1000} delay={2} />
+        {/* Simplified Static Orbs - No FloatingSphere or Particles */}
+        <div className="absolute top-1/4 left-10 w-60 md:w-80 lg:w-96 h-60 md:h-80 lg:h-96 bg-gradient-to-br from-blue-500/20 to-cyan-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-10 w-60 md:w-80 h-60 md:h-80 bg-gradient-to-br from-cyan-400/15 to-blue-600/10 rounded-full blur-3xl"></div>
       </div>
 
       {/* Main Hero Content */}
@@ -294,46 +181,39 @@ const MainHero = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="text-center space-y-6 sm:space-y-8">
             
-            {/* Kicker Badge with Sparkles */}
+            {/* Kicker Badge with Sparkles - Simplified */}
             <motion.div 
               className="mb-4 sm:mb-6 flex justify-center"
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#38BDF8]/10 border border-[#38BDF8]/25 backdrop-blur-sm">
-                <motion.span 
-                  className="text-[#38BDF8]"
-                  animate={{ scale: [1, 1.1, 1], opacity: [1, 0.7, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                >
+                <span className="text-[#38BDF8]">
                   <Sparkles size={16} />
-                </motion.span>
+                </span>
                 <span className="text-xs sm:text-sm font-medium tracking-wider uppercase text-white/90">
                   Arlan Medya - Yazılım & Dijital Yönetim
                 </span>
               </div>
             </motion.div>
 
-            {/* Main Title - TrueFocus Effect */}
+            {/* Main Title - TrueFocus Effect - Simplified */}
             <motion.div 
               className="mb-4 sm:mb-6"
-              style={{
-                transform: `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0)`,
-              }}
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight [&_span]:bg-gradient-to-br [&_span]:from-white [&_span]:via-[#38BDF8] [&_span]:to-cyan-400 [&_span]:bg-clip-text [&_span]:text-transparent">
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight [&_span]:bg-linear-to-br [&_span]:from-white [&_span]:via-[#38BDF8] [&_span]:to-cyan-400 [&_span]:bg-clip-text [&_span]:text-transparent">
                 <TrueFocus 
                   sentence="Dijitalde Öne Çıkan Markalar Şanslı Değil, Doğru Yönlendirilmiştir."
                   manualMode={false}
-                  blurAmount={4}
+                  blurAmount={3}
                   borderColor="#38BDF8"
-                  glowColor="rgba(56, 189, 248, 0.6)"
-                  animationDuration={0.25}
-                  pauseBetweenAnimations={0.6}
+                  glowColor="rgba(56, 189, 248, 0.4)"
+                  animationDuration={0.2}
+                  pauseBetweenAnimations={0.5}
                 />
               </div>
             </motion.div>
@@ -419,7 +299,7 @@ const MainHero = () => {
               <p className="text-xs sm:text-sm mb-6 sm:mb-8" style={{color: 'var(--text-secondary)'}}>
                 Güvenilir markalarla çalışıyoruz
               </p>
-              <div className="relative h-[80px] overflow-hidden">
+              <div className="relative h-20 overflow-hidden">
                 <LogoLoop
                   logos={[
                     { node: <SiGoogle className="text-slate-400 hover:text-white transition-colors" />, title: "Google" },
@@ -476,7 +356,7 @@ const MainHero = () => {
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4"
               style={{color: 'var(--text-primary)'}}
             >
-              <span className="bg-gradient-to-r from-[#38BDF8] via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#38BDF8] via-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 Yazılım & Dijital Çözümler
               </span>
             </motion.h2>

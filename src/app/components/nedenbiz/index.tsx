@@ -4,19 +4,18 @@ import React, { useRef } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 
-// 3D Rotating Cube Component
-const Rotating3DCube = () => {
+// Simplified 3D Rotating Cube Component - Lighter version
+const Rotating3DCube = React.memo(() => {
   return (
     <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56" style={{ perspective: '1000px' }}>
       <motion.div
         className="relative w-full h-full"
         style={{ transformStyle: 'preserve-3d' }}
         animate={{ 
-          rotateX: [0, 360],
           rotateY: [0, 360],
         }}
         transition={{ 
-          duration: 20, 
+          duration: 30, // Slower rotation
           repeat: Infinity, 
           ease: "linear" 
         }}
@@ -26,10 +25,9 @@ const Rotating3DCube = () => {
           className="absolute inset-0 flex items-center justify-center rounded-2xl"
           style={{ 
             transform: 'translateZ(64px) sm:translateZ(80px)',
-            background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(56, 189, 248, 0.05))',
-            border: '1px solid rgba(56, 189, 248, 0.3)',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '0 0 40px rgba(56, 189, 248, 0.2)'
+            background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(56, 189, 248, 0.03))',
+            border: '1px solid rgba(56, 189, 248, 0.2)',
+            backdropFilter: 'blur(8px)',
           }}
         >
           <span className="text-4xl sm:text-5xl md:text-6xl">🚀</span>
@@ -40,84 +38,18 @@ const Rotating3DCube = () => {
           className="absolute inset-0 flex items-center justify-center rounded-2xl"
           style={{ 
             transform: 'rotateY(180deg) translateZ(64px)',
-            background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05))',
-            border: '1px solid rgba(168, 85, 247, 0.3)',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '0 0 40px rgba(168, 85, 247, 0.2)'
+            background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(168, 85, 247, 0.03))',
+            border: '1px solid rgba(168, 85, 247, 0.2)',
+            backdropFilter: 'blur(8px)',
           }}
         >
           <span className="text-4xl sm:text-5xl md:text-6xl">💎</span>
         </div>
-        
-        {/* Right Face */}
-        <div 
-          className="absolute inset-0 flex items-center justify-center rounded-2xl"
-          style={{ 
-            transform: 'rotateY(90deg) translateZ(64px)',
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05))',
-            border: '1px solid rgba(16, 185, 129, 0.3)',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '0 0 40px rgba(16, 185, 129, 0.2)'
-          }}
-        >
-          <span className="text-4xl sm:text-5xl md:text-6xl">⚡</span>
-        </div>
-        
-        {/* Left Face */}
-        <div 
-          className="absolute inset-0 flex items-center justify-center rounded-2xl"
-          style={{ 
-            transform: 'rotateY(-90deg) translateZ(64px)',
-            background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.05))',
-            border: '1px solid rgba(251, 191, 36, 0.3)',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '0 0 40px rgba(251, 191, 36, 0.2)'
-          }}
-        >
-          <span className="text-4xl sm:text-5xl md:text-6xl">🎯</span>
-        </div>
-        
-        {/* Top Face */}
-        <div 
-          className="absolute inset-0 flex items-center justify-center rounded-2xl"
-          style={{ 
-            transform: 'rotateX(90deg) translateZ(64px)',
-            background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(236, 72, 153, 0.05))',
-            border: '1px solid rgba(236, 72, 153, 0.3)',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '0 0 40px rgba(236, 72, 153, 0.2)'
-          }}
-        >
-          <span className="text-4xl sm:text-5xl md:text-6xl">✨</span>
-        </div>
-        
-        {/* Bottom Face */}
-        <div 
-          className="absolute inset-0 flex items-center justify-center rounded-2xl"
-          style={{ 
-            transform: 'rotateX(-90deg) translateZ(64px)',
-            background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.05))',
-            border: '1px solid rgba(99, 102, 241, 0.3)',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '0 0 40px rgba(99, 102, 241, 0.2)'
-          }}
-        >
-          <span className="text-4xl sm:text-5xl md:text-6xl">🏆</span>
-        </div>
       </motion.div>
-      
-      {/* Ground Shadow */}
-      <motion.div
-        className="absolute left-1/2 -translate-x-1/2 bottom-0 w-3/4 h-4 rounded-full bg-black/20 blur-xl"
-        animate={{ 
-          scale: [1, 1.1, 1],
-          opacity: [0.3, 0.5, 0.3]
-        }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      />
     </div>
   )
-}
+})
+Rotating3DCube.displayName = 'Rotating3DCube'
 
 // Animated Text Line Component
 const AnimatedTextLine = ({ 

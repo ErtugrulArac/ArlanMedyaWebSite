@@ -4,11 +4,11 @@ import React, { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Sparkles, Rocket, Target, TrendingUp, Zap, ArrowRight } from 'lucide-react'
 
-// 3D Tilting Card Component
-const TiltCard = ({ 
+// Simplified 3D Tilting Card Component - Lighter version
+const TiltCard = React.memo(({ 
   children, 
   className = "",
-  intensity = 15 
+  intensity = 10 // Reduced from 15
 }: { 
   children: React.ReactNode
   className?: string
@@ -18,8 +18,8 @@ const TiltCard = ({
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   
-  const rotateX = useSpring(useTransform(y, [-100, 100], [intensity, -intensity]), { stiffness: 300, damping: 30 })
-  const rotateY = useSpring(useTransform(x, [-100, 100], [-intensity, intensity]), { stiffness: 300, damping: 30 })
+  const rotateX = useTransform(y, [-100, 100], [intensity * 0.5, -intensity * 0.5])
+  const rotateY = useTransform(x, [-100, 100], [-intensity * 0.5, intensity * 0.5])
 
   const handleMouse = (e: React.MouseEvent) => {
     if (!ref.current) return
@@ -50,7 +50,8 @@ const TiltCard = ({
       {children}
     </motion.div>
   )
-}
+})
+TiltCard.displayName = 'TiltCard'
 
 // Animated Phone Mockup - Responsive version
 const PhoneMockup = ({ delay = 0, rotate = 0, zIndex = 1, isMobile = false }: { delay?: number; rotate?: number; zIndex?: number; isMobile?: boolean }) => {
@@ -369,8 +370,8 @@ const FeatureItem = ({
   )
 }
 
-// Animated Circular Background
-const CircularBackground = ({ isMobile = false }: { isMobile?: boolean }) => {
+// Simplified Circular Background - Reduced animations
+const CircularBackground = React.memo(({ isMobile = false }: { isMobile?: boolean }) => {
   const baseSize = isMobile ? 80 : 150
   const containerSize = isMobile ? 350 : 600
   
@@ -379,9 +380,9 @@ const CircularBackground = ({ isMobile = false }: { isMobile?: boolean }) => {
       className={`absolute ${isMobile ? 'left-1/2 -translate-x-1/2' : 'right-0'} top-1/2 -translate-y-1/2`}
       style={{ width: containerSize, height: containerSize }}
     >
-      {/* Main Circles */}
+      {/* Static Circles - No animation */}
       {[1, 2, 3, 4].map((i) => (
-        <motion.div
+        <div
           key={i}
           className="absolute rounded-full border border-[#38BDF8]/10"
           style={{
@@ -392,31 +393,11 @@ const CircularBackground = ({ isMobile = false }: { isMobile?: boolean }) => {
             marginLeft: `-${i * baseSize / 2}px`,
             marginTop: `-${i * baseSize / 2}px`,
           }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: i * 0.1 }}
-          viewport={{ once: true }}
         />
       ))}
       
-      {/* Animated Glow Ring */}
-      <motion.div
-        className="absolute rounded-full"
-        style={{
-          width: isMobile ? '200px' : '400px',
-          height: isMobile ? '200px' : '400px',
-          left: '50%',
-          top: '50%',
-          marginLeft: isMobile ? '-100px' : '-200px',
-          marginTop: isMobile ? '-100px' : '-200px',
-          background: 'radial-gradient(circle, transparent 45%, rgba(56, 189, 248, 0.1) 50%, transparent 55%)',
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      />
-
-      {/* Center Glow */}
-      <motion.div
+      {/* Static Center Glow */}
+      <div
         className="absolute rounded-full"
         style={{
           width: isMobile ? '150px' : '300px',
@@ -425,17 +406,13 @@ const CircularBackground = ({ isMobile = false }: { isMobile?: boolean }) => {
           top: '50%',
           marginLeft: isMobile ? '-75px' : '-150px',
           marginTop: isMobile ? '-75px' : '-150px',
-          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%)',
         }}
-        animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.5, 0.8, 0.5]
-        }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
     </div>
   )
-}
+})
+CircularBackground.displayName = 'CircularBackground'
 
 // Main Mockup2 Component
 const Mockup2 = () => {
@@ -463,7 +440,7 @@ const Mockup2 = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div className="relative z-10 text-center lg:text-left">
-            {/* Badge */}
+            {/* Badge - Simplified */}
             <motion.div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#38BDF8]/10 border border-[#38BDF8]/25 mb-6"
               initial={{ opacity: 0, y: 20 }}
@@ -471,13 +448,9 @@ const Mockup2 = () => {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <motion.span 
-                className="text-[#38BDF8]"
-                animate={{ scale: [1, 1.1, 1], opacity: [1, 0.7, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
+              <span className="text-[#38BDF8]">
                 <Sparkles className="w-4 h-4" />
-              </motion.span>
+              </span>
               <span className="text-[#38BDF8] text-sm font-medium">Dijital Çözümler</span>
             </motion.div>
 

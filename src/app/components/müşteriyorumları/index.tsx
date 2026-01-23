@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState, useRef, useCallback, memo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Star, Quote, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react'
 
@@ -248,31 +248,26 @@ const colorVariants = {
   }
 }
 
-// Animated Star Rating
-const StarRating = ({ rating, color }: { rating: number; color: string }) => {
+// Animated Star Rating - Memoized and optimized
+const StarRating = memo(({ rating, color }: { rating: number; color: string }) => {
   const variant = colorVariants[color as keyof typeof colorVariants]
   
   return (
     <div className="flex gap-1">
       {[...Array(5)].map((_, i) => (
-        <motion.div
+        <Star 
           key={i}
-          initial={{ opacity: 0, scale: 0, rotate: -180 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ delay: i * 0.1, type: "spring", stiffness: 200 }}
-        >
-          <Star 
-            className={`w-4 h-4 ${i < rating ? variant.star : 'text-white/20'}`}
-            fill={i < rating ? variant.accent : 'transparent'}
-          />
-        </motion.div>
+          className={`w-4 h-4 ${i < rating ? variant.star : 'text-white/20'}`}
+          fill={i < rating ? variant.accent : 'transparent'}
+        />
       ))}
     </div>
   )
-}
+})
+StarRating.displayName = 'StarRating'
 
-// Testimonial Card Component
-const TestimonialCard = ({ 
+// Testimonial Card Component - Optimized with memo
+const TestimonialCard = memo(({ 
   testimonial, 
   isActive = false,
   onClick
@@ -285,44 +280,31 @@ const TestimonialCard = ({
   
   return (
     <motion.div
-      className={`relative cursor-pointer rounded-2xl p-6 backdrop-blur-sm transition-all duration-500 ${
+      className={`relative cursor-pointer rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 ${
         isActive 
           ? `bg-gradient-to-br ${variant.gradient} ${variant.border} border-2 scale-100` 
           : 'bg-white/5 border border-white/10 scale-95 opacity-70'
       }`}
       style={{
-        boxShadow: isActive ? `0 20px 40px -12px ${variant.glow}` : 'none'
+        boxShadow: isActive ? `0 10px 30px -10px ${variant.glow}` : 'none'
       }}
       onClick={onClick}
       whileHover={{ scale: isActive ? 1.02 : 0.98 }}
       layout
     >
       {/* Quote Icon */}
-      <motion.div 
-        className={`absolute top-4 right-4 ${variant.quote}`}
-        animate={{ 
-          rotate: isActive ? [0, 10, -10, 0] : 0,
-          scale: isActive ? [1, 1.1, 1] : 1
-        }}
-        transition={{ duration: 2, repeat: isActive ? Infinity : 0 }}
-      >
+      <div className={`absolute top-4 right-4 ${variant.quote}`}>
         <Quote className="w-8 h-8" />
-      </motion.div>
+      </div>
 
       {/* Header */}
       <div className="flex items-center gap-4 mb-4">
         {/* Avatar */}
-        <motion.div 
+        <div 
           className={`relative w-14 h-14 rounded-full overflow-hidden border-2 ${variant.border}`}
           style={{
             background: `linear-gradient(135deg, ${variant.accent}40, ${variant.accent}20)`
           }}
-          animate={{
-            boxShadow: isActive 
-              ? [`0 0 0 0 ${variant.accent}00`, `0 0 20px 4px ${variant.accent}40`, `0 0 0 0 ${variant.accent}00`]
-              : 'none'
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
         >
           {/* Placeholder Avatar with Initial */}
           <div className="w-full h-full flex items-center justify-center">
@@ -330,7 +312,7 @@ const TestimonialCard = ({
               {testimonial.name.charAt(0)}
             </span>
           </div>
-        </motion.div>
+        </div>
 
         <div>
           <h4 className="text-white font-semibold">{testimonial.name}</h4>
@@ -342,15 +324,12 @@ const TestimonialCard = ({
       {isActive && <StarRating rating={testimonial.rating} color={testimonial.color} />}
 
       {/* Highlight Badge */}
-      <motion.div
+      <div
         className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${variant.highlight} text-sm font-medium mt-3`}
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: isActive ? 1 : 0.5, x: 0 }}
-        transition={{ delay: 0.2 }}
       >
         <Sparkles className="w-3.5 h-3.5" />
         {testimonial.highlight}
-      </motion.div>
+      </div>
 
       {/* Testimonial Text */}
       <AnimatePresence mode="wait">
@@ -360,7 +339,7 @@ const TestimonialCard = ({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
           >
             &ldquo;{testimonial.text}&rdquo;
           </motion.p>
@@ -368,7 +347,8 @@ const TestimonialCard = ({
       </AnimatePresence>
     </motion.div>
   )
-}
+})
+TestimonialCard.displayName = 'TestimonialCard'
 
 // Main Testimonials Component
 const MusteriYorumlari = () => {
@@ -440,35 +420,16 @@ const MusteriYorumlari = () => {
 
   return (
     <section className="relative py-20 lg:py-32 overflow-hidden">
-      {/* Background Elements */}
+      {/* Background Elements - Simplified */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Gradient Orbs */}
-        <motion.div
-          className="absolute top-20 left-10 w-[400px] h-[400px] rounded-full opacity-20 blur-[100px]"
+        {/* Static Gradient Orbs - Removed animations */}
+        <div
+          className="absolute top-20 left-10 w-[400px] h-[400px] rounded-full opacity-10 blur-[100px]"
           style={{ background: `radial-gradient(circle, ${activeVariant.accent}, transparent 70%)` }}
-          animate={{ 
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div
-          className="absolute bottom-20 right-10 w-[300px] h-[300px] rounded-full opacity-15 blur-[80px]"
+        <div
+          className="absolute bottom-20 right-10 w-[300px] h-[300px] rounded-full opacity-8 blur-[80px]"
           style={{ background: `radial-gradient(circle, ${activeVariant.accent}, transparent 70%)` }}
-          animate={{ 
-            x: [0, -30, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `linear-gradient(${activeVariant.accent} 1px, transparent 1px), linear-gradient(90deg, ${activeVariant.accent} 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}
         />
       </div>
 
@@ -481,7 +442,7 @@ const MusteriYorumlari = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          {/* Badge */}
+          {/* Badge - Simplified */}
           <motion.div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#38BDF8]/10 border border-[#38BDF8]/25 mb-6"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -489,13 +450,9 @@ const MusteriYorumlari = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <motion.span 
-              className="text-[#38BDF8]"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
+            <span className="text-[#38BDF8]">
               <Star className="w-4 h-4" fill="#38BDF8" />
-            </motion.span>
+            </span>
             <span className="text-[#38BDF8] text-sm font-medium">Müşteri Yorumları</span>
           </motion.div>
 
@@ -600,24 +557,20 @@ const MusteriYorumlari = () => {
 
                     {/* Content */}
                     <div className="relative">
-                      {/* Author Info */}
+                      {/* Author Info - Simplified avatar */}
                       <div className="flex items-center gap-4 mb-6">
-                        <motion.div 
+                        <div 
                           className={`w-16 h-16 rounded-2xl overflow-hidden border-2 ${activeVariant.border}`}
                           style={{
                             background: `linear-gradient(135deg, ${activeVariant.accent}40, ${activeVariant.accent}10)`
                           }}
-                          animate={{
-                            boxShadow: [`0 0 0 0 ${activeVariant.accent}00`, `0 0 30px 8px ${activeVariant.accent}30`, `0 0 0 0 ${activeVariant.accent}00`]
-                          }}
-                          transition={{ duration: 3, repeat: Infinity }}
                         >
                           <div className="w-full h-full flex items-center justify-center">
                             <span className="text-2xl font-bold text-white/80">
                               {activeTestimonial.name.charAt(0)}
                             </span>
                           </div>
-                        </motion.div>
+                        </div>
 
                         <div>
                           <h3 className="text-xl font-bold text-white">{activeTestimonial.name}</h3>
@@ -629,7 +582,7 @@ const MusteriYorumlari = () => {
                         </div>
                       </div>
 
-                      {/* Highlight Badge */}
+                      {/* Highlight Badge - Simplified */}
                       <motion.div
                         className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${activeVariant.highlight} font-semibold mb-6`}
                         initial={{ opacity: 0, scale: 0.8 }}
@@ -655,7 +608,7 @@ const MusteriYorumlari = () => {
               </AnimatePresence>
             </div>
 
-            {/* Right Side - Mini Cards - Draggable scroll */}
+            {/* Right Side - Mini Cards - Virtualized scroll - Only show nearby cards */}
             <div 
               ref={rightScrollRef}
               className="col-span-4 space-y-4 max-h-[450px] overflow-y-auto scrollbar-hide cursor-grab select-none pr-2"
@@ -666,13 +619,16 @@ const MusteriYorumlari = () => {
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {testimonials.map((testimonial, idx) => {
-                if (idx === activeIndex) return null
+                // Only render cards that are near the active index (within 5 items)
+                const distance = Math.abs(idx - activeIndex)
+                if (idx === activeIndex || distance > 5) return null
+                
                 return (
                   <motion.div
                     key={testimonial.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.05, duration: 0.3, ease: "easeOut" }}
+                    transition={{ delay: idx * 0.03, duration: 0.2, ease: "easeOut" }}
                     onClick={() => !isDragging && setActiveIndex(idx)}
                     className="cursor-pointer"
                   >
@@ -708,9 +664,9 @@ const MusteriYorumlari = () => {
                   {/* Quote Icon */}
                   <Quote className={`absolute top-4 right-4 w-10 h-10 sm:w-12 sm:h-12 ${activeVariant.quote}`} />
 
-                  {/* Author Info */}
+                  {/* Author Info - Simplified for mobile */}
                   <div className="flex items-center gap-3 mb-4">
-                    <motion.div 
+                    <div 
                       className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl overflow-hidden border-2 ${activeVariant.border}`}
                       style={{
                         background: `linear-gradient(135deg, ${activeVariant.accent}40, ${activeVariant.accent}10)`
@@ -721,7 +677,7 @@ const MusteriYorumlari = () => {
                           {activeTestimonial.name.charAt(0)}
                         </span>
                       </div>
-                    </motion.div>
+                    </div>
 
                     <div className="flex-1 min-w-0">
                       <h3 className="text-base sm:text-lg font-bold text-white truncate">{activeTestimonial.name}</h3>
