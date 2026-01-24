@@ -44,6 +44,11 @@ const YazilimProjesi = dynamic(() => import("./components/yazılımprojenizmivar
   ssr: false
 })
 
+const Footer = dynamic(() => import("./components/footer"), {
+  loading: () => <div className="min-h-[300px]" />,
+  ssr: false
+})
+
 export default function Home() {
   return (
     <main className="relative z-10">
@@ -55,6 +60,7 @@ export default function Home() {
       <DestekSection />
       <YazilimProjesi />
       <MusteriYorumlari />
+      <Footer />
     </main>
   );
 }

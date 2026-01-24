@@ -18,206 +18,282 @@ import {
   Star
 } from 'lucide-react'
 
-// Floating Feature Cards Component
+// Premium Phone Mockup Component
 const FloatingMockup = React.memo(() => {
-  const features = [
-    { Icon: Smartphone, label: 'Mobil Uygulama', color: '#38BDF8', delay: 0 },
-    { Icon: Monitor, label: 'Web Sitesi', color: '#A855F7', delay: 0.1 },
-    { Icon: Palette, label: 'UI/UX Tasarım', color: '#EC4899', delay: 0.2 },
-    { Icon: Code2, label: 'Özel Yazılım', color: '#10B981', delay: 0.3 },
-  ]
-
-  const stats = [
-    { value: '99.9%', label: 'Uptime', color: '#10B981', icon: '⬆️' },
-    { value: '12ms', label: 'Yanıt', color: '#38BDF8', icon: '⚡' },
-    { value: '98%', label: 'Performans', color: '#A855F7', icon: '🚀' },
-    { value: '✓', label: 'Güvenlik', color: '#EC4899', icon: '🔒' },
+  const notifications = [
+    { icon: CheckCircle2, text: 'Ödeme başarılı!', color: '#10B981', time: 'Şimdi' },
+    { icon: Rocket, text: 'Yeni güncelleme hazır', color: '#38BDF8', time: '2dk' },
+    { icon: Star, text: '5 yıldız aldınız!', color: '#FBBF24', time: '5dk' },
   ]
 
   return (
-    <div className="relative w-full max-w-lg mx-auto">
-      {/* Main Card - Perspective Container */}
+    <div className="relative flex items-center justify-center py-8 sm:py-0">
+      {/* Orbital Rings */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <motion.div
+          className="absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[420px] lg:h-[420px] rounded-full border border-dashed border-[#38BDF8]/20"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] lg:w-[340px] lg:h-[340px] rounded-full border border-[#A855F7]/15"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        />
+      </div>
+
+      {/* Main Phone Frame */}
       <motion.div
-        className="relative"
-        initial={{ opacity: 0, y: 50 }}
+        className="relative z-10"
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        style={{ perspective: '1000px' }}
       >
-        {/* Central Dashboard Card */}
+        {/* Phone Device */}
         <motion.div
-          className="relative rounded-2xl sm:rounded-3xl overflow-hidden"
+          className="relative w-[200px] h-[400px] sm:w-[240px] sm:h-[480px] lg:w-[280px] lg:h-[560px] rounded-[32px] sm:rounded-[40px] lg:rounded-[48px] overflow-hidden"
           style={{
-            background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            boxShadow: '0 25px 80px -20px rgba(0, 0, 0, 0.5), 0 0 60px -20px rgba(56, 189, 248, 0.2)'
+            background: 'linear-gradient(145deg, #1E293B, #0F172A)',
+            border: '4px solid #334155',
+            boxShadow: `
+              0 50px 100px -20px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(255, 255, 255, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1),
+              0 0 80px -20px rgba(56, 189, 248, 0.3)
+            `
           }}
-          whileHover={{ rotateY: 5, rotateX: -5 }}
+          whileHover={{ y: -5, scale: 1.02 }}
           transition={{ duration: 0.3 }}
         >
-          {/* Header */}
-          <div className="relative px-4 sm:px-6 py-4 sm:py-5 border-b border-white/5">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
+          {/* Notch */}
+          <div className="absolute top-2 sm:top-3 left-1/2 -translate-x-1/2 w-20 sm:w-24 lg:w-28 h-5 sm:h-6 lg:h-7 bg-black rounded-full z-20 flex items-center justify-center gap-2">
+            <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-800" />
+            <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-green-500" />
+          </div>
+
+          {/* Screen Content */}
+          <div className="absolute inset-[3px] rounded-[28px] sm:rounded-[36px] lg:rounded-[44px] overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950">
+            {/* Status Bar */}
+            <div className="flex items-center justify-between px-4 sm:px-5 pt-8 sm:pt-10 pb-2">
+              <span className="text-white/60 text-[10px] sm:text-xs font-medium">9:41</span>
+              <div className="flex items-center gap-1">
+                <div className="w-3 h-1.5 sm:w-4 sm:h-2 bg-white/60 rounded-sm" />
+                <div className="w-2 h-1.5 sm:w-2.5 sm:h-2 bg-white/40 rounded-sm" />
+              </div>
+            </div>
+
+            {/* App Header */}
+            <div className="px-3 sm:px-4 pt-2 sm:pt-3 pb-3 sm:pb-4">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <motion.div
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center"
+                  className="w-9 h-9 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center overflow-hidden"
                   style={{ background: 'linear-gradient(135deg, #38BDF8, #0EA5E9)' }}
-                  animate={{ rotate: [0, 5, -5, 0] }}
-                  transition={{ duration: 4, repeat: Infinity }}
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 3, repeat: Infinity }}
                 >
                   <img 
                     src="/logolar/arlanlogonav.webp" 
                     alt="Arlan Logo" 
-                    className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                    className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 object-contain"
                   />
                 </motion.div>
-                <div>
-                  <h4 className="text-white font-semibold text-sm sm:text-base">Arlan Panel</h4>
-                  <p className="text-white/50 text-xs sm:text-sm">Sistem Aktif</p>
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-white font-semibold text-xs sm:text-sm truncate">Arlan Panel</h4>
+                  <div className="flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                    <span className="text-green-400 text-[9px] sm:text-[10px]">Aktif</span>
+                  </div>
                 </div>
               </div>
-              <div className="flex gap-1.5">
-                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
-                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
-                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
-              </div>
             </div>
-          </div>
 
-          {/* Feature Grid */}
-          <div className="p-4 sm:p-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-6">
-              {features.map((feature, i) => (
+            {/* Stats Cards */}
+            <div className="px-3 sm:px-4 grid grid-cols-2 gap-2 sm:gap-2.5">
+              {[
+                { label: 'Gelir', value: '₺24.5K', color: '#10B981', change: '+12%' },
+                { label: 'Kullanıcı', value: '1.2K', color: '#38BDF8', change: '+8%' },
+              ].map((stat, i) => (
                 <motion.div
                   key={i}
-                  className="group relative p-3 sm:p-4 rounded-xl cursor-pointer"
-                  style={{ background: 'rgba(255, 255, 255, 0.03)' }}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  className="p-2.5 sm:p-3 rounded-xl"
+                  style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.05)' }}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: feature.delay, duration: 0.5 }}
-                  whileHover={{ scale: 1.02, background: 'rgba(255, 255, 255, 0.06)' }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
                 >
-                  <motion.div
-                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{
-                      background: `linear-gradient(135deg, ${feature.color}10, transparent)`,
-                      border: `1px solid ${feature.color}30`
-                    }}
-                  />
-                  <div className="relative flex flex-col items-center gap-2 sm:gap-3">
-                    <motion.div
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center"
-                      style={{ 
-                        background: `linear-gradient(135deg, ${feature.color}20, ${feature.color}10)`,
-                        border: `1px solid ${feature.color}30`
-                      }}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                    >
-                      <feature.Icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: feature.color }} />
-                    </motion.div>
-                    <span className="text-white/80 text-xs sm:text-sm font-medium text-center">{feature.label}</span>
+                  <span className="text-white/50 text-[9px] sm:text-[10px]">{stat.label}</span>
+                  <div className="flex items-end justify-between mt-0.5 sm:mt-1">
+                    <span className="text-white font-bold text-sm sm:text-base lg:text-lg">{stat.value}</span>
+                    <span className="text-[9px] sm:text-[10px] font-medium" style={{ color: stat.color }}>{stat.change}</span>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Stats Row */}
-            <div className="flex items-center justify-between p-3 sm:p-4 rounded-xl" style={{ background: 'rgba(255, 255, 255, 0.02)' }}>
-              {stats.map((stat, i) => (
+            {/* Chart Visualization */}
+            <div className="px-3 sm:px-4 mt-3 sm:mt-4">
+              <div className="p-2.5 sm:p-3 rounded-xl" style={{ background: 'rgba(255, 255, 255, 0.02)' }}>
+                <div className="flex items-center justify-between mb-2 sm:mb-3">
+                  <span className="text-white/60 text-[9px] sm:text-[10px]">Haftalık Görüntülenme</span>
+                  <span className="text-[#38BDF8] text-[9px] sm:text-[10px] font-medium">+24%</span>
+                </div>
+                <div className="flex items-end gap-1 sm:gap-1.5 h-12 sm:h-16">
+                  {[40, 65, 45, 80, 60, 90, 75].map((height, i) => (
+                    <motion.div
+                      key={i}
+                      className="flex-1 rounded-t-sm"
+                      style={{
+                        background: i === 5 ? 'linear-gradient(180deg, #38BDF8, #0EA5E9)' : 'rgba(56, 189, 248, 0.3)',
+                        height: `${height}%`
+                      }}
+                      initial={{ height: 0 }}
+                      whileInView={{ height: `${height}%` }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 + i * 0.05, duration: 0.5 }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="px-3 sm:px-4 mt-3 sm:mt-4 grid grid-cols-4 gap-1.5 sm:gap-2">
+              {[
+                { icon: Smartphone, color: '#38BDF8' },
+                { icon: Palette, color: '#A855F7' },
+                { icon: Shield, color: '#10B981' },
+                { icon: Layers, color: '#EC4899' },
+              ].map((item, i) => (
                 <motion.div
                   key={i}
-                  className="text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  className="aspect-square rounded-lg sm:rounded-xl flex items-center justify-center"
+                  style={{ 
+                    background: `linear-gradient(135deg, ${item.color}15, ${item.color}05)`,
+                    border: `1px solid ${item.color}25`
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.4 + i * 0.1 }}
+                  transition={{ delay: 0.6 + i * 0.05 }}
+                  whileHover={{ scale: 1.1 }}
                 >
-                  <motion.span 
-                    className="block text-lg sm:text-2xl font-bold"
-                    style={{ color: stat.color }}
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-                  >
-                    {stat.value}
-                  </motion.span>
-                  <span className="text-white/50 text-[10px] sm:text-xs">{stat.label}</span>
+                  <item.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5" style={{ color: item.color }} />
                 </motion.div>
               ))}
             </div>
 
-            {/* Progress Indicator */}
-            <motion.div 
-              className="mt-4 sm:mt-6"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-white/60 text-xs sm:text-sm">Proje İlerlemesi</span>
-                <span className="text-[#10B981] text-xs sm:text-sm font-semibold">100%</span>
+            {/* Bottom Navigation */}
+            <div className="absolute bottom-2 sm:bottom-3 left-3 sm:left-4 right-3 sm:right-4">
+              <div className="flex items-center justify-around py-2 sm:py-2.5 px-2 rounded-xl sm:rounded-2xl" style={{ background: 'rgba(255, 255, 255, 0.03)', backdropFilter: 'blur(10px)' }}>
+                {[Code2, Monitor, MessageCircle].map((Icon, i) => (
+                  <motion.div
+                    key={i}
+                    className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center ${i === 1 ? 'bg-[#38BDF8]/20' : ''}`}
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${i === 1 ? 'text-[#38BDF8]' : 'text-white/40'}`} />
+                  </motion.div>
+                ))}
               </div>
-              <div className="h-2 sm:h-2.5 rounded-full bg-white/5 overflow-hidden">
-                <motion.div
-                  className="h-full rounded-full"
-                  style={{ background: 'linear-gradient(90deg, #38BDF8, #10B981)' }}
-                  initial={{ width: '0%' }}
-                  whileInView={{ width: '100%' }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.5, delay: 0.8, ease: 'easeOut' }}
-                />
-              </div>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
 
-        {/* Floating Elements */}
+        {/* Floating Notification Cards */}
+        {notifications.map((notif, i) => (
+          <motion.div
+            key={i}
+            className={`absolute ${
+              i === 0 ? '-right-4 sm:-right-12 lg:-right-20 top-16 sm:top-20' :
+              i === 1 ? '-left-4 sm:-left-12 lg:-left-20 top-1/3' :
+              '-right-2 sm:-right-10 lg:-right-16 bottom-24 sm:bottom-32'
+            } z-20`}
+            initial={{ opacity: 0, x: i === 1 ? -30 : 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 + i * 0.15 }}
+            animate={{ y: [0, i % 2 === 0 ? -8 : 8, 0] }}
+          >
+            <motion.div
+              className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl"
+              style={{
+                background: 'linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.9))',
+                border: `1px solid ${notif.color}30`,
+                boxShadow: `0 10px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px ${notif.color}30`,
+                backdropFilter: 'blur(10px)'
+              }}
+              transition={{ duration: 4, repeat: Infinity, delay: i * 0.5 }}
+            >
+              <div 
+                className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl flex items-center justify-center"
+                style={{ background: `linear-gradient(135deg, ${notif.color}20, ${notif.color}10)` }}
+              >
+                <notif.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" style={{ color: notif.color }} />
+              </div>
+              <div className="hidden sm:block">
+                <p className="text-white text-xs sm:text-sm font-medium whitespace-nowrap">{notif.text}</p>
+                <p className="text-white/40 text-[9px] sm:text-[10px]">{notif.time}</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        ))}
+
+        {/* Corner Floating Icons */}
         <motion.div
-          className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl flex items-center justify-center"
+          className="absolute -top-6 sm:-top-8 left-1/2 -translate-x-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center z-20"
           style={{
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1))',
-            border: '1px solid rgba(16, 185, 129, 0.3)',
-            backdropFilter: 'blur(10px)'
+            background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.1))',
+            border: '1px solid rgba(56, 189, 248, 0.3)',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0 10px 30px -10px rgba(56, 189, 248, 0.4)'
           }}
-          animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
+          animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
         >
-          <CheckCircle2 className="w-6 h-6 sm:w-8 sm:h-8 text-[#10B981]" />
+          <Rocket className="w-5 h-5 sm:w-6 sm:h-6 text-[#38BDF8]" />
         </motion.div>
 
         <motion.div
-          className="absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-4 w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center"
+          className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-8 w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center z-20"
           style={{
             background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.1))',
             border: '1px solid rgba(168, 85, 247, 0.3)',
             backdropFilter: 'blur(10px)'
           }}
-          animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}
+          animate={{ y: [0, 8, 0], rotate: [0, -5, 0] }}
           transition={{ duration: 5, repeat: Infinity, delay: 1 }}
         >
-          <Zap className="w-5 h-5 sm:w-7 sm:h-7 text-[#A855F7]" />
+          <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-[#A855F7]" />
         </motion.div>
 
         <motion.div
-          className="absolute top-1/2 -left-6 sm:-left-10 w-10 h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl flex items-center justify-center"
+          className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-8 w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center z-20"
           style={{
-            background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.1))',
-            border: '1px solid rgba(56, 189, 248, 0.3)',
+            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1))',
+            border: '1px solid rgba(16, 185, 129, 0.3)',
             backdropFilter: 'blur(10px)'
           }}
-          animate={{ x: [0, -5, 0], y: [0, -5, 0] }}
-          transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+          animate={{ y: [0, 8, 0], rotate: [0, 5, 0] }}
+          transition={{ duration: 4.5, repeat: Infinity, delay: 0.5 }}
         >
-          <Star className="w-4 h-4 sm:w-6 sm:h-6 text-[#38BDF8]" />
+          <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#10B981]" />
         </motion.div>
       </motion.div>
 
-      {/* Glow Effects */}
-      <div className="absolute -inset-10 -z-10 opacity-30 pointer-events-none">
-        <div className="absolute top-0 right-0 w-40 sm:w-60 h-40 sm:h-60 bg-[#38BDF8] rounded-full blur-[80px] sm:blur-[100px]" />
-        <div className="absolute bottom-0 left-0 w-40 sm:w-60 h-40 sm:h-60 bg-[#A855F7] rounded-full blur-[80px] sm:blur-[100px]" />
+      {/* Background Glow Effects */}
+      <div className="absolute inset-0 -z-10 pointer-events-none flex items-center justify-center">
+        <motion.div
+          className="absolute w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-[#38BDF8] rounded-full blur-[100px] sm:blur-[120px] opacity-20"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute w-40 h-40 sm:w-60 sm:h-60 lg:w-80 lg:h-80 bg-[#A855F7] rounded-full blur-[80px] sm:blur-[100px] opacity-15 translate-x-10 translate-y-10"
+          animate={{ scale: [1.2, 1, 1.2] }}
+          transition={{ duration: 10, repeat: Infinity, delay: 1 }}
+        />
       </div>
     </div>
   )
