@@ -359,7 +359,7 @@ const Floating3DIconsBackground = React.memo(() => {
             [item.rotateAxis === 'Y' ? 'rotateY' : 'rotateX']: {
               duration: 15 + i * 2,
               repeat: Infinity,
-              ease: "linear",
+              ease: "linear" as any,
             },
             y: {
               duration: 4 + i * 0.5,
