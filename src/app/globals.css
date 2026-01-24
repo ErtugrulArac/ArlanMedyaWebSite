@@ -90,3 +90,126 @@ body {
 .animate-shine {
   animation: shine 2s ease-in-out infinite;
 }
+
+/* ========== PERFORMANCE OPTIMIZED ANIMATIONS ========== */
+
+/* Slow spin for rings */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 35s linear infinite;
+  will-change: transform;
+}
+
+/* Pulse slow for orbs and dots */
+@keyframes pulse-slow {
+  0%, 100% { 
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* Aurora background animation */
+@keyframes aurora {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+}
+
+@keyframes aurora-reverse {
+  0%, 100% { background-position: 100% 0%; }
+  50% { background-position: 0% 100%; }
+}
+
+.animate-aurora {
+  animation: aurora 20s ease-in-out infinite;
+}
+
+.animate-aurora-reverse {
+  animation: aurora-reverse 25s ease-in-out infinite;
+}
+
+/* Light beam animation */
+@keyframes light-beam-vertical {
+  0% { opacity: 0; transform: translateY(-100%); }
+  50% { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(100%); }
+}
+
+@keyframes light-beam-horizontal {
+  0% { opacity: 0; transform: translateX(-100%); }
+  50% { opacity: 0.5; }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+
+.light-beam {
+  animation: light-beam-vertical 12s linear infinite;
+  will-change: transform, opacity;
+}
+
+.light-beam-horizontal {
+  animation: light-beam-horizontal 18s linear infinite;
+  will-change: transform, opacity;
+}
+
+/* Shooting star animation */
+@keyframes shooting-star {
+  0% {
+    opacity: 0;
+    transform: translate(-10vw, 15vh);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(110vw, 45vh);
+  }
+}
+
+.shooting-star {
+  animation: shooting-star 3s ease-in infinite;
+  animation-delay: 8s;
+  box-shadow: 0 0 12px 2px rgba(255, 255, 255, 0.5), -60px 0 40px 6px rgba(56, 189, 248, 0.3);
+  will-change: transform, opacity;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow,
+  .animate-spin-reverse,
+  .animate-pulse-slow,
+  .animate-aurora,
+  .animate-aurora-reverse,
+  .animate-float,
+  .animate-float-delayed,
+  .light-beam,
+  .light-beam-horizontal,
+  .shooting-star {
+    animation: none;
+  }
+}
