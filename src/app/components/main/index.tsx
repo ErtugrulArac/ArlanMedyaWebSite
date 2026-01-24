@@ -26,128 +26,220 @@ const PremiumBackground = React.memo(() => {
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Base Gradient */}
+      {/* ========== ULTRA PREMIUM BASE GRADIENT ========== */}
       <div 
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.15), transparent),
-            radial-gradient(ellipse 60% 40% at 100% 0%, rgba(168, 85, 247, 0.12), transparent),
-            radial-gradient(ellipse 50% 30% at 0% 100%, rgba(56, 189, 248, 0.08), transparent)
+            radial-gradient(ellipse 100% 80% at 50% -30%, rgba(56, 189, 248, 0.2), transparent 50%),
+            radial-gradient(ellipse 80% 60% at 100% 0%, rgba(168, 85, 247, 0.15), transparent 50%),
+            radial-gradient(ellipse 70% 50% at 0% 100%, rgba(56, 189, 248, 0.12), transparent 50%),
+            radial-gradient(ellipse 60% 40% at 80% 80%, rgba(16, 185, 129, 0.08), transparent 50%),
+            radial-gradient(ellipse 50% 30% at 20% 60%, rgba(251, 191, 36, 0.06), transparent 50%)
           `
         }}
       />
+
+      {/* ========== ANIMATED AURORA EFFECT ========== */}
+      <motion.div
+        className="absolute inset-0 opacity-30"
+        style={{
+          background: 'linear-gradient(45deg, transparent 30%, rgba(56, 189, 248, 0.1) 50%, transparent 70%)',
+          backgroundSize: '200% 200%',
+        }}
+        animate={{
+          backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+      />
+      <motion.div
+        className="absolute inset-0 opacity-20"
+        style={{
+          background: 'linear-gradient(-45deg, transparent 30%, rgba(168, 85, 247, 0.1) 50%, transparent 70%)',
+          backgroundSize: '200% 200%',
+        }}
+        animate={{
+          backgroundPosition: ['100% 0%', '0% 100%', '100% 0%'],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+      />
+
+      {/* ========== MASSIVE GLOWING ORBS ========== */}
+      <motion.div
+        className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0.05) 40%, transparent 70%)',
+          filter: 'blur(60px)',
+        }}
+        animate={{
+          scale: [1, 1.2, 1],
+          x: [0, 50, 0],
+          y: [0, 30, 0],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute -bottom-1/4 -right-1/4 w-[900px] h-[900px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(168, 85, 247, 0.04) 40%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+        animate={{
+          scale: [1.1, 1, 1.1],
+          x: [0, -60, 0],
+          y: [0, -40, 0],
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+      />
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 60%)',
+          filter: 'blur(50px)',
+        }}
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.5, 0.8, 0.5],
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+      />
       
-      {/* Expanding Circular Rings - Centered */}
+      {/* ========== EXPANDING CIRCULAR RINGS ========== */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center pointer-events-none">
-        {[...Array(8)].map((_, i) => (
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full border"
+            className="absolute rounded-full"
             style={{
-              width: `${(i + 1) * 150}px`,
-              height: `${(i + 1) * 150}px`,
-              borderColor: i % 2 === 0 ? 'rgba(56, 189, 248, 0.08)' : 'rgba(168, 85, 247, 0.06)',
-              borderWidth: '1px',
+              width: `${(i + 1) * 140}px`,
+              height: `${(i + 1) * 140}px`,
+              border: `1px solid ${i % 3 === 0 ? 'rgba(56, 189, 248, 0.1)' : i % 3 === 1 ? 'rgba(168, 85, 247, 0.08)' : 'rgba(16, 185, 129, 0.06)'}`,
             }}
             animate={{
-              scale: [1, 1.05, 1],
-              opacity: [0.3, 0.6, 0.3],
+              scale: [1, 1.08, 1],
+              opacity: [0.2, 0.5, 0.2],
               rotate: i % 2 === 0 ? [0, 360] : [360, 0],
             }}
             transition={{
-              scale: {
-                duration: 4 + i * 0.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              },
-              opacity: {
-                duration: 3 + i * 0.3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              },
-              rotate: {
-                duration: 60 + i * 10,
-                repeat: Infinity,
-                ease: "linear",
-              }
+              scale: { duration: 5 + i * 0.6, repeat: Infinity, ease: "easeInOut" },
+              opacity: { duration: 4 + i * 0.4, repeat: Infinity, ease: "easeInOut" },
+              rotate: { duration: 50 + i * 8, repeat: Infinity, ease: "linear" },
             }}
           />
         ))}
         
-        {/* Central Glow Pulse */}
+        {/* Central Mega Glow Pulse */}
         <motion.div
-          className="absolute w-[300px] h-[300px] rounded-full"
+          className="absolute w-[400px] h-[400px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(168, 85, 247, 0.1) 40%, transparent 70%)',
           }}
           animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.6, 0.3],
+            scale: [1, 1.4, 1],
+            opacity: [0.3, 0.7, 0.3],
           }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
-      {/* Animated Large Orbs */}
-      <motion.div
-        className="absolute top-1/4 -right-48 w-[600px] h-[600px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 70%)',
-          filter: 'blur(80px)'
-        }}
-        animate={{
-          x: [0, -60, 0],
-          y: [0, 50, 0],
-          scale: [1, 1.15, 1]
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-      />
-      
-      <motion.div
-        className="absolute -bottom-48 left-1/4 w-[450px] h-[450px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(168, 85, 247, 0.05) 50%, transparent 70%)',
-          filter: 'blur(70px)'
-        }}
-        animate={{
-          x: [0, 70, 0],
-          y: [0, -40, 0],
-          scale: [1.1, 1, 1.1]
-        }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-      />
-      
-      {/* Grid Pattern */}
+      {/* ========== ANIMATED GRID PATTERN ========== */}
       <div 
-        className="absolute inset-0 opacity-[0.025]"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(56, 189, 248, 0.5) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(56, 189, 248, 0.5) 1px, transparent 1px)
+            linear-gradient(rgba(56, 189, 248, 0.8) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(56, 189, 248, 0.8) 1px, transparent 1px)
           `,
           backgroundSize: '80px 80px',
         }}
       />
       
-      {/* Floating Tech Icons */}
+      {/* Secondary Grid - Offset */}
+      <motion.div 
+        className="absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage: `
+            linear-gradient(45deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px),
+            linear-gradient(-45deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px)
+          `,
+          backgroundSize: '120px 120px',
+        }}
+        animate={{ 
+          backgroundPosition: ['0px 0px', '60px 60px', '0px 0px']
+        }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* ========== ANIMATED LIGHT BEAMS ========== */}
+      <motion.div
+        className="absolute top-0 left-1/4 w-px h-full"
+        style={{
+          background: 'linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.15), transparent)',
+        }}
+        animate={{
+          opacity: [0, 0.8, 0],
+          y: ['-100%', '100%'],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        className="absolute top-0 right-1/3 w-px h-full"
+        style={{
+          background: 'linear-gradient(to bottom, transparent, rgba(168, 85, 247, 0.12), transparent)',
+        }}
+        animate={{
+          opacity: [0, 0.6, 0],
+          y: ['-100%', '100%'],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 3 }}
+      />
+      <motion.div
+        className="absolute top-0 left-2/3 w-px h-full"
+        style={{
+          background: 'linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.1), transparent)',
+        }}
+        animate={{
+          opacity: [0, 0.5, 0],
+          y: ['-100%', '100%'],
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: "linear", delay: 6 }}
+      />
+
+      {/* Horizontal Light Beams */}
+      <motion.div
+        className="absolute left-0 top-1/4 h-px w-full"
+        style={{
+          background: 'linear-gradient(to right, transparent, rgba(56, 189, 248, 0.12), transparent)',
+        }}
+        animate={{
+          opacity: [0, 0.6, 0],
+          x: ['-100%', '100%'],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear", delay: 2 }}
+      />
+      <motion.div
+        className="absolute left-0 bottom-1/3 h-px w-full"
+        style={{
+          background: 'linear-gradient(to right, transparent, rgba(168, 85, 247, 0.1), transparent)',
+        }}
+        animate={{
+          opacity: [0, 0.5, 0],
+          x: ['100%', '-100%'],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 5 }}
+      />
+
+      {/* ========== FLOATING TECH ICONS ========== */}
       {floatingIcons.map((item, i) => (
         <motion.div
           key={i}
           className="absolute text-white/10"
-          style={{
-            left: item.x,
-            top: item.y,
-          }}
+          style={{ left: item.x, top: item.y }}
           animate={{
-            y: [0, -20, 0],
-            x: [0, 10, 0],
-            rotate: [0, 10, -10, 0],
-            opacity: [0.1, 0.2, 0.1],
+            y: [0, -25, 0],
+            x: [0, 15, 0],
+            rotate: [0, 15, -15, 0],
+            opacity: [0.08, 0.2, 0.08],
           }}
           transition={{
             duration: 8 + i,
@@ -160,52 +252,164 @@ const PremiumBackground = React.memo(() => {
         </motion.div>
       ))}
       
-      {/* Floating Particles/Stars */}
-      {[...Array(25)].map((_, i) => (
+      {/* ========== MEGA FLOATING PARTICLES ========== */}
+      {[...Array(40)].map((_, i) => (
         <motion.div
           key={`star-${i}`}
           className="absolute rounded-full"
           style={{
-            left: `${5 + Math.random() * 90}%`,
-            top: `${5 + Math.random() * 90}%`,
-            width: `${2 + Math.random() * 3}px`,
-            height: `${2 + Math.random() * 3}px`,
-            background: i % 3 === 0 
-              ? 'rgba(56, 189, 248, 0.6)' 
-              : i % 3 === 1 
-                ? 'rgba(168, 85, 247, 0.5)' 
-                : 'rgba(255, 255, 255, 0.4)',
+            left: `${3 + Math.random() * 94}%`,
+            top: `${3 + Math.random() * 94}%`,
+            width: `${2 + Math.random() * 4}px`,
+            height: `${2 + Math.random() * 4}px`,
+            background: i % 4 === 0 
+              ? 'rgba(56, 189, 248, 0.7)' 
+              : i % 4 === 1 
+                ? 'rgba(168, 85, 247, 0.6)' 
+                : i % 4 === 2
+                  ? 'rgba(16, 185, 129, 0.5)'
+                  : 'rgba(255, 255, 255, 0.4)',
+            boxShadow: i % 4 === 0 
+              ? '0 0 10px rgba(56, 189, 248, 0.5)' 
+              : i % 4 === 1 
+                ? '0 0 10px rgba(168, 85, 247, 0.4)' 
+                : i % 4 === 2
+                  ? '0 0 10px rgba(16, 185, 129, 0.3)'
+                  : '0 0 8px rgba(255, 255, 255, 0.3)',
           }}
           animate={{
-            opacity: [0.2, 0.8, 0.2],
-            scale: [1, 1.5, 1],
+            opacity: [0.2, 0.9, 0.2],
+            scale: [1, 1.8, 1],
+            y: [0, -30, 0],
           }}
           transition={{
-            duration: 2 + Math.random() * 3,
+            duration: 3 + Math.random() * 4,
             repeat: Infinity,
-            delay: Math.random() * 4,
+            delay: Math.random() * 5,
           }}
         />
       ))}
 
-      {/* Shooting Star Effect */}
+      {/* ========== SHOOTING STARS ========== */}
+      <motion.div
+        className="absolute w-1.5 h-1.5 bg-white rounded-full"
+        style={{
+          boxShadow: '0 0 15px 3px rgba(255, 255, 255, 0.6), -80px 0 50px 8px rgba(56, 189, 248, 0.4)'
+        }}
+        animate={{
+          x: ['-10%', '120%'],
+          y: ['15%', '50%'],
+          opacity: [0, 1, 0],
+        }}
+        transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 6, ease: "easeIn" }}
+      />
       <motion.div
         className="absolute w-1 h-1 bg-white rounded-full"
         style={{
-          boxShadow: '0 0 10px 2px rgba(255, 255, 255, 0.5), -50px 0 30px 5px rgba(56, 189, 248, 0.3)'
+          boxShadow: '0 0 12px 2px rgba(255, 255, 255, 0.5), -60px 0 40px 6px rgba(168, 85, 247, 0.3)'
         }}
         animate={{
-          x: ['-10%', '110%'],
-          y: ['20%', '60%'],
+          x: ['110%', '-10%'],
+          y: ['70%', '30%'],
           opacity: [0, 1, 0],
         }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          repeatDelay: 8,
-          ease: "easeIn",
-        }}
+        transition={{ duration: 3, repeat: Infinity, repeatDelay: 10, ease: "easeIn", delay: 4 }}
       />
+
+      {/* ========== CORNER DECORATIONS ========== */}
+      {/* Top Left */}
+      <div className="absolute top-0 left-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-[#38BDF8]/40 to-transparent" />
+        <div className="absolute top-0 left-0 h-full w-px bg-gradient-to-b from-[#38BDF8]/40 to-transparent" />
+        <motion.div
+          className="absolute top-4 left-4 w-2 h-2 rounded-full bg-[#38BDF8]"
+          style={{ boxShadow: '0 0 15px #38BDF8' }}
+          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+      </div>
+      
+      {/* Top Right */}
+      <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64">
+        <div className="absolute top-0 right-0 w-full h-px bg-gradient-to-l from-[#A855F7]/40 to-transparent" />
+        <div className="absolute top-0 right-0 h-full w-px bg-gradient-to-b from-[#A855F7]/40 to-transparent" />
+        <motion.div
+          className="absolute top-4 right-4 w-2 h-2 rounded-full bg-[#A855F7]"
+          style={{ boxShadow: '0 0 15px #A855F7' }}
+          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
+        />
+      </div>
+      
+      {/* Bottom Left */}
+      <div className="absolute bottom-0 left-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64">
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-[#10B981]/40 to-transparent" />
+        <div className="absolute bottom-0 left-0 h-full w-px bg-gradient-to-t from-[#10B981]/40 to-transparent" />
+      </div>
+      
+      {/* Bottom Right */}
+      <div className="absolute bottom-0 right-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64">
+        <div className="absolute bottom-0 right-0 w-full h-px bg-gradient-to-l from-[#F59E0B]/40 to-transparent" />
+        <div className="absolute bottom-0 right-0 h-full w-px bg-gradient-to-t from-[#F59E0B]/40 to-transparent" />
+      </div>
+
+      {/* ========== FLOATING PLUS SIGNS ========== */}
+      <motion.div
+        className="absolute text-[#38BDF8]/15 text-4xl sm:text-5xl font-thin"
+        style={{ top: '15%', left: '20%' }}
+        animate={{ rotate: [0, 180, 360], scale: [1, 1.2, 1] }}
+        transition={{ duration: 15, repeat: Infinity }}
+      >
+        +
+      </motion.div>
+      <motion.div
+        className="absolute text-[#A855F7]/12 text-3xl sm:text-4xl font-thin"
+        style={{ top: '60%', right: '15%' }}
+        animate={{ rotate: [360, 180, 0], scale: [1, 1.3, 1] }}
+        transition={{ duration: 18, repeat: Infinity, delay: 2 }}
+      >
+        +
+      </motion.div>
+      <motion.div
+        className="absolute text-[#10B981]/10 text-2xl sm:text-3xl font-thin"
+        style={{ bottom: '25%', left: '10%' }}
+        animate={{ rotate: [0, -180, -360], scale: [1, 1.4, 1] }}
+        transition={{ duration: 20, repeat: Infinity, delay: 5 }}
+      >
+        +
+      </motion.div>
+
+      {/* ========== DOT PATTERNS ========== */}
+      <div className="absolute top-20 right-20 hidden sm:grid grid-cols-4 gap-2 opacity-20">
+        {[...Array(16)].map((_, i) => (
+          <motion.div 
+            key={i} 
+            className="w-1 h-1 rounded-full bg-[#38BDF8]"
+            animate={{ opacity: [0.2, 1, 0.2] }}
+            transition={{ duration: 2, repeat: Infinity, delay: i * 0.1 }}
+          />
+        ))}
+      </div>
+      <div className="absolute bottom-20 left-20 hidden sm:grid grid-cols-4 gap-2 opacity-20">
+        {[...Array(16)].map((_, i) => (
+          <motion.div 
+            key={i} 
+            className="w-1 h-1 rounded-full bg-[#A855F7]"
+            animate={{ opacity: [0.2, 1, 0.2] }}
+            transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.12 }}
+          />
+        ))}
+      </div>
+
+      {/* ========== ANIMATED HEX PATTERN ========== */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.02]">
+        <defs>
+          <pattern id="hexPattern" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
+            <polygon points="30,0 60,15 60,37 30,52 0,37 0,15" fill="none" stroke="rgba(56, 189, 248, 0.5)" strokeWidth="0.5" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hexPattern)" />
+      </svg>
     </div>
   )
 })
