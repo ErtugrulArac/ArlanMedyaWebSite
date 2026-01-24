@@ -64,12 +64,12 @@ const processSteps = [
 // Animated Connection Line
 const ConnectionLine = ({ index, isInView }: { index: number, isInView: boolean }) => {
   return (
-    <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full top-0 -z-10 hidden lg:block">
+    <div className="absolute left-1/2 transform -translate-x-1/2 hidden lg:block" style={{ top: '64px', width: '2px', height: 'calc(100% + 80px)', zIndex: -1 }}>
       <motion.div
-        className="w-full h-full bg-gradient-to-b from-[#38BDF8]/50 to-[#38BDF8]/10"
+        className="w-full h-full bg-gradient-to-b from-[#38BDF8] to-transparent"
         initial={{ scaleY: 0 }}
         animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
-        transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
+        transition={{ duration: 1.2, delay: index * 0.1, ease: "easeOut" }}
         style={{ transformOrigin: "top" }}
       />
     </div>
@@ -101,6 +101,9 @@ const ProcessStepCard = ({
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
     >
+      {/* Desktop Connection Line */}
+      <ConnectionLine index={index} isInView={isInView} />
+
       {/* Mobile Layout */}
       <div className="lg:hidden relative flex gap-3">
         {/* Mobile Timeline - Left Side */}
@@ -406,7 +409,7 @@ const NasilCalisiyoruz = () => {
         {/* Section Header */}
         <motion.div
           ref={titleRef}
-          className="text-center mb-10 sm:mb-14 md:mb-18"
+          className="text-center mb-6 sm:mb-8 lg:mb-10 pt-8 sm:pt-12 lg:pt-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isTitleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
@@ -425,19 +428,13 @@ const NasilCalisiyoruz = () => {
           {/* Main Title */}
           <h2 
             id="process-title"
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold"
           >
             <span className="text-white">Yazılım Geliştirme </span>
             <span className="bg-gradient-to-r from-[#38BDF8] via-cyan-400 to-blue-500 bg-clip-text text-transparent">
               Sürecimiz
             </span>
           </h2>
-
-          {/* Subtitle */}
-          <p className="text-white/60 text-xs sm:text-sm lg:text-base max-w-xl mx-auto leading-relaxed">
-            Arlan Medya, profesyonel yazılım geliştirme metodolojisi ile 
-            yüksek kaliteli, ölçeklenebilir uygulamalar sunuyoruz.
-          </p>
         </motion.div>
 
         {/* Timeline Container */}

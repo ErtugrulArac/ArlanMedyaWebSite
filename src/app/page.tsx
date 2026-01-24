@@ -8,6 +8,11 @@ const MainHero = dynamic(() => import("./components/main"), {
   ssr: true // Hero should load on server
 })
 
+const KodKarti = dynamic(() => import("./components/main/kodkartı"), {
+  loading: () => <div className="min-h-[600px]" />,
+  ssr: false
+})
+
 // These components load only when user scrolls to them
 const Mockup2 = dynamic(() => import("./components/mockup2"), {
   loading: () => <div className="min-h-[600px]" />,
@@ -38,6 +43,7 @@ export default function Home() {
   return (
     <main className="relative z-10">
       <MainHero />
+      <KodKarti />
       <Mockup2 />
       <NasilCalisiyoruz />
       <NedenBiz />

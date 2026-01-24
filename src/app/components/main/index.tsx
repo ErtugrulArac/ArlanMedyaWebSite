@@ -8,7 +8,461 @@ const ServiceCard = dynamic(() => import('../ui/service-card'))
 const LogoLoop = dynamic(() => import('../ui/logo-loop'))
 const TrueFocus = dynamic(() => import('../ui/true-focus'))
 import { SiGoogle, SiMeta, SiLinkedin, SiX, SiInstagram, SiYoutube, SiTiktok, SiSpotify } from 'react-icons/si'
-import { Sparkles, ArrowRight } from 'lucide-react'
+import { Sparkles, ArrowRight, Code, Palette, Globe, Zap, Database, Cloud, Shield, Cpu, Layers, Box, Hexagon, Triangle, Square, Circle, Star, Rocket, Terminal, Settings, Smartphone, Monitor, Server, Wifi, Lock, GitBranch } from 'lucide-react'
+
+// Premium Animated Background with Expanding Rings and Floating Icons
+const PremiumBackground = React.memo(() => {
+  // Floating tech icons for background
+  const floatingIcons = [
+    { Icon: Code, x: '10%', y: '20%', delay: 0, size: 24 },
+    { Icon: Palette, x: '85%', y: '15%', delay: 1, size: 20 },
+    { Icon: Globe, x: '75%', y: '70%', delay: 2, size: 22 },
+    { Icon: Zap, x: '15%', y: '75%', delay: 0.5, size: 18 },
+    { Icon: Database, x: '90%', y: '45%', delay: 1.5, size: 20 },
+    { Icon: Cloud, x: '5%', y: '50%', delay: 2.5, size: 22 },
+    { Icon: Shield, x: '70%', y: '85%', delay: 3, size: 18 },
+    { Icon: Cpu, x: '25%', y: '90%', delay: 0.8, size: 20 },
+  ]
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Base Gradient */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.15), transparent),
+            radial-gradient(ellipse 60% 40% at 100% 0%, rgba(168, 85, 247, 0.12), transparent),
+            radial-gradient(ellipse 50% 30% at 0% 100%, rgba(56, 189, 248, 0.08), transparent)
+          `
+        }}
+      />
+      
+      {/* Expanding Circular Rings - Centered */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center pointer-events-none">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full border"
+            style={{
+              width: `${(i + 1) * 150}px`,
+              height: `${(i + 1) * 150}px`,
+              borderColor: i % 2 === 0 ? 'rgba(56, 189, 248, 0.08)' : 'rgba(168, 85, 247, 0.06)',
+              borderWidth: '1px',
+            }}
+            animate={{
+              scale: [1, 1.05, 1],
+              opacity: [0.3, 0.6, 0.3],
+              rotate: i % 2 === 0 ? [0, 360] : [360, 0],
+            }}
+            transition={{
+              scale: {
+                duration: 4 + i * 0.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+              opacity: {
+                duration: 3 + i * 0.3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+              rotate: {
+                duration: 60 + i * 10,
+                repeat: Infinity,
+                ease: "linear",
+              }
+            }}
+          />
+        ))}
+        
+        {/* Central Glow Pulse */}
+        <motion.div
+          className="absolute w-[300px] h-[300px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%)',
+          }}
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </div>
+
+      {/* Animated Large Orbs */}
+      <motion.div
+        className="absolute top-1/4 -right-48 w-[600px] h-[600px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 70%)',
+          filter: 'blur(80px)'
+        }}
+        animate={{
+          x: [0, -60, 0],
+          y: [0, 50, 0],
+          scale: [1, 1.15, 1]
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
+      <motion.div
+        className="absolute -bottom-48 left-1/4 w-[450px] h-[450px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(168, 85, 247, 0.05) 50%, transparent 70%)',
+          filter: 'blur(70px)'
+        }}
+        animate={{
+          x: [0, 70, 0],
+          y: [0, -40, 0],
+          scale: [1.1, 1, 1.1]
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
+      {/* Grid Pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(56, 189, 248, 0.5) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(56, 189, 248, 0.5) 1px, transparent 1px)
+          `,
+          backgroundSize: '80px 80px',
+        }}
+      />
+      
+      {/* Floating Tech Icons */}
+      {floatingIcons.map((item, i) => (
+        <motion.div
+          key={i}
+          className="absolute text-white/10"
+          style={{
+            left: item.x,
+            top: item.y,
+          }}
+          animate={{
+            y: [0, -20, 0],
+            x: [0, 10, 0],
+            rotate: [0, 10, -10, 0],
+            opacity: [0.1, 0.2, 0.1],
+          }}
+          transition={{
+            duration: 8 + i,
+            repeat: Infinity,
+            delay: item.delay,
+            ease: "easeInOut",
+          }}
+        >
+          <item.Icon size={item.size} />
+        </motion.div>
+      ))}
+      
+      {/* Floating Particles/Stars */}
+      {[...Array(25)].map((_, i) => (
+        <motion.div
+          key={`star-${i}`}
+          className="absolute rounded-full"
+          style={{
+            left: `${5 + Math.random() * 90}%`,
+            top: `${5 + Math.random() * 90}%`,
+            width: `${2 + Math.random() * 3}px`,
+            height: `${2 + Math.random() * 3}px`,
+            background: i % 3 === 0 
+              ? 'rgba(56, 189, 248, 0.6)' 
+              : i % 3 === 1 
+                ? 'rgba(168, 85, 247, 0.5)' 
+                : 'rgba(255, 255, 255, 0.4)',
+          }}
+          animate={{
+            opacity: [0.2, 0.8, 0.2],
+            scale: [1, 1.5, 1],
+          }}
+          transition={{
+            duration: 2 + Math.random() * 3,
+            repeat: Infinity,
+            delay: Math.random() * 4,
+          }}
+        />
+      ))}
+
+      {/* Shooting Star Effect */}
+      <motion.div
+        className="absolute w-1 h-1 bg-white rounded-full"
+        style={{
+          boxShadow: '0 0 10px 2px rgba(255, 255, 255, 0.5), -50px 0 30px 5px rgba(56, 189, 248, 0.3)'
+        }}
+        animate={{
+          x: ['-10%', '110%'],
+          y: ['20%', '60%'],
+          opacity: [0, 1, 0],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          repeatDelay: 8,
+          ease: "easeIn",
+        }}
+      />
+    </div>
+  )
+})
+PremiumBackground.displayName = 'PremiumBackground'
+
+// 3D Floating Icons Background - Yazıların Arkasına
+const Floating3DIconsBackground = React.memo(() => {
+  const icons3D = [
+    // Sol taraf ikonları
+    { Icon: Layers, x: '8%', y: '25%', size: 32, delay: 0, rotateAxis: 'Y', color: 'rgba(56, 189, 248, 0.12)' },
+    { Icon: Box, x: '5%', y: '45%', size: 40, delay: 0.5, rotateAxis: 'X', color: 'rgba(168, 85, 247, 0.10)' },
+    { Icon: Hexagon, x: '12%', y: '65%', size: 36, delay: 1, rotateAxis: 'Y', color: 'rgba(16, 185, 129, 0.11)' },
+    { Icon: Terminal, x: '3%', y: '80%', size: 28, delay: 1.5, rotateAxis: 'X', color: 'rgba(56, 189, 248, 0.09)' },
+    
+    // Sağ taraf ikonları
+    { Icon: Rocket, x: '88%', y: '20%', size: 38, delay: 0.3, rotateAxis: 'Y', color: 'rgba(251, 191, 36, 0.12)' },
+    { Icon: Settings, x: '92%', y: '40%', size: 34, delay: 0.8, rotateAxis: 'X', color: 'rgba(56, 189, 248, 0.10)' },
+    { Icon: Server, x: '85%', y: '60%', size: 30, delay: 1.3, rotateAxis: 'Y', color: 'rgba(168, 85, 247, 0.11)' },
+    { Icon: GitBranch, x: '95%', y: '75%', size: 26, delay: 1.8, rotateAxis: 'X', color: 'rgba(16, 185, 129, 0.09)' },
+    
+    // Üst alan
+    { Icon: Monitor, x: '25%', y: '8%', size: 28, delay: 0.2, rotateAxis: 'Y', color: 'rgba(56, 189, 248, 0.08)' },
+    { Icon: Smartphone, x: '75%', y: '5%', size: 26, delay: 0.7, rotateAxis: 'X', color: 'rgba(168, 85, 247, 0.08)' },
+    
+    // Alt alan
+    { Icon: Lock, x: '20%', y: '88%', size: 24, delay: 1.1, rotateAxis: 'Y', color: 'rgba(16, 185, 129, 0.08)' },
+    { Icon: Wifi, x: '80%', y: '90%', size: 28, delay: 1.6, rotateAxis: 'X', color: 'rgba(251, 191, 36, 0.08)' },
+  ]
+
+  // 3D Şekiller - Wireframe style
+  const shapes3D = [
+    // Büyük 3D Küp - Sol üst
+    { type: 'cube', x: '15%', y: '30%', size: 80, delay: 0, color: 'rgba(56, 189, 248, 0.06)' },
+    // 3D Piramit - Sağ
+    { type: 'pyramid', x: '82%', y: '35%', size: 70, delay: 0.5, color: 'rgba(168, 85, 247, 0.05)' },
+    // 3D Küre outline - Sol alt
+    { type: 'sphere', x: '10%', y: '70%', size: 60, delay: 1, color: 'rgba(16, 185, 129, 0.05)' },
+    // 3D Torus - Sağ alt
+    { type: 'torus', x: '88%', y: '65%', size: 55, delay: 1.5, color: 'rgba(251, 191, 36, 0.05)' },
+  ]
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ perspective: '1000px' }}>
+      {/* 3D Wireframe Şekiller */}
+      {shapes3D.map((shape, i) => (
+        <motion.div
+          key={`shape-${i}`}
+          className="absolute"
+          style={{
+            left: shape.x,
+            top: shape.y,
+            width: shape.size,
+            height: shape.size,
+            transformStyle: 'preserve-3d',
+          }}
+          animate={{
+            rotateX: [0, 360],
+            rotateY: [0, 360],
+          }}
+          transition={{
+            duration: 20 + i * 5,
+            repeat: Infinity,
+            ease: "linear",
+            delay: shape.delay,
+          }}
+        >
+          {shape.type === 'cube' && (
+            <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+              {/* Küp kenarları - wireframe */}
+              {[...Array(12)].map((_, edge) => {
+                const transforms = [
+                  'translateZ(40px)',
+                  'translateZ(-40px)',
+                  'rotateY(90deg) translateZ(40px)',
+                  'rotateY(90deg) translateZ(-40px)',
+                  'rotateX(90deg) translateZ(40px)',
+                  'rotateX(90deg) translateZ(-40px)',
+                  'translateY(-40px) rotateX(90deg)',
+                  'translateY(40px) rotateX(90deg)',
+                  'translateX(-40px) rotateY(90deg)',
+                  'translateX(40px) rotateY(90deg)',
+                  'translateZ(40px) rotateX(90deg)',
+                  'translateZ(-40px) rotateX(90deg)',
+                ]
+                return (
+                  <div
+                    key={edge}
+                    className="absolute left-1/2 top-1/2 w-20 h-0.5 -translate-x-1/2 -translate-y-1/2"
+                    style={{
+                      background: shape.color,
+                      transform: transforms[edge % transforms.length],
+                      boxShadow: `0 0 10px ${shape.color}`,
+                    }}
+                  />
+                )
+              })}
+            </div>
+          )}
+          
+          {shape.type === 'pyramid' && (
+            <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: `drop-shadow(0 0 8px ${shape.color})` }}>
+              <polygon
+                points="50,10 90,90 10,90"
+                fill="none"
+                stroke={shape.color}
+                strokeWidth="1"
+              />
+              <line x1="50" y1="10" x2="50" y2="70" stroke={shape.color} strokeWidth="0.5" opacity="0.5" />
+              <line x1="10" y1="90" x2="50" y2="70" stroke={shape.color} strokeWidth="0.5" opacity="0.5" />
+              <line x1="90" y1="90" x2="50" y2="70" stroke={shape.color} strokeWidth="0.5" opacity="0.5" />
+            </svg>
+          )}
+          
+          {shape.type === 'sphere' && (
+            <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: `drop-shadow(0 0 8px ${shape.color})` }}>
+              <circle cx="50" cy="50" r="45" fill="none" stroke={shape.color} strokeWidth="1" />
+              <ellipse cx="50" cy="50" rx="45" ry="15" fill="none" stroke={shape.color} strokeWidth="0.5" opacity="0.6" />
+              <ellipse cx="50" cy="50" rx="15" ry="45" fill="none" stroke={shape.color} strokeWidth="0.5" opacity="0.6" />
+              <ellipse cx="50" cy="50" rx="30" ry="45" fill="none" stroke={shape.color} strokeWidth="0.3" opacity="0.4" />
+            </svg>
+          )}
+          
+          {shape.type === 'torus' && (
+            <svg viewBox="0 0 100 100" className="w-full h-full" style={{ filter: `drop-shadow(0 0 8px ${shape.color})` }}>
+              <ellipse cx="50" cy="50" rx="40" ry="20" fill="none" stroke={shape.color} strokeWidth="1" />
+              <ellipse cx="50" cy="50" rx="25" ry="12" fill="none" stroke={shape.color} strokeWidth="0.8" opacity="0.7" />
+              <path d="M 10 50 Q 50 30 90 50" fill="none" stroke={shape.color} strokeWidth="0.5" opacity="0.5" />
+              <path d="M 10 50 Q 50 70 90 50" fill="none" stroke={shape.color} strokeWidth="0.5" opacity="0.5" />
+            </svg>
+          )}
+        </motion.div>
+      ))}
+
+      {/* 3D Dönen İkonlar */}
+      {icons3D.map((item, i) => (
+        <motion.div
+          key={`icon3d-${i}`}
+          className="absolute"
+          style={{
+            left: item.x,
+            top: item.y,
+            color: item.color,
+            transformStyle: 'preserve-3d',
+          }}
+          animate={{
+            [item.rotateAxis === 'Y' ? 'rotateY' : 'rotateX']: [0, 360],
+            y: [0, -15, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            [item.rotateAxis === 'Y' ? 'rotateY' : 'rotateX']: {
+              duration: 15 + i * 2,
+              repeat: Infinity,
+              ease: "linear",
+            },
+            y: {
+              duration: 4 + i * 0.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: item.delay,
+            },
+            scale: {
+              duration: 5 + i * 0.3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: item.delay,
+            }
+          }}
+        >
+          <motion.div
+            style={{ 
+              filter: `drop-shadow(0 0 12px ${item.color})`,
+            }}
+          >
+            <item.Icon size={item.size} strokeWidth={1} />
+          </motion.div>
+        </motion.div>
+      ))}
+
+      {/* Bağlantı Çizgileri - Teknoloji network efekti */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.03]">
+        <defs>
+          <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#38BDF8" />
+            <stop offset="100%" stopColor="#A855F7" />
+          </linearGradient>
+        </defs>
+        {/* Diagonal connection lines */}
+        <motion.line
+          x1="10%" y1="30%" x2="25%" y2="15%"
+          stroke="url(#lineGradient1)"
+          strokeWidth="1"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: [0, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.line
+          x1="85%" y1="25%" x2="75%" y2="10%"
+          stroke="url(#lineGradient1)"
+          strokeWidth="1"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: [0, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <motion.line
+          x1="15%" y1="70%" x2="25%" y2="85%"
+          stroke="url(#lineGradient1)"
+          strokeWidth="1"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: [0, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+        <motion.line
+          x1="88%" y1="60%" x2="80%" y2="85%"
+          stroke="url(#lineGradient1)"
+          strokeWidth="1"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: [0, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        />
+      </svg>
+
+      {/* Parlayan Noktalar - Connection nodes */}
+      {[
+        { x: '10%', y: '30%' },
+        { x: '88%', y: '25%' },
+        { x: '12%', y: '70%' },
+        { x: '90%', y: '65%' },
+        { x: '50%', y: '50%' },
+      ].map((node, i) => (
+        <motion.div
+          key={`node-${i}`}
+          className="absolute w-2 h-2 rounded-full"
+          style={{
+            left: node.x,
+            top: node.y,
+            background: i % 2 === 0 ? 'rgba(56, 189, 248, 0.3)' : 'rgba(168, 85, 247, 0.3)',
+            boxShadow: i % 2 === 0 
+              ? '0 0 20px rgba(56, 189, 248, 0.4), 0 0 40px rgba(56, 189, 248, 0.2)'
+              : '0 0 20px rgba(168, 85, 247, 0.4), 0 0 40px rgba(168, 85, 247, 0.2)',
+          }}
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.5,
+          }}
+        />
+      ))}
+    </div>
+  )
+})
+Floating3DIconsBackground.displayName = 'Floating3DIconsBackground'
 
 // Removed FloatingSphere for better performance
 
@@ -164,13 +618,14 @@ const MainHero = () => {
 
   return (
     <section ref={containerRef} className="relative overflow-hidden pt-16 lg:pt-32">
-      {/* Simplified 3D Background Elements */}
+      {/* Premium Animated Background with Rings and Icons */}
       <div className="absolute inset-0 pointer-events-none">
-        <AnimatedGrid />
-        
-        {/* Simplified Static Orbs - No FloatingSphere or Particles */}
-        <div className="absolute top-1/4 left-10 w-60 md:w-80 lg:w-96 h-60 md:h-80 lg:h-96 bg-gradient-to-br from-blue-500/20 to-cyan-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-10 w-60 md:w-80 h-60 md:h-80 bg-gradient-to-br from-cyan-400/15 to-blue-600/10 rounded-full blur-3xl"></div>
+        <PremiumBackground />
+      </div>
+
+      {/* 3D Floating Icons Background - Yazıların Arkasında */}
+      <div className="absolute inset-0 pointer-events-none z-1">
+        <Floating3DIconsBackground />
       </div>
 
       {/* Main Hero Content */}
