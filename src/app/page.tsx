@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Footer from './components/footer'
 
 // Loading component
 const LoadingScreen = () => (
@@ -89,11 +90,6 @@ const Referanslar = dynamic(() => import("./components/referanslar"), {
   ssr: false
 })
 
-const Footer = dynamic(() => import("./components/footer"), {
-  loading: () => <div className="min-h-[300px]" />,
-  ssr: false
-})
-
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
 
@@ -111,18 +107,20 @@ export default function Home() {
   }
 
   return (
-    <main className="relative z-10">
-      <MainHero />
-      <KodKarti />
-      <Mockup2 />
-      <NasilCalisiyoruz />
-      <NedenBiz />
-      <DestekSection />
-      <YazilimProjesi />
-      <MusteriYorumlari />
-      <Referanslar />
-      <FAQ />
+    <>
+      <main className="relative z-10">
+        <MainHero />
+        <KodKarti />
+        <Mockup2 />
+        <NasilCalisiyoruz />
+        <NedenBiz />
+        <DestekSection />
+        <YazilimProjesi />
+        <MusteriYorumlari />
+        <Referanslar />
+        <FAQ />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

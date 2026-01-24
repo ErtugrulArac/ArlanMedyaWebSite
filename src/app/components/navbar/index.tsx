@@ -1,11 +1,15 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import StaggeredMenu from '../ui/staggered-menu'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
+  const [isNavigating, setIsNavigating] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,13 +19,37 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Pathname değişince loading'i kapat
+  useEffect(() => {
+    setIsNavigating(false)
+  }, [pathname])
+
   const menuItems = [
     { label: 'Anasayfa', ariaLabel: 'Ana sayfaya git', link: '/' },
     { label: 'Hizmetler', ariaLabel: 'Hizmetlerimizi görüntüle', link: '/hizmetlerimiz' },
     { label: 'Hakkımızda', ariaLabel: 'Hakkımızda sayfası', link: '#about' },
     { label: 'Projeler', ariaLabel: 'Projelerimizi görüntüle', link: '#projects' },
-    { label: 'İletişim', ariaLabel: 'İletişime geç', link: '#contact' },
+    { label: 'İletişim', ariaLabel: 'İletişime geç', link: '/iletisim' },
   ]
+
+  const handleNavigation = useCallback((link: string) => {
+    if (link.startsWith('#')) {
+      document.querySelector(link)?.scrollIntoView({ behavior: 'smooth' })
+      return
+    }
+    
+    // Aynı sayfadaysa navigasyon yapma
+    if (link === pathname) return
+    
+    // Loading başlat
+    setIsNavigating(true)
+    window.dispatchEvent(new CustomEvent('navigation-start'))
+    
+    // 300ms sonra navigate et
+    setTimeout(() => {
+      window.location.href = link
+    }, 300)
+  }, [pathname])
 
   const socialItems = [
     { label: 'Instagram', link: 'https://instagram.com/arlanmedya' },
@@ -33,27 +61,30 @@ const Navbar = () => {
     <>
       {/* Desktop Navbar */}
       <motion.header
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden lg:block transition-all duration-300`}
+        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block transition-all duration-300`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <div 
-          className={`flex items-center gap-4 px-8 py-3 rounded-full border transition-all duration-300 ${
+          className={`flex items-center gap-6 px-10 py-4 rounded-full border transition-all duration-300 ${
             scrolled
               ? 'bg-[#050816]/95 backdrop-blur-xl border-white/20 shadow-xl shadow-black/30'
               : 'bg-[#0a1628]/80 backdrop-blur-lg border-white/15 shadow-lg shadow-black/20'
           }`}
         >
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group shrink-0 hover:opacity-80 transition-opacity">
+          <button 
+            onClick={() => handleNavigation('/')}
+            className="flex items-center gap-2 group shrink-0 hover:opacity-80 transition-opacity"
+          >
             <img 
               src="/logolar/arlanlogonav.webp" 
               alt="Arlan Medya Logo" 
-              className="h-10 w-auto object-contain"
+              className="h-12 w-auto object-contain"
               loading="eager"
             />
-          </a>
+          </button>
 
           {/* Divider */}
           <div className="w-px h-6 bg-white/15" />
@@ -61,14 +92,15 @@ const Navbar = () => {
           {/* Desktop Menu Links */}
           <nav className="flex items-center">
             {menuItems.map((item, idx) => (
-              <a
+              <button
                 key={idx}
-                href={item.link}
-                className="relative px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors group"
+                data-nav-link={item.link}
+                onClick={() => handleNavigation(item.link)}
+                className="relative px-5 py-2.5 text-base font-medium text-white/70 hover:text-white transition-colors group"
               >
                 <span className="relative z-10">{item.label}</span>
                 <span className="absolute inset-0 rounded-lg bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </a>
+              </button>
             ))}
           </nav>
 
@@ -78,7 +110,7 @@ const Navbar = () => {
           {/* CTA Button */}
           <motion.a
             href="#contact"
-            className="relative inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] rounded-lg text-[#050816] font-semibold text-sm overflow-hidden group shrink-0"
+            className="relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] rounded-lg text-[#050816] font-semibold text-base overflow-hidden group shrink-0"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

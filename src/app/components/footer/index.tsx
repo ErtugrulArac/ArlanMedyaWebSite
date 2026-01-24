@@ -23,13 +23,13 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative overflow-hidden py-16 sm:py-24">
+    <footer className="relative overflow-hidden py-16 sm:py-20 mt-20 sm:mt-32">
       {/* Subtle glow only */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#38BDF8] rounded-full blur-[200px] opacity-[0.03] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Big ARLAN Text */}
-        <div className="relative flex items-center justify-center mb-12 sm:mb-16">
+        <div className="relative flex items-center justify-center mb-6 sm:mb-8">
           {/* Traveling light effect */}
           <div 
             className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -39,7 +39,7 @@ export default function Footer() {
             }}
           >
             <span 
-              className="text-[80px] sm:text-[120px] md:text-[160px] lg:text-[200px] font-black tracking-tight select-none animate-light-travel"
+              className="text-[40px] sm:text-[60px] md:text-[80px] lg:text-[100px] font-black tracking-tight select-none animate-light-travel"
               style={{
                 color: 'transparent',
                 background: 'linear-gradient(90deg, transparent 0%, transparent 40%, rgba(56, 189, 248, 0.8) 50%, transparent 60%, transparent 100%)',
@@ -55,7 +55,7 @@ export default function Footer() {
           
           {/* Base text */}
           <h2 
-            className="text-[80px] sm:text-[120px] md:text-[160px] lg:text-[200px] font-black tracking-tight select-none"
+            className="text-[40px] sm:text-[60px] md:text-[80px] lg:text-[100px] font-black tracking-tight select-none"
             style={{
               color: 'rgba(255, 255, 255, 0.08)',
               WebkitTextStroke: '1px rgba(56, 189, 248, 0.2)',
@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
 
         {/* Social Icons */}
-        <div className="flex items-center justify-center gap-6 sm:gap-8 mb-12 sm:mb-16">
+        <div className="flex items-center justify-center gap-6 sm:gap-8 mb-6 sm:mb-8">
           {socialLinks.map((social, i) => (
             <a
               key={i}
@@ -83,12 +83,12 @@ export default function Footer() {
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex flex-wrap items-center justify-center gap-x-8 sm:gap-x-12 lg:gap-x-16 gap-y-4 mb-12 sm:mb-16">
+        <nav className="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-10 lg:gap-x-12 gap-y-3 mb-6 sm:mb-8">
           {navLinks.map((link, i) => (
             <Link
               key={i}
               href={link.href}
-              className="text-white/50 text-sm sm:text-base hover:text-white transition-colors duration-300"
+              className="text-white/50 text-xs sm:text-sm hover:text-white transition-colors duration-300"
             >
               {link.label}
             </Link>
@@ -96,19 +96,19 @@ export default function Footer() {
         </nav>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" />
+        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4" />
 
         {/* Bottom Section */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/30 text-xs sm:text-sm">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+          <p className="text-white/30">
             © {currentYear} Arlan Medya. Tüm hakları saklıdır.
           </p>
           
-          <div className="flex items-center gap-6">
-            <a href="#" className="text-white/40 text-xs sm:text-sm hover:text-white transition-colors">
+          <div className="flex items-center gap-4">
+            <a href="#" className="text-white/40 hover:text-white transition-colors">
               Kullanım Şartları
             </a>
-            <a href="#" className="text-white/40 text-xs sm:text-sm hover:text-white transition-colors">
+            <a href="#" className="text-white/40 hover:text-white transition-colors">
               Gizlilik Politikası
             </a>
           </div>

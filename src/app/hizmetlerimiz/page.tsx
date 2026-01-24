@@ -28,9 +28,7 @@ import {
   Server
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
-
-// Lazy load navbar
-const Navbar = dynamic(() => import('../components/navbar'), { ssr: false })
+import Footer from '../components/footer'
 
 // ============================================
 // FLOATING BACKGROUND COMPONENT - Parallax Style
@@ -544,14 +542,13 @@ export default function HizmetlerimizPage() {
   ], [])
 
   return (
-    <main className="relative min-h-screen">
-      {/* Floating Background Animation */}
-      <FloatingBackground />
-      
-      <Navbar />
-      
-      {/* Hero */}
-      <HeroSection />
+    <>
+      <main className="relative min-h-screen">
+        {/* Floating Background Animation */}
+        <FloatingBackground />
+        
+        {/* Hero */}
+        <HeroSection />
 
       {/* Services */}
       <section className="relative py-16 sm:py-24">
@@ -629,5 +626,7 @@ export default function HizmetlerimizPage() {
         </div>
       </section>
     </main>
+    <Footer />
+    </>
   )
 }
