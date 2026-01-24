@@ -52,11 +52,11 @@ const DashboardCard = ({ variant = "primary" }: { variant?: "primary" | "seconda
       <div className="p-3 sm:p-4 border-b border-white/5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center ${
-              isPrimary ? 'bg-[#38BDF8]/20' : 'bg-white/5'
-            }`}>
-              <Shield size={14} className={isPrimary ? 'text-[#38BDF8]' : 'text-white/40'} />
-            </div>
+            <img 
+              src="/logolar/arlanlogonav.webp" 
+              alt="Arlan Logo" 
+              className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
+            />
             <span className="text-white/80 text-[10px] sm:text-xs font-medium">Arlan Panel</span>
           </div>
           <div className="flex gap-1">

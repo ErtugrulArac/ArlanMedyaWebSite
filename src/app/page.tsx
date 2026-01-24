@@ -39,6 +39,11 @@ const MusteriYorumlari = dynamic(() => import("./components/müşteriyorumları"
   ssr: false
 })
 
+const YazilimProjesi = dynamic(() => import("./components/yazılımprojenizmivar"), {
+  loading: () => <div className="min-h-[600px]" />,
+  ssr: false
+})
+
 export default function Home() {
   return (
     <main className="relative z-10">
@@ -48,6 +53,7 @@ export default function Home() {
       <NasilCalisiyoruz />
       <NedenBiz />
       <DestekSection />
+      <YazilimProjesi />
       <MusteriYorumlari />
     </main>
   );

@@ -46,16 +46,13 @@ const Navbar = () => {
           }`}
         >
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative w-9 h-9">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] rounded-lg opacity-75 group-hover:opacity-100 transition blur-sm"></div>
-              <div className="relative rounded-lg w-full h-full flex items-center justify-center bg-[#0a1628]">
-                <span className="font-bold text-sm text-[#38BDF8]">A</span>
-              </div>
-            </div>
-            <span className="font-bold text-base text-white tracking-tight">
-              ARLAN<span className="text-[#38BDF8]">MEDYA</span>
-            </span>
+          <a href="/" className="flex items-center gap-2 group shrink-0 hover:opacity-80 transition-opacity">
+            <img 
+              src="/logolar/arlanlogonav.webp" 
+              alt="Arlan Medya Logo" 
+              className="h-10 w-auto object-contain"
+              loading="eager"
+            />
           </a>
 
           {/* Divider */}
@@ -108,6 +105,7 @@ const Navbar = () => {
           colors={['#050816', '#0a1628', '#0f2942']}
           accentColor="#38BDF8"
           isFixed={false}
+          logoUrl="/logolar/arlanlogonav.webp"
         />
       </div>
     </>

@@ -2,50 +2,203 @@
 
 import React, { useRef } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Sparkles, Zap, Shield, Code2 } from 'lucide-react'
 
-// Simplified 3D Rotating Cube Component - Lighter version
+// Premium 3D Logo Platform Component
 const Rotating3DCube = React.memo(() => {
   return (
-    <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56" style={{ perspective: '1000px' }}>
+    <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64" style={{ perspective: '1200px' }}>
+      {/* Outer Rotating Ring */}
       <motion.div
-        className="relative w-full h-full"
+        className="absolute inset-0"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      >
+        <div 
+          className="absolute inset-0 rounded-full"
+          style={{
+            border: '2px dashed rgba(56, 189, 248, 0.3)',
+          }}
+        />
+        {/* Orbiting Dots */}
+        {[0, 90, 180, 270].map((deg, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 sm:w-3 sm:h-3 rounded-full"
+            style={{
+              top: '50%',
+              left: '50%',
+              background: i % 2 === 0 ? '#38BDF8' : '#A855F7',
+              boxShadow: i % 2 === 0 ? '0 0 15px #38BDF8' : '0 0 15px #A855F7',
+              transform: `rotate(${deg}deg) translateX(${window?.innerWidth > 768 ? '110px' : '75px'}) translateY(-50%)`,
+            }}
+            animate={{ scale: [1, 1.3, 1] }}
+            transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+          />
+        ))}
+      </motion.div>
+
+      {/* Secondary Ring - Counter Rotate */}
+      <motion.div
+        className="absolute inset-4 sm:inset-5 md:inset-6"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      >
+        <div 
+          className="absolute inset-0 rounded-full"
+          style={{
+            border: '1px solid rgba(168, 85, 247, 0.2)',
+          }}
+        />
+      </motion.div>
+
+      {/* Main 3D Platform */}
+      <motion.div
+        className="absolute inset-6 sm:inset-8 md:inset-10"
         style={{ transformStyle: 'preserve-3d' }}
         animate={{ 
           rotateY: [0, 360],
+          rotateX: [0, 10, 0, -10, 0],
         }}
         transition={{ 
-          duration: 30, // Slower rotation
-          repeat: Infinity, 
-          ease: "linear" 
+          rotateY: { duration: 20, repeat: Infinity, ease: "linear" },
+          rotateX: { duration: 8, repeat: Infinity, ease: "easeInOut" },
         }}
       >
-        {/* Front Face */}
-        <div 
-          className="absolute inset-0 flex items-center justify-center rounded-2xl"
+        {/* Front Face - Main Logo Display */}
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center rounded-2xl sm:rounded-3xl overflow-hidden"
           style={{ 
-            transform: 'translateZ(64px) sm:translateZ(80px)',
-            background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(56, 189, 248, 0.03))',
-            border: '1px solid rgba(56, 189, 248, 0.2)',
-            backdropFilter: 'blur(8px)',
+            transform: 'translateZ(40px)',
+            background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))',
+            border: '1px solid rgba(56, 189, 248, 0.3)',
+            boxShadow: '0 0 40px rgba(56, 189, 248, 0.2), inset 0 1px 0 rgba(255,255,255,0.1)',
           }}
         >
-          <span className="text-4xl sm:text-5xl md:text-6xl">🚀</span>
-        </div>
+          {/* Inner Glow */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(circle at center, rgba(56, 189, 248, 0.1) 0%, transparent 70%)',
+            }}
+          />
+          
+          {/* Logo */}
+          <motion.img 
+            src="/logolar/arlanlogonav.webp" 
+            alt="Arlan Logo" 
+            className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain"
+            animate={{ 
+              scale: [1, 1.05, 1],
+              filter: ['drop-shadow(0 0 10px rgba(56, 189, 248, 0.3))', 'drop-shadow(0 0 20px rgba(56, 189, 248, 0.5))', 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.3))']
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+          />
+
+          {/* Corner Decorations */}
+          <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-[#38BDF8]/40 rounded-tl" />
+          <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-[#38BDF8]/40 rounded-tr" />
+          <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-[#38BDF8]/40 rounded-bl" />
+          <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-[#38BDF8]/40 rounded-br" />
+        </motion.div>
         
         {/* Back Face */}
-        <div 
-          className="absolute inset-0 flex items-center justify-center rounded-2xl"
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center rounded-2xl sm:rounded-3xl"
           style={{ 
-            transform: 'rotateY(180deg) translateZ(64px)',
-            background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(168, 85, 247, 0.03))',
-            border: '1px solid rgba(168, 85, 247, 0.2)',
-            backdropFilter: 'blur(8px)',
+            transform: 'rotateY(180deg) translateZ(40px)',
+            background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))',
+            border: '1px solid rgba(168, 85, 247, 0.3)',
+            boxShadow: '0 0 40px rgba(168, 85, 247, 0.2)',
           }}
         >
-          <span className="text-4xl sm:text-5xl md:text-6xl">💎</span>
-        </div>
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(circle at center, rgba(168, 85, 247, 0.1) 0%, transparent 70%)',
+            }}
+          />
+          <motion.img 
+            src="/logolar/arlanlogonav.webp" 
+            alt="Arlan Logo" 
+            className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain opacity-80"
+            style={{ filter: 'hue-rotate(60deg)' }}
+          />
+        </motion.div>
       </motion.div>
+
+      {/* Floating Icons Around */}
+      <motion.div
+        className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center"
+        style={{
+          background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.1))',
+          border: '1px solid rgba(56, 189, 248, 0.3)',
+          backdropFilter: 'blur(8px)',
+        }}
+        animate={{ y: [0, -8, 0], rotate: [0, 10, 0] }}
+        transition={{ duration: 3, repeat: Infinity }}
+      >
+        <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#38BDF8]" />
+      </motion.div>
+
+      <motion.div
+        className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center"
+        style={{
+          background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.1))',
+          border: '1px solid rgba(168, 85, 247, 0.3)',
+          backdropFilter: 'blur(8px)',
+        }}
+        animate={{ y: [0, 8, 0], rotate: [0, -10, 0] }}
+        transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+      >
+        <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-[#A855F7]" />
+      </motion.div>
+
+      <motion.div
+        className="absolute top-1/2 -left-4 sm:-left-5 w-7 h-7 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center"
+        style={{
+          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1))',
+          border: '1px solid rgba(16, 185, 129, 0.3)',
+          backdropFilter: 'blur(8px)',
+        }}
+        animate={{ x: [0, -5, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
+      >
+        <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-[#10B981]" />
+      </motion.div>
+
+      <motion.div
+        className="absolute top-1/2 -right-4 sm:-right-5 w-7 h-7 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center"
+        style={{
+          background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.1))',
+          border: '1px solid rgba(236, 72, 153, 0.3)',
+          backdropFilter: 'blur(8px)',
+        }}
+        animate={{ x: [0, 5, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, delay: 0.8 }}
+      >
+        <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-[#EC4899]" />
+      </motion.div>
+
+      {/* Background Glow Effects */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 60%)',
+          }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 4, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 60%)',
+          }}
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+        />
+      </div>
     </div>
   )
 })
