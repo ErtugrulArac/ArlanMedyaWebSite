@@ -74,7 +74,7 @@ const FAQItem = ({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boolean; o
 }
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(1)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)

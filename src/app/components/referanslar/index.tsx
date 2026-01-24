@@ -1,17 +1,21 @@
 'use client'
 
 import React, { useEffect } from 'react'
+import Image from 'next/image'
 
 // Referans logoları - placeholder olarak kullanılacak, gerçek logolar eklenecek
 const referanslar = [
-  { name: 'Şirket 1', logo: '/referans1.png' },
-  { name: 'Şirket 2', logo: '/referans2.png' },
-  { name: 'Şirket 3', logo: '/referans3.png' },
-  { name: 'Şirket 4', logo: '/referans4.png' },
-  { name: 'Şirket 5', logo: '/referans5.png' },
-  { name: 'Şirket 6', logo: '/referans6.png' },
-  { name: 'Şirket 7', logo: '/referans7.png' },
-  { name: 'Şirket 8', logo: '/referans8.png' },
+  { name: 'Şirket 1', logo: 'referanslar/1.png' },
+  { name: 'Şirket 2', logo: 'referanslar/2.png' },
+  { name: 'Şirket 3', logo: 'referanslar/3.png' },
+  { name: 'Şirket 4', logo: 'referanslar/4.png' },
+  { name: 'Şirket 5', logo: 'referanslar/5.png' },
+  { name: 'Şirket 6', logo: 'referanslar/6.png' },
+  { name: 'Şirket 7', logo: 'referanslar/7.png' },
+  { name: 'Şirket 8', logo: 'referanslar/8.png' },
+  { name: 'Şirket 9', logo: 'referanslar/9.png' },
+  { name: 'Şirket 10', logo: 'referanslar/10.png' },
+  { name: 'Şirket 11', logo: 'referanslar/11.png' },
 ]
 
 export default function Referanslar() {
@@ -179,13 +183,17 @@ export default function Referanslar() {
                 {doubledReferanslar.map((ref, index) => (
                   <div
                     key={index}
-                    className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-[#1a1f35] to-[#0d1020] border border-white/10 flex items-center justify-center transition-all duration-300 hover:border-[#38BDF8]/50 hover:scale-110 group"
+                    className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-[#1a1f35] to-[#0d1020] border border-white/10 flex items-center justify-center transition-all duration-300 hover:border-[#38BDF8]/50 hover:scale-110 group"
                   >
-                    {/* Placeholder - gerçek logo eklendiğinde Image component kullanılacak */}
-                    <div className="w-full h-full rounded-full bg-gradient-to-br from-[#1a1f35] to-[#0d1020] flex items-center justify-center">
-                      <span className="text-white/40 text-xs sm:text-sm font-medium text-center px-2">
-                        Logo {(index % referanslar.length) + 1}
-                      </span>
+                    <div className="w-full h-full rounded-full bg-gradient-to-br from-[#1a1f35] to-[#0d1020] flex items-center justify-center overflow-hidden">
+                      <Image
+                        src={ref.logo}
+                        alt={ref.name}
+                        width={80}
+                        height={80}
+                        className="object-contain w-full h-full rounded-full"
+                        unoptimized
+                      />
                     </div>
                   </div>
                 ))}
