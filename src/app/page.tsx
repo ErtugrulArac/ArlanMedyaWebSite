@@ -44,6 +44,16 @@ const YazilimProjesi = dynamic(() => import("./components/yazılımprojenizmivar
   ssr: false
 })
 
+const FAQ = dynamic(() => import("./components/faq"), {
+  loading: () => <div className="min-h-[600px]" />,
+  ssr: false
+})
+
+const Referanslar = dynamic(() => import("./components/referanslar"), {
+  loading: () => <div className="min-h-[600px]" />,
+  ssr: false
+})
+
 const Footer = dynamic(() => import("./components/footer"), {
   loading: () => <div className="min-h-[300px]" />,
   ssr: false
@@ -60,6 +70,8 @@ export default function Home() {
       <DestekSection />
       <YazilimProjesi />
       <MusteriYorumlari />
+      <Referanslar />
+      <FAQ />
       <Footer />
     </main>
   );

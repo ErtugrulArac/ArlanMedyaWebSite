@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const menuItems = [
     { label: 'Anasayfa', ariaLabel: 'Ana sayfaya git', link: '/' },
-    { label: 'Hizmetler', ariaLabel: 'Hizmetlerimizi görüntüle', link: '#services' },
+    { label: 'Hizmetler', ariaLabel: 'Hizmetlerimizi görüntüle', link: '/hizmetlerimiz' },
     { label: 'Hakkımızda', ariaLabel: 'Hakkımızda sayfası', link: '#about' },
     { label: 'Projeler', ariaLabel: 'Projelerimizi görüntüle', link: '#projects' },
     { label: 'İletişim', ariaLabel: 'İletişime geç', link: '#contact' },
