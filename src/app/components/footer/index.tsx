@@ -1,34 +1,11 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { SiInstagram, SiX, SiLinkedin } from 'react-icons/si'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
-
-  // Inject keyframes for light animation
-  useEffect(() => {
-    const styleId = 'footer-light-animation'
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement('style')
-      style.id = styleId
-      style.textContent = `
-        @keyframes lightTravel {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-      `
-      document.head.appendChild(style)
-    }
-  }, [])
 
   const navLinks = [
     { label: 'Ana Sayfa', href: '/' },
@@ -62,7 +39,7 @@ export default function Footer() {
             }}
           >
             <span 
-              className="text-[80px] sm:text-[120px] md:text-[160px] lg:text-[200px] font-black tracking-tight select-none"
+              className="text-[80px] sm:text-[120px] md:text-[160px] lg:text-[200px] font-black tracking-tight select-none animate-light-travel"
               style={{
                 color: 'transparent',
                 background: 'linear-gradient(90deg, transparent 0%, transparent 40%, rgba(56, 189, 248, 0.8) 50%, transparent 60%, transparent 100%)',
@@ -70,7 +47,6 @@ export default function Footer() {
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 WebkitTextStroke: '1px transparent',
-                animation: 'lightTravel 4s ease-in-out infinite',
               }}
             >
               ARLAN

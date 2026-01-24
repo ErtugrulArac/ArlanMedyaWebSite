@@ -28,17 +28,13 @@ const FloatingMockup = React.memo(() => {
 
   return (
     <div className="relative flex items-center justify-center py-8 sm:py-0">
-      {/* Orbital Rings */}
+      {/* Orbital Rings - CSS Animation */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <motion.div
-          className="absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[420px] lg:h-[420px] rounded-full border border-dashed border-[#38BDF8]/20"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        <div
+          className="absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[420px] lg:h-[420px] rounded-full border border-dashed border-[#38BDF8]/20 animate-spin-slow"
         />
-        <motion.div
-          className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] lg:w-[340px] lg:h-[340px] rounded-full border border-[#A855F7]/15"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        <div
+          className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] lg:w-[340px] lg:h-[340px] rounded-full border border-[#A855F7]/15 animate-spin-reverse"
         />
       </div>
 
@@ -51,8 +47,8 @@ const FloatingMockup = React.memo(() => {
         transition={{ duration: 0.8 }}
       >
         {/* Phone Device */}
-        <motion.div
-          className="relative w-[200px] h-[400px] sm:w-[240px] sm:h-[480px] lg:w-[280px] lg:h-[560px] rounded-[32px] sm:rounded-[40px] lg:rounded-[48px] overflow-hidden"
+        <div
+          className="relative w-[200px] h-[400px] sm:w-[240px] sm:h-[480px] lg:w-[280px] lg:h-[560px] rounded-[32px] sm:rounded-[40px] lg:rounded-[48px] overflow-hidden hover-scale"
           style={{
             background: 'linear-gradient(145deg, #1E293B, #0F172A)',
             border: '4px solid #334155',
@@ -63,8 +59,6 @@ const FloatingMockup = React.memo(() => {
               0 0 80px -20px rgba(56, 189, 248, 0.3)
             `
           }}
-          whileHover={{ y: -5, scale: 1.02 }}
-          transition={{ duration: 0.3 }}
         >
           {/* Notch */}
           <div className="absolute top-2 sm:top-3 left-1/2 -translate-x-1/2 w-20 sm:w-24 lg:w-28 h-5 sm:h-6 lg:h-7 bg-black rounded-full z-20 flex items-center justify-center gap-2">
@@ -86,18 +80,16 @@ const FloatingMockup = React.memo(() => {
             {/* App Header */}
             <div className="px-3 sm:px-4 pt-2 sm:pt-3 pb-3 sm:pb-4">
               <div className="flex items-center gap-2 sm:gap-3">
-                <motion.div
-                  className="w-9 h-9 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center overflow-hidden"
+                <div
+                  className="w-9 h-9 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center overflow-hidden animate-pulse-slow"
                   style={{ background: 'linear-gradient(135deg, #38BDF8, #0EA5E9)' }}
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 3, repeat: Infinity }}
                 >
                   <img 
                     src="/logolar/arlanlogonav.webp" 
                     alt="Arlan Logo" 
                     className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 object-contain"
                   />
-                </motion.div>
+                </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-white font-semibold text-xs sm:text-sm truncate">Arlan Panel</h4>
                   <div className="flex items-center gap-1">
@@ -158,7 +150,7 @@ const FloatingMockup = React.memo(() => {
               </div>
             </div>
 
-            {/* Quick Actions */}
+            {/* Quick Actions - CSS Hover */}
             <div className="px-3 sm:px-4 mt-3 sm:mt-4 grid grid-cols-4 gap-1.5 sm:gap-2">
               {[
                 { icon: Smartphone, color: '#38BDF8' },
@@ -168,7 +160,7 @@ const FloatingMockup = React.memo(() => {
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  className="aspect-square rounded-lg sm:rounded-xl flex items-center justify-center"
+                  className="aspect-square rounded-lg sm:rounded-xl flex items-center justify-center hover-scale"
                   style={{ 
                     background: `linear-gradient(135deg, ${item.color}15, ${item.color}05)`,
                     border: `1px solid ${item.color}25`
@@ -177,31 +169,29 @@ const FloatingMockup = React.memo(() => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.6 + i * 0.05 }}
-                  whileHover={{ scale: 1.1 }}
                 >
                   <item.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5" style={{ color: item.color }} />
                 </motion.div>
               ))}
             </div>
 
-            {/* Bottom Navigation */}
+            {/* Bottom Navigation - CSS Hover */}
             <div className="absolute bottom-2 sm:bottom-3 left-3 sm:left-4 right-3 sm:right-4">
               <div className="flex items-center justify-around py-2 sm:py-2.5 px-2 rounded-xl sm:rounded-2xl" style={{ background: 'rgba(255, 255, 255, 0.03)', backdropFilter: 'blur(10px)' }}>
                 {[Code2, Monitor, MessageCircle].map((Icon, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center ${i === 1 ? 'bg-[#38BDF8]/20' : ''}`}
-                    whileHover={{ scale: 1.1 }}
+                    className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center hover-scale ${i === 1 ? 'bg-[#38BDF8]/20' : ''}`}
                   >
                     <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${i === 1 ? 'text-[#38BDF8]' : 'text-white/40'}`} />
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Floating Notification Cards */}
+        {/* Floating Notification Cards - CSS Animation */}
         {notifications.map((notif, i) => (
           <motion.div
             key={i}
@@ -209,14 +199,14 @@ const FloatingMockup = React.memo(() => {
               i === 0 ? '-right-4 sm:-right-12 lg:-right-20 top-16 sm:top-20' :
               i === 1 ? '-left-4 sm:-left-12 lg:-left-20 top-1/3' :
               '-right-2 sm:-right-10 lg:-right-16 bottom-24 sm:bottom-32'
-            } z-20`}
+            } z-20 ${i % 2 === 0 ? 'animate-float-notification' : 'animate-float-notification-reverse'}`}
             initial={{ opacity: 0, x: i === 1 ? -30 : 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.8 + i * 0.15 }}
-            animate={{ y: [0, i % 2 === 0 ? -8 : 8, 0] }}
+            style={{ animationDelay: `${i * 0.5}s` }}
           >
-            <motion.div
+            <div
               className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl"
               style={{
                 background: 'linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.9))',
@@ -224,7 +214,6 @@ const FloatingMockup = React.memo(() => {
                 boxShadow: `0 10px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px ${notif.color}30`,
                 backdropFilter: 'blur(10px)'
               }}
-              transition={{ duration: 4, repeat: Infinity, delay: i * 0.5 }}
             >
               <div 
                 className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl flex items-center justify-center"
@@ -236,64 +225,51 @@ const FloatingMockup = React.memo(() => {
                 <p className="text-white text-xs sm:text-sm font-medium whitespace-nowrap">{notif.text}</p>
                 <p className="text-white/40 text-[9px] sm:text-[10px]">{notif.time}</p>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         ))}
 
-        {/* Corner Floating Icons */}
-        <motion.div
-          className="absolute -top-6 sm:-top-8 left-1/2 -translate-x-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center z-20"
+        {/* Corner Floating Icons - CSS Animation */}
+        <div
+          className="absolute -top-6 sm:-top-8 left-1/2 -translate-x-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center z-20 animate-float"
           style={{
             background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.1))',
             border: '1px solid rgba(56, 189, 248, 0.3)',
             backdropFilter: 'blur(10px)',
             boxShadow: '0 10px 30px -10px rgba(56, 189, 248, 0.4)'
           }}
-          animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
-          transition={{ duration: 4, repeat: Infinity }}
         >
           <Rocket className="w-5 h-5 sm:w-6 sm:h-6 text-[#38BDF8]" />
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-8 w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center z-20"
+        <div
+          className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-8 w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center z-20 animate-float-delayed"
           style={{
             background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.1))',
             border: '1px solid rgba(168, 85, 247, 0.3)',
             backdropFilter: 'blur(10px)'
           }}
-          animate={{ y: [0, 8, 0], rotate: [0, -5, 0] }}
-          transition={{ duration: 5, repeat: Infinity, delay: 1 }}
         >
           <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-[#A855F7]" />
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-8 w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center z-20"
+        <div
+          className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-8 w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center z-20 animate-float"
           style={{
             background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1))',
             border: '1px solid rgba(16, 185, 129, 0.3)',
-            backdropFilter: 'blur(10px)'
+            backdropFilter: 'blur(10px)',
+            animationDelay: '0.5s'
           }}
-          animate={{ y: [0, 8, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 4.5, repeat: Infinity, delay: 0.5 }}
         >
           <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#10B981]" />
-        </motion.div>
+        </div>
       </motion.div>
 
-      {/* Background Glow Effects */}
+      {/* Background Glow Effects - Static */}
       <div className="absolute inset-0 -z-10 pointer-events-none flex items-center justify-center">
-        <motion.div
-          className="absolute w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-[#38BDF8] rounded-full blur-[100px] sm:blur-[120px] opacity-20"
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute w-40 h-40 sm:w-60 sm:h-60 lg:w-80 lg:h-80 bg-[#A855F7] rounded-full blur-[80px] sm:blur-[100px] opacity-15 translate-x-10 translate-y-10"
-          animate={{ scale: [1.2, 1, 1.2] }}
-          transition={{ duration: 10, repeat: Infinity, delay: 1 }}
-        />
+        <div className="absolute w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-[#38BDF8] rounded-full blur-[100px] sm:blur-[120px] opacity-15" />
+        <div className="absolute w-40 h-40 sm:w-60 sm:h-60 lg:w-80 lg:h-80 bg-[#A855F7] rounded-full blur-[80px] sm:blur-[100px] opacity-10 translate-x-10 translate-y-10" />
       </div>
     </div>
   )

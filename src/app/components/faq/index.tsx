@@ -34,7 +34,7 @@ const faqData: FAQItem[] = [
 const FAQItem = ({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boolean; onToggle: () => void }) => {
   return (
     <div 
-      className={`rounded-2xl overflow-hidden transition-all duration-300 ${
+      className={`rounded-2xl overflow-hidden transition-colors duration-200 ${
         isOpen 
           ? 'bg-gradient-to-r from-[#38BDF8]/10 via-[#A855F7]/10 to-[#38BDF8]/5 border border-[#38BDF8]/30' 
           : 'bg-white/[0.02] border border-white/5 hover:border-white/10'
@@ -44,29 +44,32 @@ const FAQItem = ({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boolean; o
         onClick={onToggle}
         className="w-full px-6 py-5 flex items-center justify-between text-left"
       >
-        <span className={`text-base sm:text-lg font-medium transition-colors duration-300 ${
+        <span className={`text-base sm:text-lg font-medium transition-colors duration-200 ${
           isOpen ? 'text-white' : 'text-white/80'
         }`}>
           {item.question}
         </span>
-        <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
-          isOpen 
-            ? 'bg-[#38BDF8]/20 rotate-180' 
-            : 'bg-white/5'
-        }`}>
-          <ChevronDown className={`w-5 h-5 transition-colors duration-300 ${
-            isOpen ? 'text-[#38BDF8]' : 'text-white/50'
-          }`} />
+        <div 
+          className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-200 ${
+            isOpen ? 'bg-[#38BDF8]/20' : 'bg-white/5'
+          }`}
+          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+        >
+          <ChevronDown className={`w-5 h-5 ${isOpen ? 'text-[#38BDF8]' : 'text-white/50'}`} />
         </div>
       </button>
       
-      <div className={`overflow-hidden transition-all duration-300 ${
-        isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-      }`}>
-        <div className="px-6 pb-5">
-          <p className="text-white/60 leading-relaxed">
-            {item.answer}
-          </p>
+      {/* Grid-based height animation - GPU accelerated */}
+      <div 
+        className="grid transition-[grid-template-rows] duration-200 ease-out"
+        style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
+      >
+        <div className="overflow-hidden">
+          <div className="px-6 pb-5">
+            <p className="text-white/60 leading-relaxed">
+              {item.answer}
+            </p>
+          </div>
         </div>
       </div>
     </div>

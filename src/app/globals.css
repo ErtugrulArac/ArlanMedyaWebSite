@@ -198,6 +198,47 @@ body {
   will-change: transform, opacity;
 }
 
+/* Notification card float animation */
+@keyframes float-notification {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes float-notification-reverse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.animate-float-notification {
+  animation: float-notification 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-notification-reverse {
+  animation: float-notification-reverse 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Simple hover scale for quick actions */
+.hover-scale:hover {
+  transform: scale(1.1);
+}
+
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+/* Footer light travel animation - GPU accelerated */
+@keyframes light-travel {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-light-travel {
+  animation: light-travel 4s linear infinite;
+  will-change: background-position;
+}
+
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   .animate-spin-slow,
@@ -207,6 +248,9 @@ body {
   .animate-aurora-reverse,
   .animate-float,
   .animate-float-delayed,
+  .animate-float-notification,
+  .animate-float-notification-reverse,
+  .animate-light-travel,
   .light-beam,
   .light-beam-horizontal,
   .shooting-star {
