@@ -5,17 +5,17 @@ import Image from 'next/image'
 
 // Referans logoları - placeholder olarak kullanılacak, gerçek logolar eklenecek
 const referanslar = [
-  { name: 'Şirket 1', logo: 'referanslar/1.png' },
-  { name: 'Şirket 2', logo: 'referanslar/2.png' },
-  { name: 'Şirket 3', logo: 'referanslar/3.png' },
-  { name: 'Şirket 4', logo: 'referanslar/4.png' },
-  { name: 'Şirket 5', logo: 'referanslar/5.png' },
-  { name: 'Şirket 6', logo: 'referanslar/6.png' },
-  { name: 'Şirket 7', logo: 'referanslar/7.png' },
-  { name: 'Şirket 8', logo: 'referanslar/8.png' },
-  { name: 'Şirket 9', logo: 'referanslar/9.png' },
-  { name: 'Şirket 10', logo: 'referanslar/10.png' },
-  { name: 'Şirket 11', logo: 'referanslar/11.png' },
+  { name: 'Şirket 1', logo: '/logolar/referanslar/1.webp' },
+  { name: 'Şirket 2', logo: '/logolar/referanslar/2.webp' },
+  { name: 'Şirket 3', logo: '/logolar/referanslar/3.webp' },
+  { name: 'Şirket 4', logo: '/logolar/referanslar/4.webp' },
+  { name: 'Şirket 5', logo: '/logolar/referanslar/5.webp' },
+  { name: 'Şirket 6', logo: '/logolar/referanslar/6.webp' },
+  { name: 'Şirket 7', logo: '/logolar/referanslar/7.webp' },
+  { name: 'Şirket 8', logo: '/logolar/referanslar/8.webp' },
+  { name: 'Şirket 9', logo: '/logolar/referanslar/9.webp' },
+  { name: 'Şirket 10', logo: '/logolar/referanslar/10.webp' },
+  { name: 'Şirket 11', logo: '/logolar/referanslar/11.webp' },
 ]
 
 export default function Referanslar() {

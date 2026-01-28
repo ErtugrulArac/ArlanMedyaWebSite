@@ -1,8 +1,30 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const AnimatedBackground = () => {
+  useEffect(() => {
+    const styleId = 'animated-bg-keyframes'
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style')
+      style.id = styleId
+      style.textContent = `
+        @keyframes float {
+          0%, 100% {
+            transform: translate(0, 0);
+          }
+          33% {
+            transform: translate(30px, -30px);
+          }
+          66% {
+            transform: translate(-20px, 20px);
+          }
+        }
+      `
+      document.head.appendChild(style)
+    }
+  }, [])
+
   return (
     <>
       {/* Optimized Animated Background - Reduced effects for better performance */}
@@ -31,21 +53,6 @@ const AnimatedBackground = () => {
           }}
         ></div>
       </div>
-
-      {/* CSS Keyframes */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translate(0, 0);
-          }
-          33% {
-            transform: translate(30px, -30px);
-          }
-          66% {
-            transform: translate(-20px, 20px);
-          }
-        }
-      `}</style>
     </>
   )
 }

@@ -81,7 +81,7 @@ const FloatingMockup = React.memo(() => {
             <div className="px-3 sm:px-4 pt-2 sm:pt-3 pb-3 sm:pb-4">
               <div className="flex items-center gap-2 sm:gap-3">
                 <div
-                  className="w-9 h-9 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center overflow-hidden animate-pulse-slow"
+                  className="w-9 h-9 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center overflow-hidden"
                   style={{ background: 'linear-gradient(135deg, #38BDF8, #0EA5E9)' }}
                 >
                   <img 
@@ -106,21 +106,17 @@ const FloatingMockup = React.memo(() => {
                 { label: 'Gelir', value: '₺24.5K', color: '#10B981', change: '+12%' },
                 { label: 'Kullanıcı', value: '1.2K', color: '#38BDF8', change: '+8%' },
               ].map((stat, i) => (
-                <motion.div
+                <div
                   key={i}
                   className="p-2.5 sm:p-3 rounded-xl"
                   style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.05)' }}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
                 >
                   <span className="text-white/50 text-[9px] sm:text-[10px]">{stat.label}</span>
                   <div className="flex items-end justify-between mt-0.5 sm:mt-1">
                     <span className="text-white font-bold text-sm sm:text-base lg:text-lg">{stat.value}</span>
                     <span className="text-[9px] sm:text-[10px] font-medium" style={{ color: stat.color }}>{stat.change}</span>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -133,17 +129,13 @@ const FloatingMockup = React.memo(() => {
                 </div>
                 <div className="flex items-end gap-1 sm:gap-1.5 h-12 sm:h-16">
                   {[40, 65, 45, 80, 60, 90, 75].map((height, i) => (
-                    <motion.div
+                    <div
                       key={i}
                       className="flex-1 rounded-t-sm"
                       style={{
                         background: i === 5 ? 'linear-gradient(180deg, #38BDF8, #0EA5E9)' : 'rgba(56, 189, 248, 0.3)',
                         height: `${height}%`
                       }}
-                      initial={{ height: 0 }}
-                      whileInView={{ height: `${height}%` }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5 + i * 0.05, duration: 0.5 }}
                     />
                   ))}
                 </div>
@@ -158,20 +150,16 @@ const FloatingMockup = React.memo(() => {
                 { icon: Shield, color: '#10B981' },
                 { icon: Layers, color: '#EC4899' },
               ].map((item, i) => (
-                <motion.div
+                <div
                   key={i}
                   className="aspect-square rounded-lg sm:rounded-xl flex items-center justify-center hover-scale"
                   style={{ 
                     background: `linear-gradient(135deg, ${item.color}15, ${item.color}05)`,
                     border: `1px solid ${item.color}25`
                   }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6 + i * 0.05 }}
                 >
                   <item.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5" style={{ color: item.color }} />
-                </motion.div>
+                </div>
               ))}
             </div>
 

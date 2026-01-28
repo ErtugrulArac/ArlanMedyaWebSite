@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { SiInstagram, SiX, SiLinkedin } from 'react-icons/si'
 
 export default function Footer() {
@@ -24,46 +25,27 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden py-16 sm:py-20 mt-20 sm:mt-32">
-      {/* Subtle glow only */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#38BDF8] rounded-full blur-[200px] opacity-[0.03] pointer-events-none" />
+      {/* Subtle static glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#38BDF8] rounded-full blur-[150px] opacity-[0.04] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Big ARLAN Text */}
+        {/* Arlan Logo */}
         <div className="relative flex items-center justify-center mb-6 sm:mb-8">
-          {/* Traveling light effect */}
           <div 
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            className="relative p-6 sm:p-8"
             style={{
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
+              filter: 'drop-shadow(0 0 40px rgba(56, 189, 248, 0.15))',
             }}
           >
-            <span 
-              className="text-[40px] sm:text-[60px] md:text-[80px] lg:text-[100px] font-black tracking-tight select-none animate-light-travel"
-              style={{
-                color: 'transparent',
-                background: 'linear-gradient(90deg, transparent 0%, transparent 40%, rgba(56, 189, 248, 0.8) 50%, transparent 60%, transparent 100%)',
-                backgroundSize: '200% 100%',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextStroke: '1px transparent',
-              }}
-            >
-              ARLAN
-            </span>
+            <Image
+              src="/logolar/arlanlogonav.webp"
+              alt="Arlan Medya Logo"
+              width={200}
+              height={80}
+              className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain"
+              priority
+            />
           </div>
-          
-          {/* Base text */}
-          <h2 
-            className="text-[40px] sm:text-[60px] md:text-[80px] lg:text-[100px] font-black tracking-tight select-none"
-            style={{
-              color: 'rgba(255, 255, 255, 0.08)',
-              WebkitTextStroke: '1px rgba(56, 189, 248, 0.2)',
-              textShadow: '0 0 80px rgba(56, 189, 248, 0.1)',
-            }}
-          >
-            ARLAN
-          </h2>
         </div>
 
         {/* Social Icons */}
@@ -75,7 +57,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.label}
-              className="text-white/50 hover:text-[#38BDF8] transition-all duration-300 hover:scale-110"
+              className="text-white/50 hover:text-[#38BDF8] transition-colors duration-200"
             >
               <social.Icon className="w-6 h-6 sm:w-7 sm:h-7" />
             </a>
@@ -88,7 +70,7 @@ export default function Footer() {
             <Link
               key={i}
               href={link.href}
-              className="text-white/50 text-xs sm:text-sm hover:text-white transition-colors duration-300"
+              className="text-white/50 text-xs sm:text-sm hover:text-white transition-colors duration-200"
             >
               {link.label}
             </Link>
@@ -105,10 +87,10 @@ export default function Footer() {
           </p>
           
           <div className="flex items-center gap-4">
-            <a href="#" className="text-white/40 hover:text-white transition-colors">
+            <a href="#" className="text-white/40 hover:text-white transition-colors duration-200">
               Kullanım Şartları
             </a>
-            <a href="#" className="text-white/40 hover:text-white transition-colors">
+            <a href="#" className="text-white/40 hover:text-white transition-colors duration-200">
               Gizlilik Politikası
             </a>
           </div>
