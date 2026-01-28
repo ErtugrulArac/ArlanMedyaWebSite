@@ -6,16 +6,22 @@ export default function GlobalLoader() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    const handleStart = () => {
-      setIsLoading(true)
-    }
-
+    const handleStart = () => setIsLoading(true)
+    
     window.addEventListener('navigation-start', handleStart)
 
     return () => {
       window.removeEventListener('navigation-start', handleStart)
     }
   }, [])
+
+  // Auto close after 1 second
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => setIsLoading(false), 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [isLoading])
 
   if (!isLoading) return null
 

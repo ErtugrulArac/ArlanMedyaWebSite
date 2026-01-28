@@ -1,179 +1,999 @@
 'use client'
 
-import React, { useMemo, useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { 
   Monitor, 
   Smartphone, 
-  Palette, 
   Code2, 
   ShoppingCart, 
-  BarChart3, 
   Search, 
   Megaphone,
   ArrowRight,
   CheckCircle2,
-  Sparkles,
+  Layers,
+  Phone,
+  Zap,
+  Shield,
   TrendingUp,
   Globe,
-  Layers,
-  MessageCircle,
-  ChevronRight,
-  PenTool,
-  Lock,
-  Terminal,
-  Database,
-  Cloud,
-  Cpu,
-  Wifi,
-  Server
+  Play,
+  Video,
+  Sparkles,
+  MousePointer2,
+  ChevronDown
 } from 'lucide-react'
-import dynamic from 'next/dynamic'
 import Footer from '../components/footer'
 
 // ============================================
-// FLOATING BACKGROUND COMPONENT - Parallax Style
+// STYLES - Advanced Animations
 // ============================================
-const FloatingBackground = React.memo(() => {
-  const [scrollY, setScrollY] = useState(0)
-  const [mounted, setMounted] = useState(false)
-  
+const injectStyles = () => {
+  const styleId = 'hizmetler-advanced-styles'
+  if (typeof document !== 'undefined' && !document.getElementById(styleId)) {
+    const style = document.createElement('style')
+    style.id = styleId
+    style.textContent = `
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(2deg); }
+      }
+      @keyframes float-reverse {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(20px) rotate(-2deg); }
+      }
+      @keyframes pulse-glow {
+        0%, 100% { opacity: 0.5; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.05); }
+      }
+      @keyframes gradient-shift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+      @keyframes typing {
+        0%, 100% { width: 0; }
+        50% { width: 100%; }
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+      @keyframes orbit {
+        0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+        100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+      }
+      @keyframes orbit-reverse {
+        0% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+        100% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+      }
+      @keyframes slide-up {
+        0% { opacity: 0; transform: translateY(60px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes scale-in {
+        0% { opacity: 0; transform: scale(0.8); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+      @keyframes draw-line {
+        0% { stroke-dashoffset: 1000; }
+        100% { stroke-dashoffset: 0; }
+      }
+      @keyframes bounce-subtle {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+      }
+      .animate-float { animation: float 6s ease-in-out infinite; }
+      .animate-float-reverse { animation: float-reverse 7s ease-in-out infinite; }
+      .animate-float-slow { animation: float 8s ease-in-out infinite; }
+      .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+      .animate-gradient { 
+        background-size: 200% 200%;
+        animation: gradient-shift 8s ease infinite; 
+      }
+      .animate-shimmer { animation: shimmer 2s infinite; }
+      .animate-orbit { animation: orbit 20s linear infinite; }
+      .animate-orbit-reverse { animation: orbit-reverse 15s linear infinite; }
+      .animate-bounce-subtle { animation: bounce-subtle 2s ease-in-out infinite; }
+      
+      .service-card {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .service-card:hover {
+        transform: translateY(-12px) scale(1.02);
+      }
+      .service-card:hover .card-glow {
+        opacity: 1;
+      }
+      .service-card:hover .card-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+      .service-card:hover .card-arrow {
+        transform: translateX(8px);
+      }
+      
+      .mockup-3d {
+        transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .mockup-3d:hover {
+        transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+      }
+      
+      .glass {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      
+      .text-gradient {
+        background: linear-gradient(135deg, #38BDF8 0%, #A855F7 50%, #EC4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .hero-gradient {
+        background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.15), transparent),
+                    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(168, 85, 247, 0.1), transparent),
+                    radial-gradient(ellipse 50% 30% at 20% 80%, rgba(236, 72, 153, 0.08), transparent);
+      }
+      
+      .line-gradient {
+        background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
+      }
+    `
+    document.head.appendChild(style)
+  }
+}
+
+// ============================================
+// HERO SECTION - Cinematic Entry
+// ============================================
+const HeroSection = () => {
+  const [isVisible, setIsVisible] = useState(false)
+
   useEffect(() => {
-    setMounted(true)
-    
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-    
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    injectStyles()
+    setIsVisible(true)
   }, [])
 
-  if (!mounted) return null
-
-  // Code snippets that float - parallax with different speeds
-  const codeSnippets = [
-    { code: '<div>', x: '5%', baseY: 200, speed: 0.1 },
-    { code: 'npm run', x: '88%', baseY: 400, speed: 0.15 },
-    { code: '{ }', x: '12%', baseY: 700, speed: 0.08 },
-    { code: '</>', x: '85%', baseY: 1000, speed: 0.12 },
-    { code: 'const', x: '8%', baseY: 1400, speed: 0.18 },
-    { code: '=>', x: '90%', baseY: 1800, speed: 0.1 },
-    { code: 'async', x: '15%', baseY: 2200, speed: 0.14 },
-    { code: 'return', x: '82%', baseY: 2600, speed: 0.09 },
-    { code: 'function', x: '6%', baseY: 3000, speed: 0.16 },
-    { code: 'import', x: '92%', baseY: 3400, speed: 0.11 },
-    { code: 'export', x: '10%', baseY: 3800, speed: 0.13 },
-    { code: 'await', x: '87%', baseY: 4200, speed: 0.17 },
-  ]
-
-  // Floating icons - parallax with different speeds
-  const floatingIcons = [
-    { Icon: Terminal, x: '92%', baseY: 300, speed: 0.12 },
-    { Icon: Database, x: '7%', baseY: 600, speed: 0.08 },
-    { Icon: Cloud, x: '90%', baseY: 900, speed: 0.15 },
-    { Icon: Cpu, x: '5%', baseY: 1200, speed: 0.1 },
-    { Icon: Code2, x: '88%', baseY: 1600, speed: 0.14 },
-    { Icon: Server, x: '8%', baseY: 2000, speed: 0.09 },
-    { Icon: Globe, x: '93%', baseY: 2400, speed: 0.16 },
-    { Icon: Wifi, x: '4%', baseY: 2800, speed: 0.11 },
-    { Icon: Monitor, x: '91%', baseY: 3200, speed: 0.13 },
-    { Icon: Smartphone, x: '6%', baseY: 3600, speed: 0.18 },
-  ]
-
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
-      {/* Floating Code Snippets */}
-      {codeSnippets.map((snippet, i) => {
-        const y = snippet.baseY - scrollY * snippet.speed
-        return (
-          <div
-            key={`code-${i}`}
-            className="absolute font-mono text-sm sm:text-base select-none transition-opacity duration-300"
-            style={{
-              left: snippet.x,
-              top: `${y}px`,
-              color: '#38BDF8',
-              opacity: 0.12,
-              transform: `rotate(${Math.sin(scrollY * 0.002 + i) * 5}deg)`,
-            }}
-          >
-            {snippet.code}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Grid Pattern - Same as homepage */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px',
+        }} />
+        
+        {/* Floating Orbs */}
+        <div className="absolute top-20 left-[10%] w-72 h-72 bg-[#38BDF8]/20 rounded-full blur-[100px] animate-float" />
+        <div className="absolute bottom-32 right-[15%] w-96 h-96 bg-[#A855F7]/15 rounded-full blur-[120px] animate-float-reverse" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#EC4899]/10 rounded-full blur-[150px] animate-pulse-glow" />
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px'
+        }} />
+
+        {/* Orbiting Elements */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px]">
+          <div className="absolute inset-0 animate-orbit">
+            <div className="w-3 h-3 rounded-full bg-[#38BDF8]" />
           </div>
-        )
-      })}
-
-      {/* Floating Icons */}
-      {floatingIcons.map((item, i) => {
-        const y = item.baseY - scrollY * item.speed
-        return (
-          <item.Icon
-            key={`icon-${i}`}
-            className="absolute w-5 h-5 sm:w-6 sm:h-6 transition-opacity duration-300"
-            style={{
-              left: item.x,
-              top: `${y}px`,
-              color: '#A855F7',
-              opacity: 0.1,
-              transform: `rotate(${Math.cos(scrollY * 0.002 + i) * 8}deg)`,
-            }}
-          />
-        )
-      })}
-    </div>
-  )
-})
-
-FloatingBackground.displayName = 'FloatingBackground'
-
-// ============================================
-// HERO SECTION
-// ============================================
-const HeroSection = React.memo(() => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-4">
-      {/* Subtle glow effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#38BDF8] rounded-full blur-[200px] opacity-[0.05]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#A855F7] rounded-full blur-[200px] opacity-[0.05]" />
+          <div className="absolute inset-0 animate-orbit-reverse">
+            <div className="w-2 h-2 rounded-full bg-[#A855F7]" />
+          </div>
+        </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 bg-gradient-to-r from-[#38BDF8]/10 to-[#A855F7]/10 border border-[#38BDF8]/20">
-            <Sparkles className="w-4 h-4 text-[#38BDF8]" />
-            <span className="text-white/70 text-sm">Dijital Çözümler</span>
+      {/* Main Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left - Text Content */}
+          <div className={`text-center lg:text-left transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#38BDF8] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#38BDF8]"></span>
+              </span>
+              <span className="text-white/70 text-sm font-medium">Dijital Dönüşüm Partneri</span>
+            </div>
+
+            {/* Heading */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1]">
+              Dijital Dünyada
+              <br />
+              <span className="text-gradient">Fark Yaratın</span>
+            </h1>
+
+            <p className="text-white/50 text-base sm:text-lg md:text-xl max-w-lg mb-8 sm:mb-10 leading-relaxed">
+              Web sitesinden mobil uygulamaya, SEO&apos;dan dijital pazarlamaya. 
+              <span className="text-white/70"> 200+ başarılı proje</span> ile işinizi büyütüyoruz.
+            </p>
+
+            {/* Stats Row */}
+            <div className="flex items-center justify-center sm:justify-start gap-6 sm:gap-8 mb-8 sm:mb-10">
+              {[
+                { value: '200+', label: 'Proje' },
+                { value: '8+', label: 'Yıl' },
+                { value: '%97', label: 'Memnuniyet' },
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-white">{stat.value}</div>
+                  <div className="text-white/40 text-xs sm:text-sm">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4">
+              <a
+                href="#hizmetler"
+                className="group relative flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-white overflow-hidden w-full sm:w-auto"
+              >
+                {/* Button Background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899] animate-gradient" />
+                {/* Shimmer Effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                </div>
+                <span className="relative z-10 text-sm sm:text-base">Hizmetleri Keşfet</span>
+                <ArrowRight className="relative z-10 w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="/iletisim"
+                className="group flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-white glass hover:bg-white/10 transition-all w-full sm:w-auto"
+              >
+                <Phone className="w-4 sm:w-5 h-4 sm:h-5" />
+                <span className="text-sm sm:text-base">Ücretsiz Görüşme</span>
+              </a>
+            </div>
           </div>
 
-          {/* Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-8">
-            <span className="text-white">Premium </span>
-            <span className="bg-gradient-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899] bg-clip-text text-transparent">
-              Hizmetlerimiz
-            </span>
-          </h1>
+          {/* Right - 3D Mockup */}
+          <div className={`relative mt-12 lg:mt-0 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+            {/* Browser Mockup */}
+            <div className="mockup-3d">
+              <div className="relative glass rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+                {/* Browser Chrome */}
+                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-white/5 border-b border-white/10">
+                  <div className="flex gap-1 sm:gap-1.5">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
+                  </div>
+                  <div className="flex-1 mx-2 sm:mx-4">
+                    <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/5">
+                      <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500" />
+                      <span className="text-white/40 text-[10px] sm:text-xs">arlanmedya.com</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Browser Content */}
+                <div className="p-3 sm:p-4 md:p-6 bg-gradient-to-br from-[#0a0a1a] to-[#0d1025] min-h-[180px] sm:min-h-[240px] md:min-h-[300px]">
+                  {/* Fake Dashboard */}
+                  <div className="space-y-2 sm:space-y-3 md:space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="h-5 sm:h-6 md:h-8 w-20 sm:w-24 md:w-32 rounded-md sm:rounded-lg bg-gradient-to-r from-[#38BDF8]/20 to-[#A855F7]/20" />
+                      <div className="flex gap-1.5 sm:gap-2">
+                        <div className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 rounded-md sm:rounded-lg bg-white/5" />
+                        <div className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 rounded-md sm:rounded-lg bg-white/5" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-1.5 sm:gap-2 md:gap-3">
+                      {[...Array(3)].map((_, i) => (
+                        <div key={i} className="p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl bg-white/5">
+                          <div className="h-1.5 sm:h-2 w-8 sm:w-10 md:w-12 rounded bg-white/10 mb-1 sm:mb-2" />
+                          <div className="text-sm sm:text-lg md:text-2xl font-bold text-white">{['2.4K', '89%', '156'][i]}</div>
+                          <div className="h-6 sm:h-8 md:h-12 mt-1.5 sm:mt-2 md:mt-3 rounded-md sm:rounded-lg bg-gradient-to-t from-[#38BDF8]/20 to-transparent" />
+                        </div>
+                      ))}
+                    </div>
+                    <div className="h-16 sm:h-24 md:h-32 rounded-lg sm:rounded-xl bg-white/5 p-2 sm:p-3 md:p-4">
+                      <div className="flex items-end justify-between h-full gap-1 sm:gap-1.5 md:gap-2">
+                        {[40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95].map((h, i) => (
+                          <div 
+                            key={i} 
+                            className="flex-1 rounded-t bg-gradient-to-t from-[#38BDF8] to-[#A855F7]"
+                            style={{ height: `${h}%`, opacity: 0.3 + (h / 100) * 0.7 }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <p className="text-white/50 text-lg sm:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
-            İşletmenizi dijital dünyada zirveye taşıyacak çözümler. 
-            Modern teknolojiler, yaratıcı tasarımlar ve güçlü stratejiler.
-          </p>
+            {/* Floating Phone Mockup - Now visible on all screens */}
+            <div className="absolute -bottom-6 -left-4 sm:-bottom-10 sm:-left-10 w-24 sm:w-28 md:w-40 animate-float-slow">
+              <div className="glass rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 shadow-xl shadow-black/30">
+                <div className="bg-[#0a0a1a] rounded-xl sm:rounded-2xl overflow-hidden">
+                  <div className="h-3 sm:h-4 flex items-center justify-center">
+                    <div className="w-6 sm:w-8 md:w-12 h-0.5 sm:h-1 rounded-full bg-white/20" />
+                  </div>
+                  <div className="p-2 sm:p-3 space-y-1.5 sm:space-y-2">
+                    {/* Arlan Medya Logo */}
+                    <div className="flex items-center justify-center py-1 sm:py-2">
+                      <img 
+                        src="/logolar/arlanlogonav.webp" 
+                        alt="Arlan Medya" 
+                        className="h-6 sm:h-8 md:h-10 w-auto object-contain"
+                      />
+                    </div>
+                    <div className="h-2 sm:h-3 w-full rounded bg-gradient-to-r from-[#38BDF8]/30 to-[#A855F7]/30" />
+                    <div className="h-2 sm:h-3 w-3/4 rounded bg-white/10" />
+                    <div className="flex gap-1 sm:gap-1.5 md:gap-2">
+                      <div className="h-4 sm:h-5 md:h-8 flex-1 rounded-md sm:rounded-lg bg-[#38BDF8]/20" />
+                      <div className="h-4 sm:h-5 md:h-8 flex-1 rounded-md sm:rounded-lg bg-white/5" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            {/* Floating Elements - Hidden on small mobile */}
+            <div className="absolute -top-2 sm:-top-4 right-4 sm:right-10 animate-bounce-subtle hidden xs:block">
+              <div className="glass px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl flex items-center gap-1.5 sm:gap-2">
+                <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
+                <span className="text-white/70 text-xs sm:text-sm">Deploy Başarılı</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce-subtle">
+          <span className="text-white/30 text-xs">Keşfet</span>
+          <ChevronDown className="w-5 h-5 text-white/30" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ============================================
+// SERVICES DATA
+// ============================================
+const services = [
+  {
+    id: 'web',
+    title: 'Web Geliştirme',
+    subtitle: 'Hızlı, güvenli, etkileyici',
+    description: 'Next.js, React ve modern teknolojilerle kurumsal web siteleri. Core Web Vitals optimizasyonu ile Google\'da üst sıralarda yer alın.',
+    icon: Monitor,
+    color: '#38BDF8',
+    gradient: 'from-[#38BDF8] to-[#06B6D4]',
+    features: ['Responsive Tasarım', 'SEO Optimizasyonu', 'Yönetim Paneli', 'Analytics'],
+    stats: '80+ Proje',
+    mockupType: 'browser'
+  },
+  {
+    id: 'media',
+    title: 'Medya Yönetimi',
+    subtitle: 'Sosyal medya uzmanlığı',
+    description: 'Instagram, Facebook, LinkedIn ve TikTok\'ta profesyonel hesap yönetimi. İçerik üretimi, strateji geliştirme ve analiz raporlaması ile markanızı güçlendiriyoruz.',
+    icon: Video,
+    color: '#A855F7',
+    gradient: 'from-[#A855F7] to-[#7C3AED]',
+    features: ['İçerik Üretimi', 'Hesap Yönetimi', 'Video Editör', 'Analiz Raporları'],
+    stats: '50+ Hesap',
+    mockupType: 'phone'
+  },
+  {
+    id: 'ecommerce',
+    title: 'E-Ticaret',
+    subtitle: 'Satışlarınızı katlayın',
+    description: 'Shopify, WooCommerce veya özel altyapı. Ödeme sistemleri, kargo entegrasyonu ve stok yönetimi.',
+    icon: ShoppingCart,
+    color: '#10B981',
+    gradient: 'from-[#10B981] to-[#059669]',
+    features: ['Ödeme Sistemleri', 'Kargo Takibi', 'Stok Yönetimi', 'Pazaryeri'],
+    stats: '45+ Mağaza',
+    mockupType: 'cart'
+  },
+  {
+    id: 'seo',
+    title: 'SEO',
+    subtitle: 'Google\'da zirveye',
+    description: 'Teknik SEO, içerik stratejisi ve backlink çalışmaları. Organik trafiğinizi 3x artırın.',
+    icon: Search,
+    color: '#F59E0B',
+    gradient: 'from-[#F59E0B] to-[#D97706]',
+    features: ['Teknik SEO', 'İçerik Stratejisi', 'Backlink', 'Raporlama'],
+    stats: '60+ Proje',
+    mockupType: 'chart'
+  },
+  {
+    id: 'marketing',
+    title: 'Dijital Pazarlama',
+    subtitle: 'ROI odaklı kampanyalar',
+    description: 'Google Ads, Meta, LinkedIn. Dönüşüm odaklı stratejiler ve A/B testleri ile maksimum verim.',
+    icon: Megaphone,
+    color: '#EC4899',
+    gradient: 'from-[#EC4899] to-[#DB2777]',
+    features: ['Google Ads', 'Meta Ads', 'Remarketing', 'A/B Test'],
+    stats: '70+ Kampanya',
+    mockupType: 'ads'
+  },
+  {
+    id: 'software',
+    title: 'Özel Yazılım',
+    subtitle: 'İş süreçlerinize özel',
+    description: 'CRM, ERP, otomasyon sistemleri. İş akışlarınızı dijitalleştirin, verimliliği %40 artırın.',
+    icon: Code2,
+    color: '#6366F1',
+    gradient: 'from-[#6366F1] to-[#4F46E5]',
+    features: ['CRM/ERP', 'API', 'Otomasyon', 'Entegrasyon'],
+    stats: '25+ Sistem',
+    mockupType: 'code'
+  },
+]
+
+// ============================================
+// SERVICE MOCKUPS - Interactive Mini Previews
+// ============================================
+const ServiceMockup = ({ type, color }: { type: string; color: string }) => {
+  switch (type) {
+    case 'browser':
+      return (
+        <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden bg-gradient-to-br from-[#0a0a1a] to-[#0d1025] border border-white/10 shadow-2xl">
+          {/* Browser Header */}
+          <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/10">
+            <div className="flex gap-1.5">
+              <div className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-500 transition-colors" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors" />
+              <div className="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-500 transition-colors" />
+            </div>
+            <div className="flex-1 mx-3">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/5">
+                <div className="w-3 h-3 rounded-full bg-green-500" />
+                <span className="text-white/50 text-xs font-medium">arlanmedya.com</span>
+                <div className="ml-auto flex gap-1">
+                  <div className="w-4 h-4 rounded bg-white/5" />
+                  <div className="w-4 h-4 rounded bg-white/5" />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Browser Content */}
+          <div className="p-4 space-y-3">
+            {/* Nav */}
+            <div className="flex items-center justify-between">
+              <div className="h-6 w-24 rounded-lg" style={{ background: `linear-gradient(90deg, ${color}40, ${color}20)` }} />
+              <div className="flex gap-2">
+                {[1,2,3,4].map(i => (
+                  <div key={i} className="h-2 w-8 rounded bg-white/10" />
+                ))}
+              </div>
+            </div>
+            
+            {/* Hero Section */}
+            <div className="flex gap-3">
+              <div className="flex-1 space-y-2">
+                <div className="h-3 w-3/4 rounded" style={{ background: `${color}30` }} />
+                <div className="h-2 w-full rounded bg-white/10" />
+                <div className="h-2 w-2/3 rounded bg-white/5" />
+                <div className="flex gap-2 mt-3">
+                  <div className="h-6 w-16 rounded-lg" style={{ background: `linear-gradient(135deg, ${color}, ${color}80)` }} />
+                  <div className="h-6 w-16 rounded-lg bg-white/10" />
+                </div>
+              </div>
+              <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg" style={{ background: `${color}30` }} />
+              </div>
+            </div>
+            
+            {/* Stats Cards */}
+            <div className="grid grid-cols-3 gap-2">
+              {['2.4K', '89%', '156'].map((val, i) => (
+                <div key={i} className="p-2 rounded-lg bg-white/5 border border-white/5">
+                  <div className="text-xs font-bold text-white">{val}</div>
+                  <div className="h-1 w-8 rounded bg-white/10 mt-1" />
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Floating Badge */}
+          <div className="absolute top-12 right-3 px-2 py-1 rounded-lg bg-green-500/20 border border-green-500/30">
+            <span className="text-[10px] text-green-400 font-medium">● Live</span>
+          </div>
+        </div>
+      )
+    case 'phone':
+      return (
+        <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden bg-gradient-to-br from-[#0a0a1a] to-[#0d1025] border border-white/10 shadow-2xl p-4">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Video className="w-5 h-5" style={{ color }} />
+              <span className="text-sm font-semibold text-white">Medya Dashboard</span>
+            </div>
+            <div className="flex items-center gap-1 px-2 py-1 rounded-lg" style={{ background: `${color}20` }}>
+              <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: color }} />
+              <span className="text-xs font-medium" style={{ color }}>3 Aktif</span>
+            </div>
+          </div>
+          
+          {/* Social Platforms */}
+          <div className="grid grid-cols-3 gap-2 mb-4">
             {[
-              { label: 'Proje', count: '200+', icon: Globe },
-              { label: 'Müşteri', count: '150+', icon: CheckCircle2 },
-              { label: 'Yıllık Deneyim', count: '8+', icon: TrendingUp },
-              { label: 'Hizmet', count: '7', icon: Sparkles },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <stat.icon className="w-8 h-8 mx-auto mb-3 text-[#38BDF8]" />
-                <div className="text-2xl sm:text-3xl font-bold text-white mb-1">
-                  {stat.count}
+              { name: 'Instagram', followers: '12.4K', growth: '+8%', icon: '📸' },
+              { name: 'TikTok', followers: '8.2K', growth: '+24%', icon: '🎵' },
+              { name: 'LinkedIn', followers: '3.1K', growth: '+12%', icon: '💼' },
+            ].map((platform, i) => (
+              <div key={i} className="p-2 rounded-lg bg-white/5 border border-white/5 text-center">
+                <div className="text-lg mb-1">{platform.icon}</div>
+                <div className="text-xs font-bold text-white">{platform.followers}</div>
+                <div className="text-[10px] font-medium text-green-400">{platform.growth}</div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Content Calendar Preview */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] text-white/40 font-medium">Planlanan İçerikler</span>
+              <span className="text-[10px]" style={{ color }}>Bu Hafta</span>
+            </div>
+            {[
+              { type: 'Video', platform: 'IG Reels', time: '14:00', status: 'Hazır' },
+              { type: 'Carousel', platform: 'LinkedIn', time: '10:00', status: 'Taslak' },
+            ].map((content, i) => (
+              <div key={i} className="flex items-center gap-2 p-2 rounded-lg bg-white/5">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${color}20` }}>
+                  <Play className="w-4 h-4" style={{ color }} />
                 </div>
-                <div className="text-white/40 text-sm">
-                  {stat.label}
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs font-medium text-white">{content.type}</div>
+                  <div className="text-[10px] text-white/40">{content.platform} • {content.time}</div>
                 </div>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded ${content.status === 'Hazır' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
+                  {content.status}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    case 'cart':
+      return (
+        <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden bg-gradient-to-br from-[#0a0a1a] to-[#0d1025] border border-white/10 shadow-2xl p-4">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <ShoppingCart className="w-5 h-5" style={{ color }} />
+              <span className="text-sm font-semibold text-white">Sepetim</span>
+            </div>
+            <div className="px-2.5 py-1 rounded-full text-xs font-bold" style={{ background: `${color}20`, color }}>
+              3 ürün
+            </div>
+          </div>
+          
+          {/* Products */}
+          <div className="space-y-2">
+            {[
+              { name: 'Premium Plan', price: '₺2,499', tag: 'Popüler' },
+              { name: 'Starter Pack', price: '₺999', tag: null },
+              { name: 'Add-on Service', price: '₺499', tag: 'Yeni' },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: `${color}20` }}>
+                  <div className="w-5 h-5 rounded" style={{ background: `${color}40` }} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-medium text-white truncate">{item.name}</span>
+                    {item.tag && (
+                      <span className="px-1.5 py-0.5 rounded text-[8px] font-medium" style={{ background: `${color}30`, color }}>
+                        {item.tag}
+                      </span>
+                    )}
+                  </div>
+                  <div className="h-1 w-16 rounded bg-white/10 mt-1" />
+                </div>
+                <span className="text-xs font-bold" style={{ color }}>{item.price}</span>
+              </div>
+            ))}
+          </div>
+          
+          {/* Total */}
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pt-3 border-t border-white/10">
+            <span className="text-xs text-white/50">Toplam</span>
+            <span className="text-sm font-bold" style={{ color }}>₺3,997</span>
+          </div>
+        </div>
+      )
+    case 'chart':
+      return (
+        <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden bg-gradient-to-br from-[#0a0a1a] to-[#0d1025] border border-white/10 shadow-2xl p-4">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-5 h-5" style={{ color }} />
+              <span className="text-sm font-semibold text-white">Analytics</span>
+            </div>
+            <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-green-500/20">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-xs font-bold text-green-400">+127%</span>
+            </div>
+          </div>
+          
+          {/* Stats Grid */}
+          <div className="grid grid-cols-3 gap-2 mb-4">
+            {[
+              { label: 'Ziyaretçi', value: '24.5K', change: '+12%' },
+              { label: 'Tıklama', value: '8.2K', change: '+23%' },
+              { label: 'Dönüşüm', value: '4.8%', change: '+8%' },
+            ].map((stat, i) => (
+              <div key={i} className="p-2 rounded-lg bg-white/5 border border-white/5">
+                <div className="text-[10px] text-white/40">{stat.label}</div>
+                <div className="text-sm font-bold text-white">{stat.value}</div>
+                <div className="text-[10px] font-medium text-green-400">{stat.change}</div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Chart */}
+          <div className="flex items-end justify-between h-16 gap-1 px-1">
+            {[30, 45, 35, 60, 50, 75, 90, 70, 85, 95, 80, 100].map((h, i) => (
+              <div 
+                key={i} 
+                className="flex-1 rounded-t transition-all duration-500 hover:opacity-100"
+                style={{ 
+                  height: `${h}%`, 
+                  background: `linear-gradient(to top, ${color}, ${color}20)`,
+                  opacity: 0.5 + (h / 100) * 0.5
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* X-axis Labels */}
+          <div className="flex justify-between mt-2 px-1">
+            {['Oca', 'Şub', 'Mar', 'Nis'].map((m, i) => (
+              <span key={i} className="text-[8px] text-white/30">{m}</span>
+            ))}
+          </div>
+        </div>
+      )
+    case 'ads':
+      return (
+        <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden bg-gradient-to-br from-[#0a0a1a] to-[#0d1025] border border-white/10 shadow-2xl p-4">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: `${color}20` }}>
+                <Megaphone className="w-4 h-4" style={{ color }} />
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-white">Kampanya #1</div>
+                <div className="text-[10px] text-white/40">Google Ads</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 px-2 py-1 rounded-full" style={{ background: `${color}20` }}>
+              <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: color }} />
+              <span className="text-xs font-medium" style={{ color }}>Aktif</span>
+            </div>
+          </div>
+          
+          {/* Ad Preview */}
+          <div className="p-3 rounded-lg bg-white/5 border border-white/10 mb-3">
+            <div className="flex items-start gap-3">
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${color}40, ${color}20)` }}>
+                <Globe className="w-6 h-6" style={{ color }} />
+              </div>
+              <div className="flex-1">
+                <div className="text-xs font-medium text-white mb-1">Reklam Başlığı</div>
+                <div className="h-1.5 w-full rounded bg-white/10 mb-1" />
+                <div className="h-1.5 w-3/4 rounded bg-white/5" />
+              </div>
+            </div>
+          </div>
+          
+          {/* Metrics */}
+          <div className="grid grid-cols-4 gap-2">
+            {[
+              { label: 'Gösterim', value: '45K' },
+              { label: 'Tıklama', value: '2.4K' },
+              { label: 'CTR', value: '%5.3' },
+              { label: 'CPC', value: '₺0.85' },
+            ].map((m, i) => (
+              <div key={i} className="text-center p-2 rounded-lg bg-white/5">
+                <div className="text-xs font-bold" style={{ color: i === 2 ? color : 'white' }}>{m.value}</div>
+                <div className="text-[8px] text-white/40">{m.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    case 'code':
+      return (
+        <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden bg-gradient-to-br from-[#0a0a1a] to-[#0d1025] border border-white/10 shadow-2xl">
+          {/* Editor Header */}
+          <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border-b border-white/10">
+            <div className="flex gap-1.5">
+              <div className="w-3 h-3 rounded-full bg-red-500/80" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <div className="w-3 h-3 rounded-full bg-green-500/80" />
+            </div>
+            <div className="flex-1 flex items-center gap-2">
+              <div className="px-3 py-1 rounded-t bg-white/10 text-[10px] text-white/70 font-mono">api.ts</div>
+              <div className="px-3 py-1 text-[10px] text-white/30 font-mono">types.ts</div>
+            </div>
+          </div>
+          
+          {/* Code Content */}
+          <div className="p-4 font-mono text-[10px] sm:text-xs leading-relaxed">
+            <div className="flex">
+              <span className="w-6 text-white/20 select-none">1</span>
+              <span className="text-white/30">{'// Arlan Medya API'}</span>
+            </div>
+            <div className="flex">
+              <span className="w-6 text-white/20 select-none">2</span>
+              <span style={{ color }}>export async function</span>
+              <span className="text-yellow-400 ml-1">getData</span>
+              <span className="text-white/50">()</span>
+              <span className="text-white/30">{' {'}</span>
+            </div>
+            <div className="flex">
+              <span className="w-6 text-white/20 select-none">3</span>
+              <span className="text-white/30 ml-4">const</span>
+              <span className="text-white/70 ml-1">res</span>
+              <span className="text-white/30 ml-1">=</span>
+              <span className="text-green-400 ml-1">await</span>
+              <span className="text-yellow-400 ml-1">fetch</span>
+              <span className="text-white/30">(url)</span>
+            </div>
+            <div className="flex">
+              <span className="w-6 text-white/20 select-none">4</span>
+              <span className="text-white/30 ml-4">return</span>
+              <span className="text-white/30 ml-1">{'{'}</span>
+            </div>
+            <div className="flex">
+              <span className="w-6 text-white/20 select-none">5</span>
+              <span className="text-purple-400 ml-8">status</span>
+              <span className="text-white/30">:</span>
+              <span className="text-green-400 ml-1">&quot;success&quot;</span>
+              <span className="text-white/30">,</span>
+            </div>
+            <div className="flex">
+              <span className="w-6 text-white/20 select-none">6</span>
+              <span className="text-purple-400 ml-8">data</span>
+              <span className="text-white/30">:</span>
+              <span className="text-orange-400 ml-1">response</span>
+            </div>
+            <div className="flex">
+              <span className="w-6 text-white/20 select-none">7</span>
+              <span className="text-white/30 ml-4">{'}}'}</span>
+            </div>
+          </div>
+          
+          {/* Status Bar */}
+          <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-1.5 bg-white/5 border-t border-white/10">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500" />
+              <span className="text-[10px] text-white/50">TypeScript</span>
+            </div>
+            <span className="text-[10px] text-white/30">UTF-8</span>
+          </div>
+        </div>
+      )
+    default:
+      return null
+  }
+}
+
+// ============================================
+// SERVICES SECTION - Premium Cards with Mockups
+// ============================================
+const ServicesSection = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [activeService, setActiveService] = useState<number>(0)
+
+  return (
+    <section id="hizmetler" className="relative py-20 sm:py-32 overflow-hidden">
+      {/* Background Gradients */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#38BDF8]/5 to-transparent" />
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-[#A855F7]/10 rounded-full blur-[100px] opacity-30" />
+        <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-[#EC4899]/8 rounded-full blur-[120px] opacity-25" />
+      </div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+            <Layers className="w-4 h-4 text-[#38BDF8]" />
+            <span className="text-white/70 text-sm">6 Uzman Hizmet Alanı</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+            Hizmetlerimiz
+          </h2>
+          <p className="text-white/50 text-base sm:text-lg max-w-2xl mx-auto px-4">
+            Her biri alanında uzman ekiplerle, işletmenizin dijital ihtiyaçlarını karşılıyoruz.
+          </p>
+        </div>
+
+        {/* Featured Service - Large Card */}
+        <div className="mb-8 sm:mb-12">
+          <div 
+            className="relative glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 overflow-hidden"
+            style={{ 
+              background: `linear-gradient(135deg, ${services[activeService].color}08, transparent)` 
+            }}
+          >
+            {/* Glow Effect */}
+            <div 
+              className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 rounded-full blur-[100px] opacity-20"
+              style={{ background: services[activeService].color }}
+            />
+            
+            <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+              {/* Content */}
+              <div>
+                {(() => {
+                  const ActiveIcon = services[activeService].icon
+                  return (
+                    <div 
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 sm:mb-6"
+                      style={{ background: `${services[activeService].color}20` }}
+                    >
+                      <ActiveIcon className="w-4 h-4" style={{ color: services[activeService].color }} />
+                      <span className="text-sm font-medium" style={{ color: services[activeService].color }}>
+                        {services[activeService].stats}
+                      </span>
+                    </div>
+                  )
+                })()}
+                
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3">
+                  {services[activeService].title}
+                </h3>
+                <p className="text-white/40 text-sm sm:text-base mb-3 sm:mb-4">{services[activeService].subtitle}</p>
+                <p className="text-white/60 text-sm sm:text-base mb-6 sm:mb-8 leading-relaxed">
+                  {services[activeService].description}
+                </p>
+
+                {/* Features Grid */}
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                  {services[activeService].features.map((feature, i) => (
+                    <div 
+                      key={i} 
+                      className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 rounded-xl bg-white/5"
+                    >
+                      <CheckCircle2 className="w-4 sm:w-5 h-4 sm:h-5 shrink-0" style={{ color: services[activeService].color }} />
+                      <span className="text-white/70 text-xs sm:text-sm">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <a 
+                  href="/iletisim"
+                  className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-white transition-transform hover:scale-105"
+                  style={{ background: `linear-gradient(135deg, ${services[activeService].color}, ${services[activeService].color}CC)` }}
+                >
+                  Ücretsiz Teklif Al
+                  <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5" />
+                </a>
+              </div>
+
+              {/* Mockup - Now responsive on all screens */}
+              <div className="mt-6 lg:mt-0">
+                <div className="relative">
+                  <ServiceMockup type={services[activeService].mockupType} color={services[activeService].color} />
+                  
+                  {/* Decorative elements */}
+                  <div 
+                    className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full blur-2xl opacity-30"
+                    style={{ background: services[activeService].color }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Service Selector - Mini Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+          {services.map((service, index) => (
+            <button
+              key={service.id}
+              onClick={() => setActiveService(index)}
+              className={`relative p-3 sm:p-4 rounded-xl sm:rounded-2xl text-left transition-all duration-300 ${
+                activeService === index 
+                  ? 'bg-white/10 border-2' 
+                  : 'bg-white/5 border border-white/5 hover:bg-white/10'
+              }`}
+              style={{ 
+                borderColor: activeService === index ? service.color : undefined 
+              }}
+            >
+              {/* Active Indicator */}
+              {activeService === index && (
+                <div 
+                  className="absolute top-2 right-2 w-2 h-2 rounded-full animate-pulse"
+                  style={{ background: service.color }}
+                />
+              )}
+              
+              <service.icon 
+                className="w-5 sm:w-6 h-5 sm:h-6 mb-2 sm:mb-3" 
+                style={{ color: activeService === index ? service.color : 'rgba(255,255,255,0.5)' }} 
+              />
+              <h4 className={`font-semibold text-xs sm:text-sm ${activeService === index ? 'text-white' : 'text-white/70'}`}>
+                {service.title}
+              </h4>
+              <p className="text-white/40 text-[10px] sm:text-xs mt-0.5 sm:mt-1 hidden sm:block">{service.stats}</p>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ============================================
+// PROCESS SECTION - Timeline
+// ============================================
+const ProcessSection = () => {
+  const steps = [
+    { title: 'Keşif', desc: 'İhtiyaçlarınızı dinliyoruz', icon: Search },
+    { title: 'Strateji', desc: 'Yol haritası çiziyoruz', icon: Layers },
+    { title: 'Tasarım', desc: 'Modern UI/UX tasarlıyoruz', icon: Sparkles },
+    { title: 'Geliştirme', desc: 'Kodluyoruz ve test ediyoruz', icon: Code2 },
+    { title: 'Lansman', desc: 'Canlıya alıyoruz', icon: Zap },
+  ]
+
+  return (
+    <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden">
+      {/* Subtle Background Gradients */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/4 w-72 h-72 bg-[#38BDF8]/8 rounded-full blur-[80px] opacity-40" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#6366F1]/6 rounded-full blur-[90px] opacity-35" />
+      </div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
+            Nasıl Çalışıyoruz?
+          </h2>
+          <p className="text-white/50 text-base sm:text-lg max-w-xl mx-auto px-4">
+            5 adımda projenizi hayata geçiriyoruz
+          </p>
+        </div>
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* Line */}
+          <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent hidden lg:block" />
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
+            {steps.map((step, i) => (
+              <div key={i} className={`relative text-center group ${i === 4 ? 'col-span-2 sm:col-span-1' : ''}`}>
+                {/* Icon */}
+                <div className="relative inline-flex items-center justify-center w-16 sm:w-20 h-16 sm:h-20 mb-4 sm:mb-6">
+                  <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#38BDF8]/20 to-[#A855F7]/20 group-hover:from-[#38BDF8]/30 group-hover:to-[#A855F7]/30 transition-all duration-500" />
+                  <step.icon className="w-6 sm:w-8 h-6 sm:h-8 text-white/80" />
+                  {/* Number */}
+                  <div className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-[#38BDF8] flex items-center justify-center">
+                    <span className="text-[10px] sm:text-xs font-bold text-black">{i + 1}</span>
+                  </div>
+                </div>
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white mb-1 sm:mb-2">{step.title}</h3>
+                <p className="text-white/50 text-xs sm:text-sm">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -181,452 +1001,223 @@ const HeroSection = React.memo(() => {
       </div>
     </section>
   )
-})
-
-HeroSection.displayName = 'HeroSection'
-
-// ============================================
-// SERVICE CARD COMPONENT
-// ============================================
-interface ServiceCardProps {
-  index: number
-  title: string
-  description: string
-  Icon: any
-  color: string
-  features: string[]
-  mockup: React.ReactNode
-  reverse: boolean
 }
 
-const ServiceCard = React.memo(({ index, title, description, Icon, color, features, mockup, reverse }: ServiceCardProps) => {
+// ============================================
+// STATS SECTION - Big Numbers
+// ============================================
+const StatsSection = () => {
+  const stats = [
+    { value: '200+', label: 'Tamamlanan Proje', icon: Globe },
+    { value: '150+', label: 'Mutlu Müşteri', icon: Sparkles },
+    { value: '8+', label: 'Yıllık Deneyim', icon: Shield },
+    { value: '%97', label: 'Memnuniyet Oranı', icon: TrendingUp },
+  ]
+
   return (
-    <div className="py-16 sm:py-24 first:pt-8">
-      <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-16`}>
-        {/* Content */}
-        <div className="flex-1 lg:max-w-lg">
-          {/* Icon & Title */}
-          <div className="flex items-center gap-4 mb-6">
-            <div 
-              className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg"
-              style={{
-                background: `linear-gradient(135deg, ${color}20, ${color}10)`,
-                border: `1px solid ${color}30`
-              }}
-            >
-              <Icon className="w-7 h-7" style={{ color }} />
-            </div>
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1">
-                {title}
-              </h3>
-              <div className="text-xs text-white/40 uppercase tracking-wide">
-                0{index + 1}. Hizmet
-              </div>
-            </div>
-          </div>
-
-          {/* Description */}
-          <p className="text-white/60 text-lg mb-8 leading-relaxed">
-            {description}
-          </p>
-
-          {/* Features */}
-          <div className="space-y-3 mb-8">
-            {features.map((feature, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color }} />
-                <span className="text-white/70">{feature}</span>
+    <section className="relative py-12 sm:py-16 lg:py-20">
+      {/* Enhanced Background */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#38BDF8]/5 via-transparent to-[#A855F7]/5 opacity-60" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#38BDF8]/10 rounded-full blur-[120px] opacity-30" />
+      </div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10">
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center">
+                <stat.icon className="w-6 sm:w-8 h-6 sm:h-8 text-[#38BDF8] mx-auto mb-3 sm:mb-4" />
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gradient mb-1 sm:mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-white/50 text-xs sm:text-sm md:text-base">{stat.label}</div>
               </div>
             ))}
-          </div>
-
-          {/* CTA Button */}
-          <div className="flex items-center gap-4">
-            <button 
-              className="group px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-white/5 to-white/10 border border-white/10 hover:bg-white/20 transition-all duration-300"
-            >
-              Detaylı Bilgi
-              <ArrowRight className="inline-block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </div>
-
-        {/* Mockup */}
-        <div className="flex-1 lg:max-w-2xl w-full">
-          <div className="relative">
-            {mockup}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
-})
-
-ServiceCard.displayName = 'ServiceCard'
+}
 
 // ============================================
-// MAIN COMPONENT
+// CTA SECTION - Final Push
+// ============================================
+const CTASection = () => {
+  return (
+    <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
+      {/* Premium Background Gradients */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black opacity-90" />
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-gradient-to-br from-emerald-400/15 to-blue-500/10 rounded-full blur-[80px] opacity-60 animate-pulse-glow" />
+        <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-gradient-to-br from-violet-500/12 to-purple-400/8 rounded-full blur-[60px] opacity-50 animate-float" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-gradient-to-r from-cyan-400/8 via-transparent to-indigo-400/6 rounded-full blur-[100px] opacity-30" />
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `linear-gradient(rgba(34, 197, 94, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 197, 94, 0.1) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }} />
+      </div>
+      
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl">
+          {/* Card Background with Premium Glass Effect */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-800/40 via-slate-800/30 to-gray-900/50" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/8 via-transparent to-blue-500/5" />
+            <div className="absolute inset-0 backdrop-blur-xl border border-white/10" style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.01) 100%)'
+            }} />
+          </div>
+          
+          {/* Inner Glow Effects */}
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
+          <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-emerald-400/30 to-transparent" />
+          <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-blue-400/30 to-transparent" />
+          
+          {/* Floating Orbs */}
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-12 sm:w-16 h-12 sm:h-16 rounded-full bg-gradient-to-br from-emerald-400/20 to-blue-500/15 blur-xl animate-float" />
+          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-gradient-to-tl from-violet-400/15 to-purple-500/12 blur-xl animate-float-reverse" />
+          <div className="absolute top-1/3 right-1/4 w-8 h-8 rounded-full bg-gradient-to-r from-cyan-400/10 to-indigo-400/8 blur-lg animate-pulse-glow" />
+          
+          {/* Content */}
+          <div className="relative z-10 text-center px-4 sm:px-8 md:px-12 py-6 sm:py-10 md:py-12 lg:py-16">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-4 sm:mb-6" style={{
+              background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(59, 130, 246, 0.1))',
+              border: '1px solid rgba(34, 197, 94, 0.2)'
+            }}>
+              <div className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
+              </div>
+              <span className="text-emerald-300 text-xs font-medium">24/7 Destek • Ücretsiz Danışmanlık</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 leading-[1.1]">
+              Projenizi Birlikte
+              <br />
+              <span className="relative inline-block">
+                <span className="bg-gradient-to-r from-emerald-400 via-blue-500 to-violet-400 bg-clip-text text-transparent">
+                  Gerçekleştirelim
+                </span>
+                <div className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-400/50 via-blue-500/50 to-violet-400/50 rounded-full" />
+              </span>
+            </h2>
+            
+            <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-xl mx-auto mb-6 sm:mb-8 leading-relaxed">
+              Fikirlerinizi dinleyelim, hayallerinizdeki dijital çözümü birlikte tasarlayalım.
+              <br className="hidden sm:block" />
+              <span className="text-emerald-400 font-medium">Ücretsiz keşif görüşmesi</span> ile başlayın.
+            </p>
+
+            {/* Enhanced Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3">
+              {/* Primary CTA Button */}
+              <a
+                href="/iletisim"
+                className="group relative inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base text-white overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-xl w-full sm:w-auto"
+                style={{
+                  background: 'linear-gradient(135deg, #22C55E, #3B82F6, #8B5CF6)',
+                  backgroundSize: '200% 200%'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.animation = 'gradient-shift 0.6s ease-in-out'
+                }}
+              >
+                {/* Shimmer Effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent animate-shimmer" />
+                </div>
+                
+                {/* Glow Effect */}
+                <div className="absolute inset-0 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{
+                  background: 'linear-gradient(135deg, #22C55E, #3B82F6, #8B5CF6)',
+                  filter: 'blur(15px)',
+                  transform: 'scale(1.05)',
+                  zIndex: -1
+                }} />
+                
+                <Phone className="relative z-10 w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                <span className="relative z-10">Ücretsiz Görüşme</span>
+                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </a>
+
+              {/* WhatsApp Button */}
+              <a
+                href="https://wa.me/905551234567"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-medium text-sm sm:text-base text-white transition-all duration-500 hover:scale-105 border border-white/20 w-full sm:w-auto"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(37, 211, 102, 0.05))',
+                  backdropFilter: 'blur(20px)'
+                }}
+              >
+                {/* Hover Background */}
+                <div className="absolute inset-0 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{
+                  background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(37, 211, 102, 0.1))'
+                }} />
+                
+                <div className="relative z-10 w-4 h-4 rounded-full bg-gradient-to-br from-green-400 to-green-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                </div>
+                <span className="relative z-10 text-green-100">WhatsApp</span>
+                <MousePointer2 className="relative z-10 w-3.5 h-3.5 text-green-200 group-hover:translate-x-0.5 group-hover:rotate-6 transition-transform duration-300" />
+              </a>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/10">
+              <div className="flex items-center gap-1.5 text-gray-400 text-xs">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span>200+ Başarılı Proje</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-gray-400 text-xs">
+                <Shield className="w-3.5 h-3.5 text-blue-400" />
+                <span>%100 Güvenli</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-gray-400 text-xs">
+                <Sparkles className="w-3.5 h-3.5 text-violet-400" />
+                <span>24 Saat Yanıt</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ============================================
+// MAIN PAGE
 // ============================================
 export default function HizmetlerimizPage() {
-  const services = useMemo(() => [
-    {
-      title: 'Web Sitesi Geliştirme',
-      description: 'Modern teknolojilerle, SEO uyumlu, hızlı ve mobil dostu web siteleri geliştiriyoruz.',
-      Icon: Monitor,
-      color: '#38BDF8',
-      features: [
-        'Responsive & Mobil Uyumlu Tasarım',
-        'SEO Optimizasyonu & Hızlı Yüklenme',
-        'Modern UI/UX Standartları',
-        'SSL Sertifikası & Güvenlik',
-        'İçerik Yönetim Sistemi (CMS)',
-      ],
-      MockupComponent: () => (
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 shadow-2xl">
-          <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/5">
-            <div className="flex gap-1.5">
-              <span className="w-3 h-3 rounded-full bg-red-500/80" />
-              <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-              <span className="w-3 h-3 rounded-full bg-green-500/80" />
-            </div>
-            <div className="flex-1 mx-4">
-              <div className="bg-white/5 rounded-lg px-4 py-1.5 text-white/40 text-sm flex items-center gap-2">
-                <Lock className="w-3 h-3 text-green-400" />
-                <span>www.sirketiniz.com</span>
-              </div>
-            </div>
-          </div>
-          <div className="p-6">
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#38BDF8] to-[#0EA5E9]" />
-                <span className="text-white font-semibold">Logo</span>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              <div>
-                <div className="h-4 w-3/4 bg-white/10 rounded mb-3" />
-                <div className="h-8 w-full bg-gradient-to-r from-[#38BDF8]/20 to-[#A855F7]/20 rounded mb-4" />
-                <div className="h-10 w-32 rounded-lg bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9]" />
-              </div>
-              <div className="hidden sm:block">
-                <div className="aspect-video rounded-xl bg-gradient-to-br from-[#38BDF8]/10 to-[#A855F7]/10 border border-white/10" />
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: 'Mobil Uygulama',
-      description: 'iOS ve Android için native ve cross-platform mobil uygulamalar geliştiriyoruz.',
-      Icon: Smartphone,
-      color: '#A855F7',
-      features: [
-        'iOS & Android Native Geliştirme',
-        'Cross-Platform (React Native, Flutter)',
-        'Push Bildirim Sistemi',
-        'App Store & Play Store Optimizasyonu',
-        'Offline Çalışabilme',
-      ],
-      MockupComponent: () => (
-        <div className="relative flex justify-center">
-          <div className="relative w-[240px] sm:w-[280px] h-[480px] sm:h-[560px] rounded-[40px] sm:rounded-[48px] overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 border-4 border-slate-600 shadow-2xl">
-            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20" />
-            <div className="absolute inset-[3px] rounded-[44px] overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950">
-              <div className="flex items-center justify-between px-6 pt-10 pb-2">
-                <span className="text-white/60 text-xs font-medium">9:41</span>
-                <div className="w-4 h-2 bg-white/60 rounded-sm" />
-              </div>
-              <div className="px-5 pt-4">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#A855F7] to-[#EC4899]" />
-                  <div>
-                    <div className="text-white font-semibold text-sm">Hoş Geldiniz! 👋</div>
-                    <div className="text-white/40 text-xs">Premium Üye</div>
-                  </div>
-                </div>
-                <div className="p-4 rounded-2xl mb-4 bg-gradient-to-r from-[#A855F7] to-[#EC4899]">
-                  <div className="text-white/70 text-xs mb-1">Toplam Bakiye</div>
-                  <div className="text-white text-2xl font-bold">₺24,580.00</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: 'E-Ticaret Çözümleri',
-      description: 'Ürünlerinizi online satışa açın! Güvenli ödeme sistemi ile tam donanımlı e-ticaret.',
-      Icon: ShoppingCart,
-      color: '#10B981',
-      features: [
-        'Güvenli Ödeme Altyapısı',
-        'Stok & Sipariş Yönetimi',
-        'Müşteri Paneli & Üyelik Sistemi',
-        'Kargo Entegrasyonları',
-        'Çoklu Para Birimi Desteği',
-      ],
-      MockupComponent: () => (
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 shadow-2xl">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#10B981] to-[#059669] flex items-center justify-center">
-                <ShoppingCart className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-white font-semibold">E-Ticaret</span>
-            </div>
-          </div>
-          <div className="p-6">
-            <div className="relative rounded-2xl overflow-hidden mb-6 p-6 bg-gradient-to-r from-[#10B981]/10 to-[#10B981]/5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-[#10B981] text-xs font-medium">🔥 Öne Çıkan</span>
-                  <h4 className="text-white text-lg font-bold mt-1">Premium Ürün</h4>
-                  <div className="flex items-center gap-2 mt-2">
-                    <span className="text-white/30 line-through text-sm">₺2,999</span>
-                    <span className="text-[#10B981] font-bold text-xl">₺1,999</span>
-                  </div>
-                </div>
-                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center">
-                  <Layers className="w-12 h-12 text-[#10B981]/50" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: 'UI/UX Tasarım',
-      description: 'Kullanıcı deneyimini ön planda tutan, estetik ve fonksiyonel arayüz tasarımları.',
-      Icon: Palette,
-      color: '#EC4899',
-      features: [
-        'Kullanıcı Araştırması & Analizi',
-        'Wireframe & Prototip',
-        'Görsel Tasarım & Branding',
-        'Etkileşim Tasarımı',
-        'Tasarım Sistemi Oluşturma',
-      ],
-      MockupComponent: () => (
-        <div className="relative rounded-2xl overflow-hidden p-6 bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 shadow-2xl">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#EC4899] to-[#DB2777] flex items-center justify-center">
-                <PenTool className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-white font-semibold">Design Studio</span>
-            </div>
-            <div className="flex items-center gap-2">
-              {['#EC4899', '#A855F7', '#38BDF8', '#10B981', '#FBBF24'].map((color, i) => (
-                <div key={i} className="w-6 h-6 rounded-full" style={{ background: color }} />
-              ))}
-            </div>
-          </div>
-          <div className="grid grid-cols-3 gap-4">
-            {[1, 2, 3].map((_, i) => (
-              <div key={i} className="aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-br from-[#EC4899]/10 to-[#A855F7]/10 border border-white/10">
-                <div className="p-3">
-                  <div className="h-2 w-1/2 bg-white/20 rounded mb-1" />
-                  <div className="h-1 w-3/4 bg-white/10 rounded" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: 'Dijital Pazarlama',
-      description: 'Markanızı dijitalde büyütün! Sosyal medya, Google Ads ve performans odaklı kampanyalar.',
-      Icon: Megaphone,
-      color: '#FBBF24',
-      features: [
-        'Sosyal Medya Yönetimi',
-        'Google & Meta Ads Kampanyaları',
-        'İçerik Pazarlaması & Strateji',
-        'E-posta Marketing',
-        'Influencer İş Birlikleri',
-      ],
-      MockupComponent: () => (
-        <div className="relative rounded-2xl overflow-hidden p-6 bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 shadow-2xl">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FBBF24] to-[#F59E0B] flex items-center justify-center">
-                <BarChart3 className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-white font-semibold">Marketing Dashboard</span>
-            </div>
-          </div>
-          <div className="grid grid-cols-3 gap-3 mb-6">
-            {[
-              { label: 'Erişim', value: '1.2M', color: '#38BDF8' },
-              { label: 'Etkileşim', value: '45.2K', color: '#A855F7' },
-              { label: 'Dönüşüm', value: '8.5%', color: '#10B981' },
-            ].map((stat, i) => (
-              <div key={i} className="p-4 rounded-xl bg-white/5">
-                <span className="text-white/40 text-xs block mb-1">{stat.label}</span>
-                <span className="text-white text-xl font-bold">{stat.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: 'SEO Optimizasyonu',
-      description: 'Arama motorlarında üst sıralara çıkın! Teknik SEO ve içerik optimizasyonu.',
-      Icon: Search,
-      color: '#6366F1',
-      features: [
-        'Teknik SEO Analizi & Düzeltme',
-        'Anahtar Kelime Araştırması',
-        'İçerik Optimizasyonu',
-        'Backlink Stratejisi',
-        'Rakip Analizi & Raporlama',
-      ],
-      MockupComponent: () => (
-        <div className="relative rounded-2xl overflow-hidden p-6 bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 shadow-2xl">
-          <div className="mb-6">
-            <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white mb-4">
-              <Search className="w-5 h-5 text-gray-400" />
-              <span className="text-gray-600 text-sm">şirketiniz hizmetleri</span>
-            </div>
-            <div className="p-4 rounded-xl border-2 border-[#10B981]/50 bg-[#10B981]/5">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs text-[#10B981] font-medium px-2 py-0.5 bg-[#10B981]/20 rounded">1. Sıra</span>
-              </div>
-              <h4 className="text-[#38BDF8] font-medium mb-1">Şirketiniz - Profesyonel Hizmetler</h4>
-              <p className="text-white/50 text-sm">En iyi hizmetleri sunan lider firma...</p>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: 'Özel Yazılım Geliştirme',
-      description: 'İşletmenize özel yazılım çözümleri. ERP, CRM ve otomasyon sistemleri.',
-      Icon: Code2,
-      color: '#8B5CF6',
-      features: [
-        'İş Analizi & Danışmanlık',
-        'Özel ERP & CRM Sistemleri',
-        'API Geliştirme & Entegrasyon',
-        'Otomasyon Çözümleri',
-        'Bulut Altyapı & DevOps',
-      ],
-      MockupComponent: () => (
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 shadow-2xl">
-          <div className="flex items-center gap-2 px-4 py-3 bg-black/30 border-b border-white/5">
-            <div className="flex gap-1.5">
-              <span className="w-3 h-3 rounded-full bg-red-500/80" />
-              <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-              <span className="w-3 h-3 rounded-full bg-green-500/80" />
-            </div>
-            <span className="text-white/40 text-sm ml-2">~/custom-software</span>
-          </div>
-          <div className="p-6 font-mono text-sm">
-            <div className="space-y-2">
-              <div><span className="text-[#A855F7]">const</span> <span className="text-white">solution</span> <span className="text-[#38BDF8]">=</span> <span className="text-white">{`{`}</span></div>
-              <div className="pl-4"><span className="text-[#10B981]">name</span><span className="text-white">: </span><span className="text-[#FBBF24]">"Özel Yazılım"</span><span className="text-white">,</span></div>
-              <div className="pl-4"><span className="text-[#10B981]">scalable</span><span className="text-white">: </span><span className="text-[#A855F7]">true</span></div>
-              <div><span className="text-white">{`}`};</span></div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-  ], [])
+  useEffect(() => {
+    injectStyles()
+  }, [])
 
   return (
     <>
-      <main className="relative min-h-screen">
-        {/* Floating Background Animation */}
-        <FloatingBackground />
+      <main className="relative z-10 min-h-screen bg-[#050816]">
+        {/* Global Grid Pattern */}
+        <div className="fixed inset-0 z-0 pointer-events-none" style={{
+          backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.02) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px',
+        }} />
         
-        {/* Hero */}
         <HeroSection />
-
-      {/* Services */}
-      <section className="relative py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center mb-16 sm:mb-24">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Hizmetlerimiz
-            </h2>
-            <p className="text-white/50 text-lg max-w-2xl mx-auto">
-              İşletmenizi dijital dünyada öne çıkaracak kapsamlı çözümler sunuyoruz.
-            </p>
-          </div>
-
-          {/* Service Cards */}
-          <div className="divide-y divide-white/5">
-            {services.map((service, index) => (
-              <ServiceCard
-                key={service.title}
-                index={index}
-                title={service.title}
-                description={service.description}
-                Icon={service.Icon}
-                color={service.color}
-                features={service.features}
-                mockup={<service.MockupComponent />}
-                reverse={index % 2 === 1}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative py-24 sm:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#38BDF8]/10 via-[#A855F7]/10 to-[#EC4899]/10" />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 bg-gradient-to-r from-[#38BDF8]/10 to-[#A855F7]/10 border border-[#38BDF8]/20">
-            <MessageCircle className="w-4 h-4 text-[#38BDF8]" />
-            <span className="text-white/70 text-sm">Ücretsiz Danışmanlık</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Projenizi{' '}
-            <span className="bg-gradient-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899] bg-clip-text text-transparent">
-              Hayata Geçirelim
-            </span>
-          </h2>
-
-          <p className="text-white/50 text-lg mb-10 max-w-2xl mx-auto">
-            Fikirlerinizi dinliyor, ihtiyaçlarınızı analiz ediyor ve size en uygun 
-            dijital çözümü sunuyoruz.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="https://wa.me/905551234567"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-white bg-gradient-to-r from-green-500 to-green-600 shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <MessageCircle className="w-5 h-5" />
-              WhatsApp ile İletişim
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-
-            <a
-              href="mailto:info@arlanmedya.com"
-              className="group flex items-center gap-2 px-8 py-4 rounded-2xl font-semibold text-white bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
-            >
-              E-posta Gönder
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-    <Footer />
+        <ServicesSection />
+        <ProcessSection />
+        <StatsSection />
+        <CTASection />
+      </main>
+      <Footer />
     </>
   )
 }

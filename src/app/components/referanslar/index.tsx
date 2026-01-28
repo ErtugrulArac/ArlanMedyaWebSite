@@ -34,30 +34,6 @@ export default function Referanslar() {
             transform: translateX(-50%);
           }
         }
-        @keyframes rotateRing {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-        @keyframes rotateRingReverse {
-          0% {
-            transform: rotate(360deg);
-          }
-          100% {
-            transform: rotate(0deg);
-          }
-        }
-        @keyframes pulseGlow {
-          0%, 100% {
-            opacity: 0.6;
-          }
-          50% {
-            opacity: 1;
-          }
-        }
       `
       document.head.appendChild(style)
     }
@@ -68,7 +44,7 @@ export default function Referanslar() {
 
   return (
     <section className="relative py-24 sm:py-32 overflow-hidden">
-      {/* Content container with rings centered on logos */}
+      {/* Content container */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Badge */}
         <div className="flex justify-center mb-6">
@@ -90,87 +66,10 @@ export default function Referanslar() {
           </p>
         </div>
 
-        {/* Logos and Rings Container */}
+        {/* Logos Container */}
         <div className="relative">
-          {/* Concentric circles background with glow - centered on logos */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            {/* SVG for segmented rings */}
-            <svg 
-              className="absolute w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] md:w-[750px] md:h-[750px]"
-              style={{
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-              }}
-              viewBox="0 0 400 400"
-            >
-              {/* Outer ring - irregular segments */}
-              <circle
-                cx="200"
-                cy="200"
-                r="180"
-                fill="none"
-                stroke="rgba(56, 189, 248, 0.15)"
-                strokeWidth="1.5"
-                strokeDasharray="180 40 60 30 120 50 200 80 100 60"
-                strokeLinecap="round"
-                style={{
-                  animation: 'rotateRing 120s linear infinite, pulseGlow 4s ease-in-out infinite',
-                  transformOrigin: 'center',
-                  filter: 'drop-shadow(0 0 8px rgba(56, 189, 248, 0.3))',
-                }}
-              />
-              
-              {/* Middle ring - irregular segments */}
-              <circle
-                cx="200"
-                cy="200"
-                r="130"
-                fill="none"
-                stroke="rgba(56, 189, 248, 0.2)"
-                strokeWidth="1.5"
-                strokeDasharray="100 35 150 45 80 50 120 40"
-                strokeLinecap="round"
-                style={{
-                  animation: 'rotateRingReverse 90s linear infinite, pulseGlow 3s ease-in-out infinite 0.5s',
-                  transformOrigin: 'center',
-                  filter: 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.4))',
-                }}
-              />
-              
-              {/* Inner ring - irregular segments */}
-              <circle
-                cx="200"
-                cy="200"
-                r="85"
-                fill="none"
-                stroke="rgba(56, 189, 248, 0.25)"
-                strokeWidth="1.5"
-                strokeDasharray="70 30 130 40 50 35 90 45"
-                strokeLinecap="round"
-                style={{
-                  animation: 'rotateRing 60s linear infinite, pulseGlow 2.5s ease-in-out infinite 1s',
-                  transformOrigin: 'center',
-                  filter: 'drop-shadow(0 0 12px rgba(56, 189, 248, 0.5))',
-                }}
-              />
-            </svg>
-            
-            {/* Center glow */}
-            <div 
-              className="absolute w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] rounded-full"
-              style={{
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-                background: 'radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%)',
-                animation: 'pulseGlow 2s ease-in-out infinite',
-              }}
-            />
-          </div>
-
-          {/* Marquee Container - centered vertically with rings */}
-          <div className="relative z-10 py-8 sm:py-12">
+          {/* Marquee Container */}
+          <div className="relative py-8 sm:py-12">
             {/* Scrolling logos */}
             <div className="overflow-hidden">
               <div 
