@@ -29,20 +29,36 @@ const Navbar = () => {
   const menuItems = [
     { label: 'Anasayfa', ariaLabel: 'Ana sayfaya git', link: '/' },
     { label: 'Hizmetler', ariaLabel: 'Hizmetlerimizi görüntüle', link: '/hizmetlerimiz' },
-    { label: 'Hakkımızda', ariaLabel: 'Hakkımızda sayfası', link: '#about' },
+    { label: 'Hakkımızda', ariaLabel: 'Hakkımızda sayfası', link: '/hakkimizda' },
     { label: 'Projeler', ariaLabel: 'Projelerimizi görüntüle', link: '#projects' },
     { label: 'İletişim', ariaLabel: 'İletişime geç', link: '/iletisim' },
   ]
 
   const handleNavigation = useCallback((link: string) => {
+    // Sayfa içi anchor'a yumuşak scroll
     if (link.startsWith('#')) {
       document.querySelector(link)?.scrollIntoView({ behavior: 'smooth' })
       return
     }
-    
+
+    // Anasayfa linkine tıklanınca her zaman en üste
+    if (link === '/') {
+      if (pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        return
+      }
+      setShowLoader(true)
+      setTimeout(() => {
+        router.push('/')
+        setTimeout(() => setShowLoader(false), 800)
+      }, 100)
+      return
+    }
+
+    // Aynı sayfaya yeniden gitmeye çalışma
     if (link === pathname) return
-    
-    // Show fake loader
+
+    // Normal yönlendirme
     setShowLoader(true)
     setTimeout(() => {
       router.push(link)
@@ -55,6 +71,20 @@ const Navbar = () => {
     { label: 'LinkedIn', link: 'https://linkedin.com/company/arlanmedya' },
     { label: 'Twitter', link: 'https://twitter.com/arlanmedya' },
   ]
+
+  const handleLogoClick = useCallback(() => {
+    // Eğer anasayfadaysak, her zaman en üste kaydır
+    if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+    // Değilsek anasayfaya yönlendir ve scroll'u en üste yap
+    setShowLoader(true)
+    setTimeout(() => {
+      router.push('/')
+      setTimeout(() => setShowLoader(false), 800)
+    }, 100)
+  }, [pathname, router])
 
   return (
     <>
@@ -118,7 +148,7 @@ const Navbar = () => {
         >
           {/* Logo */}
           <button 
-            onClick={() => handleNavigation('/')}
+            onClick={handleLogoClick}
             className="flex items-center gap-2 group shrink-0 hover:opacity-80 transition-opacity"
           >
             <img 
