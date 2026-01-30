@@ -109,7 +109,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: delay, ease: [0.25, 0.46, 0.45, 0.94] }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "0px 0px -20% 0px" }}
       className="perspective-1000"
     >
       <motion.div
@@ -122,13 +122,18 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
           rotateY,
           transformStyle: 'preserve-3d',
           willChange: 'transform, opacity',
+          backfaceVisibility: 'hidden',
         }}
         className="relative group cursor-pointer"
       >
         {/* Glow Effect */}
-        <motion.div
-          className={`absolute -inset-1 rounded-3xl bg-linear-to-r ${gradient} opacity-0 ${isMobile ? 'blur-md' : 'blur-xl'} transition-opacity duration-500`}
-          animate={{ opacity: isActive ? 0.4 : 0 }}
+        <div
+          className={`absolute -inset-1 rounded-3xl bg-linear-to-r ${gradient} ${isMobile ? 'blur-md' : 'blur-xl'}`}
+          style={{
+            opacity: isActive ? 0.4 : 0,
+            transition: 'opacity 500ms',
+            willChange: 'opacity, filter',
+          }}
         />
 
         {/* Card */}
@@ -137,9 +142,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
           style={{ contentVisibility: 'auto', contain: 'layout paint style' }}
         >
           {/* Animated Background Gradient */}
-          <motion.div
-            className={`absolute inset-0 bg-linear-to-br ${gradient} opacity-0 transition-opacity duration-500`}
-            animate={{ opacity: isActive ? 0.1 : 0 }}
+          <div
+            className={`absolute inset-0 bg-linear-to-br ${gradient}`}
+            style={{ opacity: isActive ? 0.1 : 0, transition: 'opacity 500ms', willChange: 'opacity' }}
           />
 
           {/* Grid Pattern */}
@@ -167,57 +172,46 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
           {/* Content */}
           <div className="relative z-10" style={{ transform: 'translateZ(50px)' }}>
             {/* Icon */}
-            <motion.div
+            <div
               className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl bg-linear-to-br ${gradient} p-px mb-4 sm:mb-5`}
-              animate={{ 
-                scale: isActive ? 1.1 : 1,
-                rotateZ: isActive ? 5 : 0
-              }}
-              transition={{ duration: 0.3 }}
+              style={{ transform: isActive ? 'scale(1.1) rotateZ(5deg)' : 'scale(1) rotateZ(0deg)', transition: 'transform 300ms' }}
             >
               <div className="w-full h-full rounded-2xl bg-[#0F172A] flex items-center justify-center">
-                <motion.div
-                  animate={{ scale: isActive ? 1.2 : 1 }}
-                  transition={{ duration: 0.3 }}
+                <div
                   className="text-white"
+                  style={{ transform: isActive ? 'scale(1.2)' : 'scale(1)', transition: 'transform 300ms' }}
                 >
                   {icon}
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Title */}
-            <motion.h3
+            <h3
               className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 bg-clip-text"
-              style={{ color: 'var(--text-primary)' }}
-              animate={{ x: isActive ? 5 : 0 }}
-              transition={{ duration: 0.3 }}
+              style={{ color: 'var(--text-primary)', transform: isActive ? 'translateX(5px)' : 'translateX(0px)', transition: 'transform 300ms' }}
             >
               {title}
-            </motion.h3>
+            </h3>
 
             {/* Description */}
-            <motion.p
+            <p
               className="text-xs sm:text-sm lg:text-base leading-relaxed"
-              style={{ color: 'var(--text-secondary)' }}
-              animate={{ x: isActive ? 5 : 0 }}
-              transition={{ duration: 0.3, delay: 0.05 }}
+              style={{ color: 'var(--text-secondary)', transform: isActive ? 'translateX(5px)' : 'translateX(0px)', transition: 'transform 300ms 50ms' }}
             >
               {description}
-            </motion.p>
+            </p>
 
             {/* Arrow */}
-            <motion.div
+            <div
               className="mt-4 sm:mt-5 flex items-center gap-2 text-[#38BDF8]"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -10 }}
-              transition={{ duration: 0.3 }}
+              style={{ opacity: isActive ? 1 : 0, transform: isActive ? 'translateX(0px)' : 'translateX(-10px)', transition: 'opacity 300ms, transform 300ms' }}
             >
               <span className="text-sm font-semibold">Detaylı Bilgi</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </motion.div>
+            </div>
           </div>
 
           {/* Corner Accents */}

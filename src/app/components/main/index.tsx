@@ -666,7 +666,7 @@ const MainHero = () => {
       </motion.div>
 
       {/* Services Section */}
-      <div className="relative z-10 py-12 sm:py-16 md:py-24">
+      <div className="relative z-10 py-12 sm:py-16 md:py-24" style={{ isolation: 'isolate' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -688,7 +688,10 @@ const MainHero = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6"
+            style={{ contentVisibility: 'auto', contain: 'layout paint style', willChange: 'transform, opacity' }}
+          >
             <ServiceCard
               title="Yazılım Geliştirme"
               description="React, Next.js ve Node.js ile ölçeklenebilir, yüksek performanslı web ve mobil uygulamaları geliştiriyoruz."
