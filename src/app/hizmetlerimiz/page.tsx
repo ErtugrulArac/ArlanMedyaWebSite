@@ -25,144 +25,16 @@ import {
 import Footer from '../components/footer'
 
 // ============================================
-// STYLES - Advanced Animations
-// ============================================
-const injectStyles = () => {
-  const styleId = 'hizmetler-advanced-styles'
-  if (typeof document !== 'undefined' && !document.getElementById(styleId)) {
-    const style = document.createElement('style')
-    style.id = styleId
-    style.textContent = `
-      @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(2deg); }
-      }
-      @keyframes float-reverse {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(20px) rotate(-2deg); }
-      }
-      @keyframes pulse-glow {
-        0%, 100% { opacity: 0.5; transform: scale(1); }
-        50% { opacity: 1; transform: scale(1.05); }
-      }
-      @keyframes gradient-shift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-      @keyframes shimmer {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
-      }
-      @keyframes typing {
-        0%, 100% { width: 0; }
-        50% { width: 100%; }
-      }
-      @keyframes blink {
-        0%, 50% { opacity: 1; }
-        51%, 100% { opacity: 0; }
-      }
-      @keyframes orbit {
-        0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
-        100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
-      }
-      @keyframes orbit-reverse {
-        0% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
-        100% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
-      }
-      @keyframes slide-up {
-        0% { opacity: 0; transform: translateY(60px); }
-        100% { opacity: 1; transform: translateY(0); }
-      }
-      @keyframes scale-in {
-        0% { opacity: 0; transform: scale(0.8); }
-        100% { opacity: 1; transform: scale(1); }
-      }
-      @keyframes draw-line {
-        0% { stroke-dashoffset: 1000; }
-        100% { stroke-dashoffset: 0; }
-      }
-      @keyframes bounce-subtle {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
-      }
-      .animate-float { animation: float 6s ease-in-out infinite; }
-      .animate-float-reverse { animation: float-reverse 7s ease-in-out infinite; }
-      .animate-float-slow { animation: float 8s ease-in-out infinite; }
-      .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
-      .animate-gradient { 
-        background-size: 200% 200%;
-        animation: gradient-shift 8s ease infinite; 
-      }
-      .animate-shimmer { animation: shimmer 2s infinite; }
-      .animate-orbit { animation: orbit 20s linear infinite; }
-      .animate-orbit-reverse { animation: orbit-reverse 15s linear infinite; }
-      .animate-bounce-subtle { animation: bounce-subtle 2s ease-in-out infinite; }
-      
-      .service-card {
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .service-card:hover {
-        transform: translateY(-12px) scale(1.02);
-      }
-      .service-card:hover .card-glow {
-        opacity: 1;
-      }
-      .service-card:hover .card-icon {
-        transform: scale(1.1) rotate(5deg);
-      }
-      .service-card:hover .card-arrow {
-        transform: translateX(8px);
-      }
-      
-      .mockup-3d {
-        transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .mockup-3d:hover {
-        transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
-      }
-      
-      .glass {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-      }
-      
-      .text-gradient {
-        background: linear-gradient(135deg, #38BDF8 0%, #A855F7 50%, #EC4899 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      
-      .hero-gradient {
-        background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.15), transparent),
-                    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(168, 85, 247, 0.1), transparent),
-                    radial-gradient(ellipse 50% 30% at 20% 80%, rgba(236, 72, 153, 0.08), transparent);
-      }
-      
-      .line-gradient {
-        background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
-      }
-    `
-    document.head.appendChild(style)
-  }
-}
-
-// ============================================
 // HERO SECTION - Cinematic Entry
 // ============================================
 const HeroSection = () => {
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    injectStyles()
-    setIsVisible(true)
-  }, [])
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0" style={{
+        background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.15), transparent), radial-gradient(ellipse 60% 40% at 80% 50%, rgba(168, 85, 247, 0.1), transparent), radial-gradient(ellipse 50% 30% at 20% 80%, rgba(236, 72, 153, 0.08), transparent)'
+      }} />
+      
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Grid Pattern - Same as homepage */}
@@ -171,10 +43,10 @@ const HeroSection = () => {
           backgroundSize: '50px 50px',
         }} />
         
-        {/* Floating Orbs */}
-        <div className="absolute top-20 left-[10%] w-72 h-72 bg-[#38BDF8]/20 rounded-full blur-[100px] animate-float" />
-        <div className="absolute bottom-32 right-[15%] w-96 h-96 bg-[#A855F7]/15 rounded-full blur-[120px] animate-float-reverse" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#EC4899]/10 rounded-full blur-[150px] animate-pulse-glow" />
+        {/* Floating Orbs - Reduced blur for performance */}
+        <div className="absolute top-20 left-[10%] w-72 h-72 bg-[#38BDF8]/20 rounded-full blur-[40px] animate-float" />
+        <div className="hidden md:block absolute bottom-32 right-[15%] w-96 h-96 bg-[#A855F7]/15 rounded-full blur-[50px] animate-float-reverse" />
+        <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#EC4899]/10 rounded-full blur-[60px] animate-pulse-slow" />
         
         {/* Grid Pattern */}
         <div className="absolute inset-0 opacity-[0.02]" style={{
@@ -182,7 +54,7 @@ const HeroSection = () => {
           backgroundSize: '60px 60px'
         }} />
 
-        {/* Orbiting Elements */}
+        {/* Orbiting Elements - KEEP AS IS */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px]">
           <div className="absolute inset-0 animate-orbit">
             <div className="w-3 h-3 rounded-full bg-[#38BDF8]" />
@@ -197,41 +69,30 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Text Content */}
-          <div className={`text-center lg:text-left transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <div className="text-center lg:text-left animate-fade-in">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#38BDF8] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#38BDF8]"></span>
-              </span>
-              <span className="text-white/70 text-sm font-medium">Dijital Dönüşüm Partneri</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8" style={{
+              background: 'rgba(255, 255, 255, 0.03)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.08)'
+            }}>
+              <Sparkles className="w-4 h-4 text-[#38BDF8]" />
+              <span className="text-white/70 text-sm">Premium Digital Solutions</span>
             </div>
 
             {/* Heading */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1]">
               Dijital Dünyada
               <br />
-              <span className="text-gradient">Fark Yaratın</span>
+              <span className="bg-gradient-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899] bg-clip-text text-transparent">
+                Fark Yaratın
+              </span>
             </h1>
 
-            <p className="text-white/50 text-base sm:text-lg md:text-xl max-w-lg mb-8 sm:mb-10 leading-relaxed">
-              Web sitesinden mobil uygulamaya, SEO&apos;dan dijital pazarlamaya. 
-              <span className="text-white/70"> 200+ başarılı proje</span> ile işinizi büyütüyoruz.
+            {/* Description */}
+            <p className="text-lg sm:text-xl text-white/60 mb-10">
+              Web tasarımından medya yönetimine, SEO&apos;dan e-ticarete kadar dijital dünyadaki tüm ihtiyaçlarınız için yanınızdayız.
             </p>
-
-            {/* Stats Row */}
-            <div className="flex items-center justify-center sm:justify-start gap-6 sm:gap-8 mb-8 sm:mb-10">
-              {[
-                { value: '200+', label: 'Proje' },
-                { value: '8+', label: 'Yıl' },
-                { value: '%97', label: 'Memnuniyet' },
-              ].map((stat, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-white">{stat.value}</div>
-                  <div className="text-white/40 text-xs sm:text-sm">{stat.label}</div>
-                </div>
-              ))}
-            </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4">
@@ -240,17 +101,27 @@ const HeroSection = () => {
                 className="group relative flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-white overflow-hidden w-full sm:w-auto"
               >
                 {/* Button Background */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899] animate-gradient" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899]" style={{
+                  backgroundSize: '200% 200%',
+                  animation: 'gradient-shift 8s ease infinite'
+                }} />
                 {/* Shimmer Effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" style={{
+                    animation: 'shimmer 2s infinite'
+                  }} />
                 </div>
                 <span className="relative z-10 text-sm sm:text-base">Hizmetleri Keşfet</span>
                 <ArrowRight className="relative z-10 w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="/iletisim"
-                className="group flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-white glass hover:bg-white/10 transition-all w-full sm:w-auto"
+                className="group flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-white hover:bg-white/10 transition-all w-full sm:w-auto"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)'
+                }}
               >
                 <Phone className="w-4 sm:w-5 h-4 sm:h-5" />
                 <span className="text-sm sm:text-base">Ücretsiz Görüşme</span>
@@ -259,10 +130,17 @@ const HeroSection = () => {
           </div>
 
           {/* Right - 3D Mockup */}
-          <div className={`relative mt-12 lg:mt-0 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <div className="relative mt-12 lg:mt-0 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             {/* Browser Mockup */}
-            <div className="mockup-3d">
-              <div className="relative glass rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+            <div className="hover-scale" style={{
+              transform: 'perspective(1000px) rotateY(-15deg) rotateX(5deg)',
+              transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+            }}>
+              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shadow-black/50" style={{
+                background: 'rgba(255, 255, 255, 0.03)',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 255, 255, 0.08)'
+              }}>
                 {/* Browser Chrome */}
                 <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-white/5 border-b border-white/10">
                   <div className="flex gap-1 sm:gap-1.5">
@@ -1198,10 +1076,6 @@ const CTASection = () => {
 // MAIN PAGE
 // ============================================
 export default function HizmetlerimizPage() {
-  useEffect(() => {
-    injectStyles()
-  }, [])
-
   return (
     <>
       <main className="relative z-10 min-h-screen bg-[#050816]">

@@ -181,6 +181,35 @@ body {
   transform-origin: left;
 }
 
+/* Hizmetler page animations */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+
+@keyframes orbit-reverse {
+  0% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+  100% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+}
+
+.animate-orbit { animation: orbit 20s linear infinite; }
+.animate-orbit-reverse { animation: orbit-reverse 15s linear infinite; }
+
+.hover-scale:hover {
+  transform: perspective(1000px) rotateY(-5deg) rotateX(2deg) !important;
+}
+
 .bg-gradient-radial {
   background: radial-gradient(circle at center, var(--tw-gradient-stops));
 }

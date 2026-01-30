@@ -30,7 +30,7 @@ const Navbar = () => {
     { label: 'Anasayfa', ariaLabel: 'Ana sayfaya git', link: '/' },
     { label: 'Hizmetler', ariaLabel: 'Hizmetlerimizi görüntüle', link: '/hizmetlerimiz' },
     { label: 'Hakkımızda', ariaLabel: 'Hakkımızda sayfası', link: '/hakkimizda' },
-    { label: 'Projeler', ariaLabel: 'Projelerimizi görüntüle', link: '#projects' },
+    { label: 'Süreç', ariaLabel: 'Süreç sayfası', link: '/surec' },
     { label: 'İletişim', ariaLabel: 'İletişime geç', link: '/iletisim' },
   ]
 

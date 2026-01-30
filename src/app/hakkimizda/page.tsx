@@ -55,14 +55,14 @@ const GlobalBackground = React.memo(() => {
 
       {/* ========== AURORA EFFECT - CSS Animation ========== */}
       <div
-        className="absolute inset-0 opacity-30 animate-aurora"
+        className="absolute inset-0 opacity-15 md:opacity-30 animate-aurora"
         style={{
           background: 'linear-gradient(45deg, transparent 30%, rgba(56, 189, 248, 0.1) 50%, transparent 70%)',
           backgroundSize: '200% 200%',
         }}
       />
       <div
-        className="absolute inset-0 opacity-25 animate-aurora-reverse"
+        className="hidden md:block absolute inset-0 opacity-25 animate-aurora-reverse"
         style={{
           background: 'linear-gradient(-45deg, transparent 30%, rgba(168, 85, 247, 0.1) 50%, transparent 70%)',
           backgroundSize: '200% 200%',
@@ -71,14 +71,15 @@ const GlobalBackground = React.memo(() => {
 
       {/* ========== GLOWING ORBS - Static with CSS pulse ========== */}
       <div
-        className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full animate-pulse-slow"
+        className="absolute -top-1/4 -left-1/4 w-[400px] h-[400px] sm:w-[800px] sm:h-[800px] rounded-full animate-pulse-slow"
         style={{
           background: 'radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0.04) 40%, transparent 70%)',
-          filter: 'blur(60px)',
+          filter: 'blur(30px)',
         }}
       />
+      {/* Second and third orbs hidden on mobile */}
       <div
-        className="absolute -bottom-1/4 -right-1/4 w-[900px] h-[900px] rounded-full animate-pulse-slow"
+        className="hidden sm:block absolute -bottom-1/4 -right-1/4 w-[900px] h-[900px] rounded-full animate-pulse-slow"
         style={{
           background: 'radial-gradient(circle, rgba(168, 85, 247, 0.10) 0%, rgba(168, 85, 247, 0.03) 40%, transparent 70%)',
           filter: 'blur(80px)',
@@ -86,7 +87,7 @@ const GlobalBackground = React.memo(() => {
         }}
       />
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full animate-pulse-slow"
+        className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full animate-pulse-slow"
         style={{
           background: 'radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, transparent 60%)',
           filter: 'blur(50px)',
@@ -96,10 +97,23 @@ const GlobalBackground = React.memo(() => {
       
       {/* ========== EXPANDING CIRCULAR RINGS - Optimized ========== */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center pointer-events-none">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(2)].map((_, i) => (
           <div
             key={i}
             className={`absolute rounded-full ${i % 2 === 0 ? 'animate-spin-slow' : 'animate-spin-reverse'}`}
+            style={{
+              width: `${(i + 1) * 200}px`,
+              height: `${(i + 1) * 200}px`,
+              border: `1px solid ${i % 3 === 0 ? 'rgba(56, 189, 248, 0.08)' : i % 3 === 1 ? 'rgba(168, 85, 247, 0.06)' : 'rgba(16, 185, 129, 0.05)'}`,
+              opacity: 0.3,
+            }}
+          />
+        ))}
+        {/* Additional rings for desktop only */}
+        {[2, 3, 4].map((i) => (
+          <div
+            key={`desktop-${i}`}
+            className={`hidden md:block absolute rounded-full ${i % 2 === 0 ? 'animate-spin-slow' : 'animate-spin-reverse'}`}
             style={{
               width: `${(i + 1) * 200}px`,
               height: `${(i + 1) * 200}px`,
@@ -150,7 +164,7 @@ const GlobalBackground = React.memo(() => {
         }}
       />
       <div
-        className="absolute top-0 right-1/3 w-px h-full light-beam"
+        className="hidden md:block absolute top-0 right-1/3 w-px h-full light-beam"
         style={{
           background: 'linear-gradient(to bottom, transparent, rgba(168, 85, 247, 0.10), transparent)',
           animationDelay: '3s',
@@ -159,7 +173,7 @@ const GlobalBackground = React.memo(() => {
 
       {/* Horizontal Light Beam */}
       <div
-        className="absolute left-0 top-1/4 h-px w-full light-beam-horizontal"
+        className="hidden lg:block absolute left-0 top-1/4 h-px w-full light-beam-horizontal"
         style={{
           background: 'linear-gradient(to right, transparent, rgba(56, 189, 248, 0.10), transparent)',
         }}
@@ -169,7 +183,7 @@ const GlobalBackground = React.memo(() => {
       {floatingIcons.map((item, i) => (
         <div
           key={i}
-          className="absolute text-white/10 animate-float"
+          className={`absolute text-white/10 animate-float ${i >= 3 ? 'hidden md:block' : ''}`}
           style={{ 
             left: item.x, 
             top: item.y,
@@ -184,7 +198,7 @@ const GlobalBackground = React.memo(() => {
       {[...Array(12)].map((_, i) => (
         <div
           key={`star-${i}`}
-          className="absolute rounded-full animate-pulse-slow"
+          className={`absolute rounded-full animate-pulse-slow ${i >= 3 ? 'hidden sm:block' : ''}`}
           style={{
             left: `${8 + i * 8}%`,
             top: `${10 + (i % 4) * 22}%`,
@@ -203,7 +217,7 @@ const GlobalBackground = React.memo(() => {
       ))}
 
       {/* ========== SHOOTING STAR - Single CSS ========== */}
-      <div className="shooting-star absolute w-1 h-1 bg-white rounded-full" />
+      <div className="shooting-star absolute w-1 h-1 bg-white rounded-full hidden md:block" />
 
       {/* ========== CORNER DECORATIONS ========== */}
       {/* Top Left */}
@@ -239,19 +253,19 @@ const GlobalBackground = React.memo(() => {
 
       {/* ========== FLOATING PLUS SIGNS - CSS Animation ========== */}
       <div
-        className="absolute text-[#38BDF8]/15 text-4xl sm:text-5xl font-thin animate-spin-slow"
+        className="hidden md:block absolute text-[#38BDF8]/15 text-4xl sm:text-5xl font-thin animate-spin-slow"
         style={{ top: '15%', left: '20%' }}
       >
         +
       </div>
       <div
-        className="absolute text-[#A855F7]/12 text-3xl sm:text-4xl font-thin animate-spin-reverse"
+        className="hidden lg:block absolute text-[#A855F7]/12 text-3xl sm:text-4xl font-thin animate-spin-reverse"
         style={{ top: '60%', right: '15%' }}
       >
         +
       </div>
       <div
-        className="absolute text-[#10B981]/10 text-2xl sm:text-3xl font-thin animate-spin-slow"
+        className="hidden md:block absolute text-[#10B981]/10 text-2xl sm:text-3xl font-thin animate-spin-slow"
         style={{ bottom: '25%', left: '10%' }}
       >
         +
