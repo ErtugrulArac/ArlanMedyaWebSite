@@ -15,6 +15,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
   const cardRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [hasActivated, setHasActivated] = useState(false)
+  const [reduceMotion, setReduceMotion] = useState(false)
   
   // Check if card is in view (for mobile scroll activation)
   const isInView = useInView(cardRef, { 
@@ -32,8 +34,23 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
+  // Detect prefers-reduced-motion
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const handleChange = () => setReduceMotion(mq.matches)
+    handleChange()
+    mq.addEventListener?.('change', handleChange)
+    return () => mq.removeEventListener?.('change', handleChange)
+  }, [])
+
   // On mobile, activate when in view
-  const isActive = isMobile ? isInView : isHovered
+  useEffect(() => {
+    if (isMobile && isInView && !hasActivated) {
+      setHasActivated(true)
+    }
+  }, [isMobile, isInView, hasActivated])
+
+  const isActive = isMobile ? hasActivated : isHovered
 
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -41,15 +58,31 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]), { stiffness: 300, damping: 30 })
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-15, 15]), { stiffness: 300, damping: 30 })
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  // Cache rect and throttle mouse updates with rAF for smoother performance
+  const rectRef = useRef<{ centerX: number; centerY: number; width: number; height: number } | null>(null)
+  const rafPending = useRef(false)
+
+  const updateRectCache = () => {
     if (!cardRef.current) return
-
     const rect = cardRef.current.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
+    rectRef.current = {
+      centerX: rect.left + rect.width / 2,
+      centerY: rect.top + rect.height / 2,
+      width: rect.width,
+      height: rect.height,
+    }
+  }
 
-    mouseX.set((e.clientX - centerX) / rect.width)
-    mouseY.set((e.clientY - centerY) / rect.height)
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!rectRef.current) return
+    if (rafPending.current) return
+    rafPending.current = true
+    requestAnimationFrame(() => {
+      const { centerX, centerY, width, height } = rectRef.current!
+      mouseX.set((e.clientX - centerX) / width)
+      mouseY.set((e.clientY - centerY) / height)
+      rafPending.current = false
+    })
   }
 
   const handleMouseLeave = () => {
@@ -57,6 +90,19 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
     mouseY.set(0)
     setIsHovered(false)
   }
+
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+    updateRectCache()
+  }
+
+  useEffect(() => {
+    const onResize = () => {
+      if (isHovered) updateRectCache()
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [isHovered])
 
   return (
     <motion.div
@@ -69,26 +115,30 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
           rotateX,
           rotateY,
           transformStyle: 'preserve-3d',
+          willChange: 'transform, opacity',
         }}
         className="relative group cursor-pointer"
       >
         {/* Glow Effect */}
         <motion.div
-          className={`absolute -inset-1 rounded-3xl bg-gradient-to-r ${gradient} opacity-0 blur-xl transition-opacity duration-500`}
+          className={`absolute -inset-1 rounded-3xl bg-linear-to-r ${gradient} opacity-0 ${isMobile ? 'blur-md' : 'blur-xl'} transition-opacity duration-500`}
           animate={{ opacity: isActive ? 0.4 : 0 }}
         />
 
         {/* Card */}
-        <div className="relative h-auto min-h-[280px] sm:min-h-[300px] p-5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border border-white/10 bg-[#0F172A]/80 backdrop-blur-xl overflow-hidden">
+        <div
+          className="relative h-auto min-h-70 sm:min-h-75 p-5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border border-white/10 bg-[#0F172A]/80 backdrop-blur-xl overflow-hidden"
+          style={{ contentVisibility: 'auto', contain: 'layout paint style' }}
+        >
           {/* Animated Background Gradient */}
           <motion.div
-            className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 transition-opacity duration-500`}
+            className={`absolute inset-0 bg-linear-to-br ${gradient} opacity-0 transition-opacity duration-500`}
             animate={{ opacity: isActive ? 0.1 : 0 }}
           />
 
@@ -110,7 +160,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
             transition={{ duration: 0.5 }}
             style={{
               backgroundSize: '200% 200%',
-              animation: isActive ? 'shine 1.5s ease-in-out infinite' : 'none'
+              animation: isActive ? (isMobile || reduceMotion ? 'shine 1.2s ease-out 1' : 'shine 1.5s ease-in-out infinite') : 'none'
             }}
           />
 
@@ -118,7 +168,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
           <div className="relative z-10" style={{ transform: 'translateZ(50px)' }}>
             {/* Icon */}
             <motion.div
-              className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${gradient} p-[1px] mb-4 sm:mb-5`}
+              className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl bg-linear-to-br ${gradient} p-px mb-4 sm:mb-5`}
               animate={{ 
                 scale: isActive ? 1.1 : 1,
                 rotateZ: isActive ? 5 : 0
@@ -171,12 +221,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
           </div>
 
           {/* Corner Accents */}
-          <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${gradient} opacity-20 blur-3xl`} />
-          <div className={`absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr ${gradient} opacity-10 blur-2xl`} />
+          <div className={`absolute top-0 right-0 w-32 h-32 bg-linear-to-br ${gradient} opacity-20 ${isMobile ? 'blur-xl' : 'blur-3xl'}`} />
+          <div className={`absolute bottom-0 left-0 w-24 h-24 bg-linear-to-tr ${gradient} opacity-10 ${isMobile ? 'blur-md' : 'blur-2xl'}`} />
         </div>
       </motion.div>
     </motion.div>
   )
 }
 
-export default ServiceCard
+export default React.memo(ServiceCard)
