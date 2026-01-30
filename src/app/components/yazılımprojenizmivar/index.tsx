@@ -1,7 +1,4 @@
-'use client'
-
 import React from 'react'
-import { motion } from 'framer-motion'
 import { 
   Rocket, 
   ArrowRight,
@@ -39,13 +36,7 @@ const FloatingMockup = React.memo(() => {
       </div>
 
       {/* Main Phone Frame */}
-      <motion.div
-        className="relative z-10"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
+      <div className="relative z-10 animate-fade-in">
         {/* Phone Device */}
         <div
           className="relative w-[200px] h-[400px] sm:w-[240px] sm:h-[480px] lg:w-[280px] lg:h-[560px] rounded-[32px] sm:rounded-[40px] lg:rounded-[48px] overflow-hidden hover-scale"
@@ -181,18 +172,14 @@ const FloatingMockup = React.memo(() => {
 
         {/* Floating Notification Cards - CSS Animation */}
         {notifications.map((notif, i) => (
-          <motion.div
+          <div
             key={i}
             className={`absolute ${
               i === 0 ? '-right-4 sm:-right-12 lg:-right-20 top-16 sm:top-20' :
               i === 1 ? '-left-4 sm:-left-12 lg:-left-20 top-1/3' :
               '-right-2 sm:-right-10 lg:-right-16 bottom-24 sm:bottom-32'
-            } z-20 ${i % 2 === 0 ? 'animate-float-notification' : 'animate-float-notification-reverse'}`}
-            initial={{ opacity: 0, x: i === 1 ? -30 : 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.8 + i * 0.15 }}
-            style={{ animationDelay: `${i * 0.5}s` }}
+            } z-20 ${i % 2 === 0 ? 'animate-float-notification' : 'animate-float-notification-reverse'} animate-fade-in`}
+            style={{ animationDelay: `${(0.8 + i * 0.15)}s` }}
           >
             <div
               className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl"
@@ -214,7 +201,7 @@ const FloatingMockup = React.memo(() => {
                 <p className="text-white/40 text-[9px] sm:text-[10px]">{notif.time}</p>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
 
         {/* Corner Floating Icons - CSS Animation */}
@@ -252,12 +239,12 @@ const FloatingMockup = React.memo(() => {
         >
           <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#10B981]" />
         </div>
-      </motion.div>
+      </div>
 
       {/* Background Glow Effects - Static */}
       <div className="absolute inset-0 -z-10 pointer-events-none flex items-center justify-center">
-        <div className="absolute w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-[#38BDF8] rounded-full blur-[100px] sm:blur-[120px] opacity-15" />
-        <div className="absolute w-40 h-40 sm:w-60 sm:h-60 lg:w-80 lg:h-80 bg-[#A855F7] rounded-full blur-[80px] sm:blur-[100px] opacity-10 translate-x-10 translate-y-10" />
+        <div className="absolute w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-[#38BDF8] rounded-full blur-[40px] opacity-12" />
+        <div className="absolute w-40 h-40 sm:w-60 sm:h-60 lg:w-80 lg:h-80 bg-[#A855F7] rounded-full blur-[30px] opacity-8 translate-x-10 translate-y-10" />
       </div>
     </div>
   )
@@ -305,60 +292,34 @@ export default function YazilimProjenizMiVar() {
           {/* Left Content */}
           <div className="text-center lg:text-left">
             {/* Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6"
+            <div
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 animate-fade-in"
               style={{
                 background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(168, 85, 247, 0.1))',
                 border: '1px solid rgba(56, 189, 248, 0.2)'
               }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
             >
-              <motion.span
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-              >
-                <Rocket size={14} className="text-[#38BDF8] sm:w-4 sm:h-4" />
-              </motion.span>
+              <Rocket size={14} className="text-[#38BDF8] sm:w-4 sm:h-4" />
               <span className="text-white/80 text-xs sm:text-sm font-medium">Hayallerinizi Kodluyoruz</span>
-            </motion.div>
+            </div>
 
             {/* Heading */}
-            <motion.h2
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight animate-fade-in" style={{ animationDelay: '0.1s' }}>
               <span className="text-white">Yazılım Projeniz</span>
               <br />
               <span className="bg-gradient-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899] bg-clip-text text-transparent">
                 Mi Var?
               </span>
-            </motion.h2>
+            </h2>
 
             {/* Description */}
-            <motion.p
-              className="text-base sm:text-lg lg:text-xl text-white/60 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
+            <p className="text-base sm:text-lg lg:text-xl text-white/60 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
               Aklınızdaki fikri, <span className="text-white font-medium">modern teknolojilerle</span> profesyonel 
               bir ürüne dönüştürelim. Siz hayal edin, biz geliştirelim.
-            </motion.p>
+            </p>
 
             {/* Benefits */}
-            <motion.div
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8 sm:mb-10"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-            >
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8 sm:mb-10 animate-fade-in" style={{ animationDelay: '0.3s' }}>
               {benefits.map((benefit, i) => (
                 <div
                   key={i}
@@ -368,56 +329,35 @@ export default function YazilimProjenizMiVar() {
                   <span className="text-white/70 text-xs sm:text-sm">{benefit.text}</span>
                 </div>
               ))}
-            </motion.div>
+            </div>
 
             {/* CTA Buttons */}
-            <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-            >
-              <motion.a
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <a
                 href="#iletisim"
-                className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white text-sm sm:text-base overflow-hidden"
+                className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white text-sm sm:text-base overflow-hidden hover-scale"
                 style={{
                   background: 'linear-gradient(135deg, #38BDF8, #0EA5E9)',
                   boxShadow: '0 10px 40px -10px rgba(56, 189, 248, 0.5)'
                 }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  <Rocket size={18} />
-                  Projeyi Başlat
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-white/20"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '100%' }}
-                  transition={{ duration: 0.5 }}
-                />
-              </motion.a>
+                <Rocket size={18} />
+                Projeyi Başlat
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </a>
               
-              <motion.a
+              <a
                 href="#portfolyo"
-                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white text-sm sm:text-base"
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white text-sm sm:text-base transition-all duration-300 hover:bg-[rgba(168,85,247,0.1)] hover:border-[rgba(168,85,247,0.3)]"
                 style={{
                   background: 'rgba(255, 255, 255, 0.05)',
                   border: '1px solid rgba(255, 255, 255, 0.1)'
                 }}
-                whileHover={{ 
-                  background: 'rgba(168, 85, 247, 0.1)',
-                  borderColor: 'rgba(168, 85, 247, 0.3)'
-                }}
-                whileTap={{ scale: 0.98 }}
               >
                 <Code2 size={18} className="text-[#A855F7]" />
                 Projelerimizi Gör
-              </motion.a>
-            </motion.div>
+              </a>
+            </div>
           </div>
 
           {/* Right - Mockup */}
@@ -427,13 +367,7 @@ export default function YazilimProjenizMiVar() {
         </div>
 
         {/* Bottom WhatsApp CTA */}
-        <motion.div
-          className="mt-16 sm:mt-24 relative"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
+        <div className="mt-16 sm:mt-24 relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <div 
             className="relative rounded-2xl sm:rounded-3xl overflow-hidden p-1"
             style={{
@@ -448,22 +382,20 @@ export default function YazilimProjenizMiVar() {
             >
               {/* Background glow */}
               <div className="absolute inset-0 overflow-hidden rounded-xl sm:rounded-2xl">
-                <div className="absolute top-0 left-1/4 w-40 sm:w-60 h-40 sm:h-60 bg-[#10B981]/10 rounded-full blur-[60px] sm:blur-[80px]" />
-                <div className="absolute bottom-0 right-1/4 w-40 sm:w-60 h-40 sm:h-60 bg-[#38BDF8]/10 rounded-full blur-[60px] sm:blur-[80px]" />
+                <div className="absolute top-0 left-1/4 w-40 sm:w-60 h-40 sm:h-60 bg-[#10B981]/8 rounded-full blur-[30px] sm:blur-[40px]" />
+                <div className="absolute bottom-0 right-1/4 w-40 sm:w-60 h-40 sm:h-60 bg-[#38BDF8]/8 rounded-full blur-[30px] sm:blur-[40px]" />
               </div>
 
               <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">
                 {/* Left Content */}
                 <div className="text-center lg:text-left flex-1">
                   <div className="flex items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-3 sm:mb-4">
-                    <motion.div
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center"
+                    <div
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center animate-pulse-scale"
                       style={{ background: 'linear-gradient(135deg, #10B981, #059669)' }}
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
                     >
                       <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    </motion.div>
+                    </div>
                     <div>
                       <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
                         Ücretsiz Danışmanlık
@@ -477,47 +409,26 @@ export default function YazilimProjenizMiVar() {
                 </div>
 
                 {/* Right - CTA */}
-                <motion.a
+                <a
                   href="https://wa.me/905551234567"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex items-center gap-3 sm:gap-4 px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-white text-sm sm:text-base whitespace-nowrap overflow-hidden"
+                  className="group relative flex items-center gap-3 sm:gap-4 px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-white text-sm sm:text-base whitespace-nowrap overflow-hidden hover-scale"
                   style={{
                     background: 'linear-gradient(135deg, #10B981, #059669)',
                     boxShadow: '0 10px 40px -10px rgba(16, 185, 129, 0.5)'
                   }}
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
                 >
-                  <motion.div
-                    animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                  >
-                    <svg viewBox="0 0 24 24" className="w-5 h-5 sm:w-6 sm:h-6 fill-current">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 sm:w-6 sm:h-6 fill-current">
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                     </svg>
-                  </motion.div>
                   <span>WhatsApp&apos;tan Yazın</span>
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                  
-                  {/* Shine effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                    initial={{ x: '-100%' }}
-                    animate={{ x: '200%' }}
-                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                  />
-                </motion.a>
+                </a>
               </div>
 
               {/* Trust Badges */}
-              <motion.div
-                className="relative z-10 flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/5"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
+              <div className="relative z-10 flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/5 animate-fade-in" style={{ animationDelay: '0.4s' }}>
                 {[
                   { icon: CheckCircle2, text: 'Ücretsiz Keşif Görüşmesi' },
                   { icon: Shield, text: 'Gizlilik Garantisi' },
@@ -528,10 +439,10 @@ export default function YazilimProjenizMiVar() {
                     <span>{item.text}</span>
                   </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

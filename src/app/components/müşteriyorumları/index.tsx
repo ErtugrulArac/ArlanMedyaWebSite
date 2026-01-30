@@ -279,18 +279,16 @@ const TestimonialCard = memo(({
   const variant = colorVariants[testimonial.color as keyof typeof colorVariants]
   
   return (
-    <motion.div
-      className={`relative cursor-pointer rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 ${
+    <div
+      className={`relative cursor-pointer rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 will-change-transform ${
         isActive 
           ? `bg-gradient-to-br ${variant.gradient} ${variant.border} border-2 scale-100` 
           : 'bg-white/5 border border-white/10 scale-95 opacity-70'
-      }`}
+      } ${isActive ? 'hover:scale-[1.02]' : 'hover:scale-[0.98]'}`}
       style={{
         boxShadow: isActive ? `0 10px 30px -10px ${variant.glow}` : 'none'
       }}
       onClick={onClick}
-      whileHover={{ scale: isActive ? 1.02 : 0.98 }}
-      layout
     >
       {/* Quote Icon */}
       <div className={`absolute top-4 right-4 ${variant.quote}`}>
@@ -332,20 +330,17 @@ const TestimonialCard = memo(({
       </div>
 
       {/* Testimonial Text */}
-      <AnimatePresence mode="wait">
-        {isActive && (
-          <motion.p
-            className="text-white/70 text-sm leading-relaxed mt-4"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            &ldquo;{testimonial.text}&rdquo;
-          </motion.p>
-        )}
-      </AnimatePresence>
-    </motion.div>
+      <div
+        className={`overflow-hidden transition-[max-height,opacity,margin-top] duration-200 ease-out ${
+          isActive ? 'opacity-100 mt-4 max-h-[520px]' : 'opacity-0 mt-0 max-h-0'
+        }`}
+        aria-hidden={!isActive}
+      >
+        <p className="text-white/70 text-sm leading-relaxed">
+          &ldquo;{testimonial.text}&rdquo;
+        </p>
+      </div>
+    </div>
   )
 })
 TestimonialCard.displayName = 'TestimonialCard'
@@ -354,6 +349,7 @@ TestimonialCard.displayName = 'TestimonialCard'
 const MusteriYorumlari = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const [isInView, setIsInView] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const leftScrollRef = useRef<HTMLDivElement>(null)
   const rightScrollRef = useRef<HTMLDivElement>(null)
@@ -398,14 +394,30 @@ const MusteriYorumlari = () => {
   
   // Auto-scroll effect
   useEffect(() => {
-    if (isPaused) return
+    if (isPaused || !isInView) return
     
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length)
     }, 4000)
     
     return () => clearInterval(interval)
-  }, [isPaused])
+  }, [isPaused, isInView])
+
+  // Pause auto-advance when section is offscreen
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.15 }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
@@ -508,7 +520,6 @@ const MusteriYorumlari = () => {
                             ? 'bg-gradient-to-r from-[#38BDF8] to-cyan-400 w-8' 
                             : 'bg-white/20 w-3 group-hover:w-5 group-hover:bg-white/40'
                         }`}
-                        layout
                       />
                       <span className={`text-xs transition-all duration-300 truncate ${
                         idx === activeIndex ? 'text-white' : 'text-white/40 group-hover:text-white/60'

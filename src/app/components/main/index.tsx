@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion'
+import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 // Heavy UI components are dynamically imported for better performance
 const ServiceCard = dynamic(() => import('../ui/service-card'))
@@ -14,14 +14,9 @@ import { Sparkles, ArrowRight, Code, Palette, Globe, Zap, Database, Cloud, Shiel
 const PremiumBackground = React.memo(() => {
   // Floating tech icons for background
   const floatingIcons = [
-    { Icon: Code, x: '10%', y: '20%', delay: 0, size: 24 },
-    { Icon: Palette, x: '85%', y: '15%', delay: 1, size: 20 },
-    { Icon: Globe, x: '75%', y: '70%', delay: 2, size: 22 },
-    { Icon: Zap, x: '15%', y: '75%', delay: 0.5, size: 18 },
-    { Icon: Database, x: '90%', y: '45%', delay: 1.5, size: 20 },
-    { Icon: Cloud, x: '5%', y: '50%', delay: 2.5, size: 22 },
-    { Icon: Shield, x: '70%', y: '85%', delay: 3, size: 18 },
-    { Icon: Cpu, x: '25%', y: '90%', delay: 0.8, size: 20 },
+    { Icon: Code, x: '12%', y: '25%', delay: 0, size: 22 },
+    { Icon: Globe, x: '80%', y: '30%', delay: 1.2, size: 20 },
+    { Icon: Zap, x: '20%', y: '70%', delay: 2.4, size: 18 },
   ]
 
   return (
@@ -40,67 +35,42 @@ const PremiumBackground = React.memo(() => {
         }}
       />
 
-      {/* ========== AURORA EFFECT - CSS Animation ========== */}
+      {/* ========== AURORA EFFECT - Reduced opacity ========== */}
       <div
-        className="absolute inset-0 opacity-20 animate-aurora"
+        className="absolute inset-0 opacity-8 animate-aurora"
         style={{
-          background: 'linear-gradient(45deg, transparent 30%, rgba(56, 189, 248, 0.1) 50%, transparent 70%)',
-          backgroundSize: '200% 200%',
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-15 animate-aurora-reverse"
-        style={{
-          background: 'linear-gradient(-45deg, transparent 30%, rgba(168, 85, 247, 0.1) 50%, transparent 70%)',
+          background: 'linear-gradient(45deg, transparent 40%, rgba(56, 189, 248, 0.06) 50%, transparent 60%)',
           backgroundSize: '200% 200%',
         }}
       />
 
-      {/* ========== GLOWING ORBS - Static with CSS pulse ========== */}
-      <div
-        className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full animate-pulse-slow"
-        style={{
-          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0.04) 40%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-      />
-      <div
-        className="absolute -bottom-1/4 -right-1/4 w-[900px] h-[900px] rounded-full animate-pulse-slow"
-        style={{
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.10) 0%, rgba(168, 85, 247, 0.03) 40%, transparent 70%)',
-          filter: 'blur(80px)',
-          animationDelay: '2s',
-        }}
-      />
+      {/* ========== GLOWING ORBS - Single orb with reduced blur ========== */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full animate-pulse-slow"
         style={{
-          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, transparent 60%)',
-          filter: 'blur(50px)',
-          animationDelay: '4s',
+          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(56, 189, 248, 0.02) 50%, transparent 70%)',
+          filter: 'blur(40px)',
         }}
       />
       
-      {/* ========== EXPANDING CIRCULAR RINGS - Optimized ========== */}
+      {/* ========== EXPANDING CIRCULAR RINGS - Reduced to 2 ========== */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute rounded-full ${i % 2 === 0 ? 'animate-spin-slow' : 'animate-spin-reverse'}`}
-            style={{
-              width: `${(i + 1) * 200}px`,
-              height: `${(i + 1) * 200}px`,
-              border: `1px solid ${i % 3 === 0 ? 'rgba(56, 189, 248, 0.08)' : i % 3 === 1 ? 'rgba(168, 85, 247, 0.06)' : 'rgba(16, 185, 129, 0.05)'}`,
-              opacity: 0.3,
-            }}
-          />
-        ))}
-        
-        {/* Central Glow - Static */}
         <div
-          className="absolute w-[400px] h-[400px] rounded-full animate-pulse-slow"
+          className="absolute rounded-full animate-spin-slow"
           style={{
-            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(168, 85, 247, 0.08) 40%, transparent 70%)',
+            width: '400px',
+            height: '400px',
+            border: '1px solid rgba(56, 189, 248, 0.06)',
+            opacity: 0.25,
+          }}
+        />
+        <div
+          className="absolute rounded-full animate-spin-reverse"
+          style={{
+            width: '600px',
+            height: '600px',
+            border: '1px solid rgba(168, 85, 247, 0.04)',
+            opacity: 0.2,
           }}
         />
       </div>
@@ -129,26 +99,11 @@ const PremiumBackground = React.memo(() => {
         }}
       />
 
-      {/* ========== LIGHT BEAMS - CSS Animation ========== */}
+      {/* ========== LIGHT BEAM - Single vertical ========== */}
       <div
         className="absolute top-0 left-1/4 w-px h-full light-beam"
         style={{
-          background: 'linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.12), transparent)',
-        }}
-      />
-      <div
-        className="absolute top-0 right-1/3 w-px h-full light-beam"
-        style={{
-          background: 'linear-gradient(to bottom, transparent, rgba(168, 85, 247, 0.10), transparent)',
-          animationDelay: '3s',
-        }}
-      />
-
-      {/* Horizontal Light Beam */}
-      <div
-        className="absolute left-0 top-1/4 h-px w-full light-beam-horizontal"
-        style={{
-          background: 'linear-gradient(to right, transparent, rgba(56, 189, 248, 0.10), transparent)',
+          background: 'linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.08), transparent)',
         }}
       />
 
@@ -167,94 +122,22 @@ const PremiumBackground = React.memo(() => {
         </div>
       ))}
       
-      {/* ========== FLOATING PARTICLES - Optimized ========== */}
-      {[...Array(12)].map((_, i) => (
-        <div
-          key={`star-${i}`}
-          className="absolute rounded-full animate-pulse-slow"
-          style={{
-            left: `${8 + i * 8}%`,
-            top: `${10 + (i % 4) * 22}%`,
-            width: `${3 + (i % 3)}px`,
-            height: `${3 + (i % 3)}px`,
-            background: i % 4 === 0 
-              ? 'rgba(56, 189, 248, 0.6)' 
-              : i % 4 === 1 
-                ? 'rgba(168, 85, 247, 0.5)' 
-                : i % 4 === 2
-                  ? 'rgba(16, 185, 129, 0.4)'
-                  : 'rgba(255, 255, 255, 0.3)',
-            animationDelay: `${i * 0.4}s`,
-          }}
-        />
-      ))}
+      {/* ========== FLOATING PARTICLES - Reduced to 3 ========== */}
+      <div className="absolute rounded-full animate-pulse-slow" style={{ left: '15%', top: '20%', width: '3px', height: '3px', background: 'rgba(56, 189, 248, 0.5)' }} />
+      <div className="absolute rounded-full animate-pulse-slow" style={{ left: '70%', top: '30%', width: '4px', height: '4px', background: 'rgba(168, 85, 247, 0.4)', animationDelay: '1s' }} />
+      <div className="absolute rounded-full animate-pulse-slow" style={{ left: '50%', top: '60%', width: '3px', height: '3px', background: 'rgba(16, 185, 129, 0.3)', animationDelay: '2s' }} />
 
-      {/* ========== SHOOTING STAR - Single CSS ========== */}
-      <div className="shooting-star absolute w-1 h-1 bg-white rounded-full" />
-
-      {/* ========== CORNER DECORATIONS ========== */}
-      {/* Top Left */}
-      <div className="absolute top-0 left-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-[#38BDF8]/40 to-transparent" />
-        <div className="absolute top-0 left-0 h-full w-px bg-gradient-to-b from-[#38BDF8]/40 to-transparent" />
-        <div
-          className="absolute top-4 left-4 w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse-slow"
-        />
+      {/* ========== CORNER DECORATIONS - Minimal ========== */}
+      <div className="absolute top-0 left-0 w-40 h-40">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-[#38BDF8]/25 to-transparent" />
+        <div className="absolute top-0 left-0 h-full w-px bg-gradient-to-b from-[#38BDF8]/25 to-transparent" />
       </div>
-      
-      {/* Top Right */}
-      <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64">
-        <div className="absolute top-0 right-0 w-full h-px bg-gradient-to-l from-[#A855F7]/40 to-transparent" />
-        <div className="absolute top-0 right-0 h-full w-px bg-gradient-to-b from-[#A855F7]/40 to-transparent" />
-        <div
-          className="absolute top-4 right-4 w-2 h-2 rounded-full bg-[#A855F7] animate-pulse-slow"
-          style={{ animationDelay: '0.5s' }}
-        />
-      </div>
-      
-      {/* Bottom Left */}
-      <div className="absolute bottom-0 left-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64">
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-[#10B981]/40 to-transparent" />
-        <div className="absolute bottom-0 left-0 h-full w-px bg-gradient-to-t from-[#10B981]/40 to-transparent" />
-      </div>
-      
-      {/* Bottom Right */}
-      <div className="absolute bottom-0 right-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64">
-        <div className="absolute bottom-0 right-0 w-full h-px bg-gradient-to-l from-[#F59E0B]/40 to-transparent" />
-        <div className="absolute bottom-0 right-0 h-full w-px bg-gradient-to-t from-[#F59E0B]/40 to-transparent" />
+      <div className="absolute bottom-0 right-0 w-40 h-40">
+        <div className="absolute bottom-0 right-0 w-full h-px bg-gradient-to-l from-[#A855F7]/20 to-transparent" />
+        <div className="absolute bottom-0 right-0 h-full w-px bg-gradient-to-t from-[#A855F7]/20 to-transparent" />
       </div>
 
-      {/* ========== FLOATING PLUS SIGNS - CSS Animation ========== */}
-      <div
-        className="absolute text-[#38BDF8]/15 text-4xl sm:text-5xl font-thin animate-spin-slow"
-        style={{ top: '15%', left: '20%' }}
-      >
-        +
-      </div>
-      <div
-        className="absolute text-[#A855F7]/12 text-3xl sm:text-4xl font-thin animate-spin-reverse"
-        style={{ top: '60%', right: '15%' }}
-      >
-        +
-      </div>
-      <div
-        className="absolute text-[#10B981]/10 text-2xl sm:text-3xl font-thin animate-spin-slow"
-        style={{ bottom: '25%', left: '10%' }}
-      >
-        +
-      </div>
 
-      {/* ========== DOT PATTERNS - Static ========== */}
-      <div className="absolute top-20 right-20 hidden sm:grid grid-cols-4 gap-2 opacity-15">
-        {[...Array(16)].map((_, i) => (
-          <div key={i} className="w-1 h-1 rounded-full bg-[#38BDF8]" />
-        ))}
-      </div>
-      <div className="absolute bottom-20 left-20 hidden sm:grid grid-cols-4 gap-2 opacity-15">
-        {[...Array(16)].map((_, i) => (
-          <div key={i} className="w-1 h-1 rounded-full bg-[#A855F7]" />
-        ))}
-      </div>
 
       {/* ========== ANIMATED HEX PATTERN ========== */}
       <svg className="absolute inset-0 w-full h-full opacity-[0.02]">
@@ -286,14 +169,6 @@ const Floating3DIconsBackground = React.memo(() => {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Static 3D Shapes - No animation, just visual */}
-      <svg className="absolute w-[80px] h-[80px] opacity-5 animate-spin-slow" style={{ left: '15%', top: '30%' }}>
-        <polygon points="40,5 75,75 5,75" fill="none" stroke="rgba(56, 189, 248, 0.4)" strokeWidth="1" />
-      </svg>
-      <svg className="absolute w-[70px] h-[70px] opacity-5 animate-spin-reverse" style={{ right: '15%', top: '35%' }}>
-        <circle cx="35" cy="35" r="30" fill="none" stroke="rgba(168, 85, 247, 0.4)" strokeWidth="1" />
-      </svg>
-
       {/* Static Icons with CSS float animation */}
       {icons3D.map((item, i) => (
         <div
@@ -303,79 +178,16 @@ const Floating3DIconsBackground = React.memo(() => {
             left: item.x,
             top: item.y,
             color: item.color,
-            animationDelay: `${i * 0.8}s`,
+            animationDelay: `${i * 1.2}s`,
           }}
         >
           <item.Icon size={item.size} strokeWidth={1} />
         </div>
       ))}
-
-      {/* Static connection nodes - No animation */}
-      {[
-        { x: '10%', y: '30%', color: 'rgba(56, 189, 248, 0.2)' },
-        { x: '88%', y: '25%', color: 'rgba(168, 85, 247, 0.2)' },
-        { x: '50%', y: '50%', color: 'rgba(56, 189, 248, 0.15)' },
-      ].map((node, i) => (
-        <div
-          key={`node-${i}`}
-          className="absolute w-2 h-2 rounded-full animate-pulse-slow"
-          style={{
-            left: node.x,
-            top: node.y,
-            background: node.color,
-            animationDelay: `${i * 0.5}s`,
-          }}
-        />
-      ))}
     </div>
   )
 })
 Floating3DIconsBackground.displayName = 'Floating3DIconsBackground'
-
-// Removed FloatingSphere for better performance
-
-// Simplified 3D Card Component with Tilt - Lighter version
-const Card3D = React.memo(({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
-  const ref = useRef<HTMLDivElement>(null)
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  
-  const rotateX = useTransform(y, [-100, 100], [5, -5])
-  const rotateY = useTransform(x, [-100, 100], [-5, 5])
-
-  const handleMouse = (e: React.MouseEvent) => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    x.set(e.clientX - centerX)
-    y.set(e.clientY - centerY)
-  }
-
-  const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
-      className={`relative ${className}`}
-    >
-      {children}
-    </motion.div>
-  )
-})
-Card3D.displayName = 'Card3D'
-
-// Removed GlowingRing for better performance
 
 // Simplified Static Grid Background
 const AnimatedGrid = React.memo(() => {
@@ -462,30 +274,8 @@ AnimatedCounter.displayName = 'AnimatedCounter'
 // <Image src="/path/to/image.jpg" width={400} height={300} alt="Açıklama" priority />
 
 const MainHero = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  })
-  
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   return (
-    <section ref={containerRef} className="relative overflow-hidden pt-16 lg:pt-32">
+    <section className="relative overflow-hidden pt-16 lg:pt-32">
       {/* Premium Animated Background with Rings and Icons */}
       <div className="absolute inset-0 pointer-events-none">
         <PremiumBackground />
@@ -497,10 +287,7 @@ const MainHero = () => {
       </div>
 
       {/* Main Hero Content */}
-      <motion.div 
-        className="relative z-10 min-h-screen flex items-center justify-center py-10"
-        style={{ y, opacity }}
-      >
+      <div className="relative z-10 min-h-screen flex items-center justify-center py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="text-center space-y-6 sm:space-y-8">
             
@@ -648,50 +435,41 @@ const MainHero = () => {
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Scroll Indicator */}
       <motion.div 
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
+        animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
         <div className="w-6 h-10 border-2 border-[#38BDF8]/50 rounded-full flex justify-center pt-2">
           <motion.div
             className="w-1.5 h-3 bg-[#38BDF8] rounded-full"
-            animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
+            animate={{ y: [0, 10, 0], opacity: [1, 0.3, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
         </div>
       </motion.div>
 
       {/* Services Section */}
-      <div className="relative z-10 py-12 sm:py-16 md:py-24" style={{ isolation: 'isolate' }}>
+      <div className="relative z-10 py-12 sm:py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-8 sm:mb-12"
-          >
-            <motion.h2 
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4"
               style={{color: 'var(--text-primary)'}}
             >
               <span className="bg-linear-to-r from-[#38BDF8] via-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 Yazılım & Dijital Çözümler
               </span>
-            </motion.h2>
+            </h2>
             <p className="text-xs sm:text-sm md:text-base max-w-xl mx-auto" style={{color: 'var(--text-secondary)'}}>
               Arlan Medya ile özel yazılım geliştirme, dijital yönetim ve SEO optimizasyonu
             </p>
-          </motion.div>
+          </div>
 
-          <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6"
-            style={{ contentVisibility: 'auto', contain: 'layout paint style', willChange: 'transform, opacity' }}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
             <ServiceCard
               title="Yazılım Geliştirme"
               description="React, Next.js ve Node.js ile ölçeklenebilir, yüksek performanslı web ve mobil uygulamaları geliştiriyoruz."

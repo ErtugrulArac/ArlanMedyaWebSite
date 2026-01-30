@@ -151,11 +151,13 @@ const Navbar = () => {
             onClick={handleLogoClick}
             className="flex items-center gap-2 group shrink-0 hover:opacity-80 transition-opacity"
           >
-            <img 
+            <Image 
               src="/logolar/arlanlogonav.webp" 
               alt="Arlan Medya Logo" 
+              width={48}
+              height={48}
               className="h-12 w-auto object-contain"
-              loading="eager"
+              priority
             />
           </button>
 

@@ -1,0 +1,97 @@
+﻿diff --git a/package.json b/package.json
+index e2928d7..2dfc087 100644
+--- a/package.json
++++ b/package.json
+@@ -3,7 +3,8 @@
+   "version": "0.1.0",
+   "private": true,
+   "scripts": {
+-    "dev": "next dev",
++    "dev": "next dev --webpack",
++    "dev:turbopack": "next dev --turbopack",
+     "build": "next build",
+     "start": "next start",
+     "lint": "eslint"
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+index 8cc9f80..9718b22 100644
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@ -1,9 +1,18 @@
+ 'use client'
+ 
+-import dynamic from 'next/dynamic'
+ import { useState, useEffect } from 'react'
+ import Image from 'next/image'
+ import Footer from './components/footer'
++import MainHero from './components/main'
++import KodKarti from './components/main/kodkart─▒'
++import Mockup2 from './components/mockup2'
++import NasilCalisiyoruz from './components/nas─▒l├ğal─▒┼ş─▒yoruz'
++import NedenBiz from './components/nedenbiz'
++import DestekSection from './components/destek'
++import MusteriYorumlari from './components/m├╝┼şteriyorumlar─▒'
++import YazilimProjesi from './components/yaz─▒l─▒mprojenizmivar'
++import FAQ from './components/faq'
++import Referanslar from './components/referanslar'
+ 
+ // Loading component
+ const LoadingScreen = () => (
+@@ -38,57 +47,7 @@ const LoadingScreen = () => (
+   </div>
+ )
+ 
+-// Lazy load components for better performance - only load when in viewport
+-const MainHero = dynamic(() => import("./components/main"), {
+-  loading: () => <div className="min-h-screen bg-[#050816]" />,
+-  ssr: true // Hero should load on server
+-})
+-
+-const KodKarti = dynamic(() => import("./components/main/kodkart─▒"), {
+-  loading: () => <div className="min-h-[600px]" />,
+-  ssr: false
+-})
+-
+-// These components load only when user scrolls to them
+-const Mockup2 = dynamic(() => import("./components/mockup2"), {
+-  loading: () => <div className="min-h-[600px]" />,
+-  ssr: false
+-})
+-
+-const NasilCalisiyoruz = dynamic(() => import("./components/nas─▒l├ğal─▒┼ş─▒yoruz"), {
+-  loading: () => <div className="min-h-[800px]" />,
+-  ssr: false
+-})
+-
+-const NedenBiz = dynamic(() => import("./components/nedenbiz"), {
+-  loading: () => <div className="min-h-[700px]" />,
+-  ssr: false
+-})
+-
+-const DestekSection = dynamic(() => import("./components/destek"), {
+-  loading: () => <div className="min-h-[600px]" />,
+-  ssr: false
+-})
+-
+-const MusteriYorumlari = dynamic(() => import("./components/m├╝┼şteriyorumlar─▒"), {
+-  loading: () => <div className="min-h-[800px]" />,
+-  ssr: false
+-})
+-
+-const YazilimProjesi = dynamic(() => import("./components/yaz─▒l─▒mprojenizmivar"), {
+-  loading: () => <div className="min-h-[600px]" />,
+-  ssr: false
+-})
+-
+-const FAQ = dynamic(() => import("./components/faq"), {
+-  loading: () => <div className="min-h-[600px]" />,
+-  ssr: false
+-})
+-
+-const Referanslar = dynamic(() => import("./components/referanslar"), {
+-  loading: () => <div className="min-h-[600px]" />,
+-  ssr: false
+-})
++// Components are statically imported to ensure reliable rendering
+ 
+ export default function Home() {
+   const [isLoading, setIsLoading] = useState(true)
