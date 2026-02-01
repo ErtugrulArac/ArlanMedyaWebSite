@@ -30,10 +30,15 @@ import KVKKModal from '../components/ui/kvkk-modal'
 export default function IletisimPage() {
   const reduce = useReducedMotion()
   const [isMobile, setIsMobile] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
+    
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
+      if (typeof window !== 'undefined') {
+        setIsMobile(window.innerWidth < 768)
+      }
     }
     
     checkMobile()
@@ -170,7 +175,7 @@ export default function IletisimPage() {
   )
 
   const motionIn = (delay = 0) =>
-    reduce || isMobile
+    reduce || isMobile || !isClient
       ? { initial: undefined, animate: undefined, transition: undefined }
       : {
           initial: { opacity: 0, y: 16 },
@@ -180,8 +185,13 @@ export default function IletisimPage() {
 
   return (
     <>
-      <LazyMotion features={domAnimation}>
-        <div className="min-h-screen pt-28 pb-12 sm:pt-36 sm:pb-20 relative overflow-hidden">
+      {!isClient ? (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-white">Yükleniyor...</div>
+        </div>
+      ) : (
+        <LazyMotion features={domAnimation}>
+          <div className="min-h-screen pt-28 pb-12 sm:pt-36 sm:pb-20 relative overflow-hidden">
           {/* Minimal Background */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#38BDF8] rounded-full blur-[200px] opacity-[0.04]" />
@@ -664,7 +674,8 @@ export default function IletisimPage() {
             background-size: 1.25rem;
           }
         `}</style>
-      </LazyMotion>
+        </LazyMotion>
+      )}
 
       <Footer />
     </>

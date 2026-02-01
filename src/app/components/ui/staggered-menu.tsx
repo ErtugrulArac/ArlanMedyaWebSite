@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useCallback, useLayoutEffect, useRef, useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { gsap } from 'gsap';
 
 export interface StaggeredMenuItem {
@@ -51,6 +52,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   onMenuOpen,
   onMenuClose
 }: StaggeredMenuProps) => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
 
@@ -427,7 +429,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           aria-label="Main navigation header"
         >
           {/* Logo */}
-          <a href="/" className="sm-logo flex items-center gap-3 select-none pointer-events-auto group" aria-label="Logo">
+          <button 
+            onClick={() => {
+              closeMenu()
+              setTimeout(() => router.push('/'), 100)
+            }}
+            className="sm-logo flex items-center gap-3 select-none pointer-events-auto group" 
+            aria-label="Logo"
+          >
             {logoUrl ? (
               <img
                 src={logoUrl}
@@ -448,7 +457,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 <span className="hidden sm:block font-bold text-sm text-white">ARLAN</span>
               </>
             )}
-          </a>
+          </button>
 
           {/* Toggle Button */}
           <button
@@ -525,11 +534,10 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                       data-index={idx + 1}
                       onClick={(e) => {
                         e.preventDefault()
-                        window.dispatchEvent(new CustomEvent('navigation-start'))
                         closeMenu()
                         setTimeout(() => {
-                          window.location.href = it.link
-                        }, 50)
+                          router.push(it.link)
+                        }, 100)
                       }}
                     >
                       <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
