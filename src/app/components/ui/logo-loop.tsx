@@ -375,6 +375,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
               'focus-visible:outline focus-visible:outline-current focus-visible:outline-offset-2'
             )}
             href={(item as any).href}
+            title={(item as any).title || (item as any).alt || itemAriaLabel}
             aria-label={itemAriaLabel || 'logo link'}
             target="_blank"
             rel="noreferrer noopener"

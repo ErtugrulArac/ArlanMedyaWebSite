@@ -105,6 +105,7 @@ export default function Referanslar() {
         <div className="flex justify-center mt-12 sm:mt-16">
           <a
             href="/iletisim"
+            title="Siz de Katılın"
             className="group relative inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 bg-gradient-to-r from-[#38BDF8] to-[#6366F1] rounded-full text-white font-medium text-sm sm:text-base overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(56,189,248,0.3)]"
           >
             {/* Shine effect */}

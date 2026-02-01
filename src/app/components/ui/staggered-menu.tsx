@@ -234,7 +234,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
     closeTweenRef.current = gsap.to(all, {
       xPercent: offscreen,
-      duration: 0.32,
+      duration: 0.25,
       ease: 'power3.in',
       overwrite: 'auto',
       onComplete: () => {
@@ -432,7 +432,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           <button 
             onClick={() => {
               closeMenu()
-              setTimeout(() => router.push('/'), 100)
+              setTimeout(() => router.push('/'), 350)
             }}
             className="sm-logo flex items-center gap-3 select-none pointer-events-auto group" 
             aria-label="Logo"
@@ -530,14 +530,32 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                     <a
                       className="sm-panel-item relative font-semibold text-[2.5rem] sm:text-[3.5rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em] poppins-semibold"
                       href={it.link}
+                      title={it.label}
                       aria-label={it.ariaLabel}
                       data-index={idx + 1}
                       onClick={(e) => {
                         e.preventDefault()
-                        closeMenu()
-                        setTimeout(() => {
-                          router.push(it.link)
-                        }, 100)
+                        
+                        // Hash linkleri için scroll işlemi
+                        if (it.link.includes('#')) {
+                          closeMenu()
+                          setTimeout(() => {
+                            const [path, hash] = it.link.split('#')
+                            if (path && window.location.pathname !== path) {
+                              router.push(it.link)
+                            } else if (hash) {
+                              const element = document.getElementById(hash)
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth' })
+                              }
+                            }
+                          }, 350)
+                        } else {
+                          closeMenu()
+                          setTimeout(() => {
+                            router.push(it.link)
+                          }, 350)
+                        }
                       }}
                     >
                       <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
@@ -568,6 +586,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                     <li key={s.label + i} className="sm-socials-item">
                       <a
                         href={s.link}
+                        title={s.label}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="sm-socials-link text-[1.1rem] font-medium no-underline relative inline-block py-[2px] transition-[color,opacity] duration-300 ease-linear"

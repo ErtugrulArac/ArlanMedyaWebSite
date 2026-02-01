@@ -78,6 +78,7 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row flex-wrap gap-4">
               <Link 
                 href="/iletisim"
+                title="Ücretsiz Danışmanlık"
                 className="group relative inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-linear-to-r from-[#1E40AF] to-[#3B82F6] text-white font-bold text-base sm:text-lg overflow-hidden transition-transform hover:scale-105"
               >
                 <span className="relative z-10">Ücretsiz Danışmanlık</span>
@@ -86,6 +87,7 @@ const HeroSection = () => {
               </Link>
               <Link 
                 href="/hizmetlerimiz"
+                title="Portföyü Gör"
                 className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl border-2 border-white/20 text-white font-semibold text-base sm:text-lg hover:bg-white/10 hover:border-white/40 transition-all"
               >
                 <span>Portföyü Gör</span>
@@ -507,6 +509,7 @@ const CTASection = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16">
             <Link 
               href="/iletisim"
+              title="Hemen Başlayalım"
               className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-xl bg-linear-to-r from-[#1E40AF] to-[#3B82F6] text-white font-semibold text-base transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[#1E40AF]/20"
             >
               <span className="relative z-10">Hemen Başlayalım</span>
@@ -516,6 +519,7 @@ const CTASection = () => {
             
             <a 
               href="tel:+905551234567"
+              title="Hemen Ara"
               className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-xl border border-white/20 text-white/80 hover:text-white font-medium text-base transition-all duration-300 hover:bg-white/5 hover:border-white/30"
             >
               <span className="text-lg">📞</span>

@@ -479,6 +479,7 @@ const KodKarti = () => {
             >
               <a
                 href="/iletisim"
+                title="Ücretsiz Danışmanlık"
                 className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white overflow-hidden w-full sm:w-auto justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
                 style={{
                   background: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)',
@@ -492,6 +493,7 @@ const KodKarti = () => {
               
               <a
                 href="tel:+905307464899"
+                title="Bizi Arayın"
                 className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white border border-white/20 w-full sm:w-auto justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
                 style={{ background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(10px)', textDecoration: 'none' }}
               >

@@ -124,6 +124,7 @@ export default function FAQ() {
         <div className="text-center mt-12">
           <a
             href="https://wa.me/905307464899?text=Merhaba%2C%20sorusum%20var"
+            title="WhatsApp ile İletişim"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-white overflow-hidden transition-colors duration-200 bg-gradient-to-r from-[#38BDF8] to-[#A855F7] hover:from-[#38BDF8]/90 hover:to-[#A855F7]/90"

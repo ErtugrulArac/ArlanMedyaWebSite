@@ -170,6 +170,7 @@ const Navbar = () => {
               <button
                 key={idx}
                 data-nav-link={item.link}
+                title={item.label}
                 onClick={() => handleNavigation(item.link)}
                 className="relative px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors group poppins-medium"
               >
@@ -185,6 +186,7 @@ const Navbar = () => {
           {/* CTA Button */}
           <motion.a
             href="/iletisim"
+            title="Teklif Al"
             className="relative inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] rounded-lg text-[#050816] font-semibold text-sm overflow-hidden group shrink-0 poppins-semibold"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

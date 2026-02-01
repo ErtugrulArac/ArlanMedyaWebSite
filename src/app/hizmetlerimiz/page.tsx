@@ -25,6 +25,31 @@ import {
 } from 'lucide-react'
 import Footer from '../components/footer'
 
+// URL hash scroll handler
+const useHashScroll = () => {
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash
+      if (hash) {
+        // Biraz bekle ki sayfa tam yüklensin
+        setTimeout(() => {
+          const element = document.getElementById(hash.substring(1))
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        }, 100)
+      }
+    }
+    
+    // Sayfa yüklendiğinde
+    scrollToHash()
+    
+    // Hash değiştiğinde
+    window.addEventListener('hashchange', scrollToHash)
+    return () => window.removeEventListener('hashchange', scrollToHash)
+  }, [])
+}
+
 // ============================================
 // HERO SECTION - Cinematic Entry
 // ============================================
@@ -99,6 +124,7 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4">
               <a
                 href="#hizmetler"
+                title="Hizmetleri Keşfet"
                 className="group relative flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-white overflow-hidden w-full sm:w-auto"
               >
                 {/* Button Background */}
@@ -117,6 +143,7 @@ const HeroSection = () => {
               </a>
               <a
                 href="/iletisim"
+                title="Ücretsiz Görüşme"
                 className="group flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-white hover:bg-white/10 transition-all w-full sm:w-auto"
                 style={{
                   background: 'rgba(255, 255, 255, 0.03)',
@@ -804,6 +831,7 @@ const ServicesSection = () => {
 
                 <a 
                   href="/iletisim"
+                  title="Ücretsiz Teklif Al"
                   className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-white transition-transform hover:scale-105"
                   style={{ background: `linear-gradient(135deg, ${services[activeService].color}, ${services[activeService].color}CC)` }}
                 >
@@ -1042,6 +1070,7 @@ const CTASection = () => {
               {/* Primary CTA Button */}
               <a
                 href="/iletisim"
+                title="Ücretsiz Görüşme"
                 className="group relative inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base text-white overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-xl w-full sm:w-auto"
                 style={{
                   background: 'linear-gradient(135deg, #22C55E, #3B82F6, #8B5CF6)',
@@ -1072,6 +1101,7 @@ const CTASection = () => {
               {/* WhatsApp Button */}
               <a
                 href="https://wa.me/905307464899?text=Merhaba%20Arlan%20Medya%2C%20dijital%20hizmetleriniz%20hakk%C4%B1nda%20%C3%BCcretsiz%20dan%C4%B1%C5%9Fmanl%C4%B1k%20almak%20istiyorum."
+                title="WhatsApp ile İletişim"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-medium text-sm sm:text-base text-white transition-all duration-500 hover:scale-105 border border-white/20 w-full sm:w-auto"
@@ -1121,6 +1151,9 @@ const CTASection = () => {
 // MAIN PAGE
 // ============================================
 export default function HizmetlerimizPage() {
+  // URL hash scroll handler
+  useHashScroll()
+  
   return (
     <>
       <main className="relative z-10 min-h-screen bg-[#050816]">

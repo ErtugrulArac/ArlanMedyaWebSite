@@ -11,9 +11,10 @@ interface ServiceCardProps {
   gradient: string
   delay?: number
   onClick?: () => void
+  href?: string
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, icon, gradient, delay = 0, onClick }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, icon, gradient, delay = 0, onClick, href }) => {
   const cardRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -52,6 +53,20 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, icon,
         onClick={onClick}
         className="relative group cursor-pointer"
       >
+        {href ? (
+          <a href={href} className="block no-underline">
+            <CardContent />
+          </a>
+        ) : (
+          <CardContent />
+        )}
+      </div>
+    </motion.div>
+  )
+
+  function CardContent() {
+    return (
+      <>
         {/* Glow Effect - Reduced blur */}
         <div
           className={`absolute -inset-0.5 rounded-2xl bg-linear-to-r ${gradient} blur-lg`}
@@ -63,7 +78,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, icon,
 
         {/* Card */}
         <div
-          className="relative h-auto min-h-70 sm:min-h-75 p-5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border border-white/10 bg-[#0F172A]/80 backdrop-blur-md overflow-hidden transition-transform duration-300"
+          className="relative h-auto min-h-[280px] sm:min-h-[300px] p-5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border border-white/10 bg-[#0F172A]/80 backdrop-blur-md overflow-hidden transition-transform duration-300"
           style={{
             transform: isActive ? 'translateY(-4px)' : 'translateY(0)',
           }}
@@ -123,9 +138,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, icon,
           <div className={`absolute top-0 right-0 w-24 h-24 bg-linear-to-br ${gradient} opacity-15 blur-lg`} />
           <div className={`absolute bottom-0 left-0 w-20 h-20 bg-linear-to-tr ${gradient} opacity-8 blur-md`} />
         </div>
-      </div>
-    </motion.div>
-  )
+      </>
+    )
+  }
 }
 
 export default React.memo(ServiceCard)

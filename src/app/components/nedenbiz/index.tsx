@@ -391,6 +391,7 @@ const NedenBiz = () => {
         <div className="mt-16 sm:mt-20 text-center animate-fade-in" style={{ animationDelay: '0.3s' }}>
           <a
             href="/iletisim"
+            title="Birlikte Çalışalım"
             className="group inline-flex items-center gap-3 text-lg font-medium text-[#38BDF8] hover:text-white transition-all duration-300 hover:translate-x-2"
           >
             <span>Birlikte çalışalım</span>

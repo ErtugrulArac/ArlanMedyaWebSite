@@ -53,6 +53,7 @@ export default function Footer() {
             <a
               key={i}
               href={social.href}
+              title={social.label}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.label}
@@ -69,6 +70,7 @@ export default function Footer() {
             <Link
               key={i}
               href={link.href}
+              title={link.label}
               className="text-white/50 text-xs sm:text-sm hover:text-white transition-colors duration-200"
             >
               {link.label}
@@ -86,10 +88,10 @@ export default function Footer() {
           </p>
           
           <div className="flex items-center gap-4">
-            <a href="#" className="text-white/40 hover:text-white transition-colors duration-200">
+            <a href="#" title="Kullanım Şartları" className="text-white/40 hover:text-white transition-colors duration-200">
               Kullanım Şartları
             </a>
-            <a href="#" className="text-white/40 hover:text-white transition-colors duration-200">
+            <a href="#" title="Gizlilik Politikası" className="text-white/40 hover:text-white transition-colors duration-200">
               Gizlilik Politikası
             </a>
           </div>

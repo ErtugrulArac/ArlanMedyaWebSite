@@ -412,6 +412,7 @@ const DestekSection = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
             <motion.a
               href="tel:+905307464899"
+              title="Bizi Arayın"
               className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs sm:text-sm hover:bg-white/10 transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -421,6 +422,7 @@ const DestekSection = () => {
             </motion.a>
             <motion.a
               href="mailto:destek@arlanmedya.com"
+              title="Email Gönder"
               className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs sm:text-sm hover:bg-white/10 transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

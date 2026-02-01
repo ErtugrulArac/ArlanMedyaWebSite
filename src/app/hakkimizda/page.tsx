@@ -938,6 +938,7 @@ const CTASection = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="/iletisim"
+              title="İletişime Geç"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#38BDF8] text-[#050816] font-semibold hover:bg-[#38BDF8]/90 transition-colors"
             >
               <span>İletişime Geç</span>
@@ -946,6 +947,7 @@ const CTASection = () => {
 
             <a
               href="https://wa.me/905307464899?text=Merhaba%20Arlan%20Medya%2C%20hizmetleriniz%20hakk%C4%B1nda%20detayl%C4%B1%20bilgi%20almak%20istiyorum."
+              title="WhatsApp ile İletişim"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/20 text-white hover:bg-white/5 transition-colors"

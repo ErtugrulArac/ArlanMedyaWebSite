@@ -224,6 +224,7 @@ export default function IletisimPage() {
                   <div className="space-y-3">
                     <a
                       href="mailto:info@arlanmedya.com"
+                      title="E-posta Gönder"
                       className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.05] transition-all group"
                     >
                       <div className="w-10 h-10 rounded-lg bg-[#38BDF8]/10 flex items-center justify-center">
@@ -238,6 +239,7 @@ export default function IletisimPage() {
 
                     <a
                       href="tel:+905307464899"
+                      title="Bizi Arayın"
                       className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.05] transition-all group"
                     >
                       <div className="w-10 h-10 rounded-lg bg-[#A855F7]/10 flex items-center justify-center">
@@ -297,18 +299,18 @@ export default function IletisimPage() {
                   <span className="text-white/50 text-sm">Takip edin</span>
                   <div className="flex gap-2">
                     {[
-                      { icon: SiInstagram, href: 'https://instagram.com/arlanmedya', color: '#E1306C' },
-                      { icon: SiX, href: 'https://twitter.com/arlanmedya', color: '#000000' },
-                      { icon: SiLinkedin, href: 'https://linkedin.com/company/arlanmedya', color: '#0077B5' },
-                      { icon: SiGoogle, href: 'https://www.google.com/search?q=Arlan+Medya', color: '#4285F4' },
+                      { icon: SiInstagram, href: 'https://instagram.com/arlanmedya', color: '#E1306C', label: 'Instagram' },
+                      { icon: SiX, href: 'https://twitter.com/arlanmedya', color: '#000000', label: 'Twitter' },
+                      { icon: SiLinkedin, href: 'https://linkedin.com/company/arlanmedya', color: '#0077B5', label: 'LinkedIn' },
+                      { icon: SiGoogle, href: 'https://www.google.com/search?q=Arlan+Medya', color: '#4285F4', label: 'Google İşletme Profilimiz' },
                     ].map((s, i) => (
                       <a
                         key={i}
                         href={s.href}
+                        title={s.label}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-8 h-8 rounded-lg bg-white/[0.05] hover:bg-[#38BDF8]/20 flex items-center justify-center transition-colors group"
-                        title={s.icon === SiGoogle ? 'Google İşletme Profilimiz' : undefined}
                       >
                         <s.icon className="w-3.5 h-3.5 text-white/50 group-hover:text-[#38BDF8]" />
                       </a>
@@ -319,6 +321,7 @@ export default function IletisimPage() {
                 {/* WhatsApp CTA */}
                 <a
                   href="https://wa.me/905307464899"
+                  title="WhatsApp ile İletişim"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-4 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 hover:bg-[#25D366]/15 transition-colors group"
