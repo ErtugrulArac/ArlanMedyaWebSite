@@ -166,11 +166,7 @@ h1, h2 {
   }
   
   /* Blur effect'leri küçült */
-  .blur-\\[40px\\],
-  .blur-\\[50px\\],
-  .blur-\\[60px\\],
-  .blur-\\[100px\\],
-  .blur-\\[150px\\] {
+  [class*="blur-"] {
     filter: blur(20px) !important;
   }
 
