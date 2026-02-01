@@ -165,11 +165,6 @@ h1, h2 {
     transform: none !important;
   }
   
-  /* Blur effect'leri küçült */
-  [class*="blur-"] {
-    filter: blur(20px) !important;
-  }
-
   /* Footer effects için mobile optimizasyonu */
   .footer-logo {
     filter: none !important;
