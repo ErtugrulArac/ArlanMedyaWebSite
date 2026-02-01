@@ -304,9 +304,9 @@ const MainHero = () => {
                 <span className="text-[#38BDF8]">
                   <Sparkles size={16} />
                 </span>
-                <span className="text-xs sm:text-sm font-medium tracking-wider uppercase text-white/90">
+                <h1 className="text-xs sm:text-sm font-medium tracking-wider uppercase text-white/90">
                   Arlan Medya - Yazılım & Dijital Yönetim
-                </span>
+                </h1>
               </div>
             </motion.div>
 

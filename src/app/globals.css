@@ -169,8 +169,21 @@ h1, h2 {
   .blur-\\[40px\\],
   .blur-\\[50px\\],
   .blur-\\[60px\\],
-  .blur-\\[100px\\] {
+  .blur-\\[100px\\],
+  .blur-\\[150px\\] {
     filter: blur(20px) !important;
+  }
+
+  /* Footer effects için mobile optimizasyonu */
+  .footer-logo {
+    filter: none !important;
+  }
+}
+
+/* Desktop'ta footer logo glow */
+@media (min-width: 769px) {
+  .footer-logo {
+    filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.15));
   }
 }
 

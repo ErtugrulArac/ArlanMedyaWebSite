@@ -577,7 +577,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
             {displaySocials && socialItems && socialItems.length > 0 && (
               <div className="sm-socials mt-auto pt-8 flex flex-col gap-3" aria-label="Sosyal medya linkleri">
-                <h3 className="sm-socials-title m-0 text-base font-medium text-[#38BDF8]">Sosyal Medya</h3>
+                <h4 className="sm-socials-title m-0 text-base font-medium text-[#38BDF8]">Sosyal Medya</h4>
                 <ul
                   className="sm-socials-list list-none m-0 p-0 flex flex-row items-center gap-4 flex-wrap"
                   role="list"
@@ -588,7 +588,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                         href={s.link}
                         title={s.label}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener noreferrer nofollow"
                         className="sm-socials-link text-[1.1rem] font-medium no-underline relative inline-block py-[2px] transition-[color,opacity] duration-300 ease-linear"
                       >
                         {s.label}

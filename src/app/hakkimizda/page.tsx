@@ -17,7 +17,8 @@ import {
   Rocket,
   Users,
   Zap,
-  CheckCircle2
+  CheckCircle2,
+  Phone
 } from 'lucide-react'
 import Footer from '../components/footer'
 
@@ -895,68 +896,121 @@ const TechSection = () => {
 // CTA SECTION
 // ============================================
 const CTASection = () => {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true)
-      },
-      { threshold: 0.2 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section ref={sectionRef} className="relative py-24 sm:py-32">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+    <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
+      {/* Premium Background Gradients */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-gray-900 to-black opacity-90" />
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-linear-to-br from-emerald-400/15 to-blue-500/10 rounded-full blur-[80px] opacity-60 animate-pulse-glow" />
+        <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-linear-to-br from-violet-500/12 to-purple-400/8 rounded-full blur-[60px] opacity-50 animate-float" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-linear-to-r from-cyan-400/8 via-transparent to-indigo-400/6 rounded-full blur-[100px] opacity-30" />
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `linear-gradient(rgba(34, 197, 94, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 197, 94, 0.1) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }} />
+      </div>
+      
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl">
+          {/* Card Background with Premium Glass Effect */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-linear-to-br from-gray-800/40 via-slate-800/30 to-gray-900/50" />
+            <div className="absolute inset-0 bg-linear-to-tr from-emerald-500/8 via-transparent to-blue-500/5" />
+            <div className="absolute inset-0 backdrop-blur-xl border border-white/10" style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.01) 100%)'
+            }} />
+          </div>
           
-          {/* Logo */}
-          <div className="mb-8">
-            <Image
-              src="/logolar/arlanlogonav.webp"
-              alt="Arlan Medya"
-              width={140}
-              height={46}
-              className="mx-auto opacity-60"
-            />
+          {/* Inner Glow Effects */}
+          <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-emerald-400/50 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-blue-400/40 to-transparent" />
+          <div className="absolute top-0 left-0 w-px h-full bg-linear-to-b from-transparent via-emerald-400/30 to-transparent" />
+          <div className="absolute top-0 right-0 w-px h-full bg-linear-to-b from-transparent via-blue-400/30 to-transparent" />
+          
+          {/* Floating Orbs */}
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-12 sm:w-16 h-12 sm:h-16 rounded-full bg-linear-to-br from-emerald-400/20 to-blue-500/15 blur-xl animate-float" />
+          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-linear-to-tl from-violet-400/15 to-purple-500/12 blur-xl animate-float-reverse" />
+          <div className="absolute top-1/3 right-1/4 w-8 h-8 rounded-full bg-linear-to-r from-cyan-400/10 to-indigo-400/8 blur-lg animate-pulse-glow" />
+          
+          {/* Content */}
+          <div className="relative z-10 text-center px-4 sm:px-8 md:px-12 py-6 sm:py-10 md:py-12 lg:py-16">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-4 sm:mb-6" style={{
+              background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(59, 130, 246, 0.1))',
+              border: '1px solid rgba(34, 197, 94, 0.2)'
+            }}>
+              <div className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
+              </div>
+              <span className="text-emerald-300 text-xs font-medium">24/7 Destek • Ücretsiz Danışmanlık</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 leading-[1.1]">
+              Projenizi Birlikte
+              <br />
+              <span className="relative inline-block">
+                <span className="bg-linear-to-r from-emerald-400 via-blue-500 to-violet-400 bg-clip-text text-transparent">
+                  Gerçekleştirelim
+                </span>
+                <div className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-linear-to-r from-emerald-400/50 via-blue-500/50 to-violet-400/50 rounded-full" />
+              </span>
+            </h2>
+            
+            <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-xl mx-auto mb-6 sm:mb-8 leading-relaxed">
+              Fikirlerinizi dinleyelim, hayallerinizdeki dijital çözümü birlikte tasarlayalım.
+              <br className="hidden sm:block" />
+              <span className="text-emerald-400 font-medium">Ücretsiz keşif görüşmesi</span> ile başlayın.
+            </p>
+
+            {/* Enhanced Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3">
+              {/* Primary CTA Button */}
+              <a
+                href="/iletisim"
+                title="Ücretsiz Görüşme"
+                className="group relative inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base text-white overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-xl w-full sm:w-auto"
+                style={{
+                  background: 'linear-gradient(135deg, #22C55E, #3B82F6, #8B5CF6)',
+                  backgroundSize: '200% 200%'
+                }}
+              >
+                {/* Shimmer Effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/25 to-transparent animate-shimmer" />
+                </div>
+                
+                {/* Glow Effect */}
+                <div className="absolute inset-0 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{
+                  background: 'linear-gradient(135deg, #22C55E, #3B82F6, #8B5CF6)',
+                  filter: 'blur(15px)',
+                  transform: 'scale(1.05)',
+                  zIndex: -1
+                }} />
+                
+                <Phone className="relative z-10 w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                <span className="relative z-10">Ücretsiz Görüşme</span>
+                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </a>
+
+              {/* Secondary CTA Button */}
+              <a
+                href="https://wa.me/905307464899?text=Merhaba%20Arlan%20Medya%2C%20hizmetleriniz%20hakk%C4%B1nda%20detayl%C4%B1%20bilgi%20almak%20istiyorum."
+                title="WhatsApp ile İletişim"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base text-white border border-white/20 hover:border-emerald-400/30 transition-all duration-300 hover:bg-white/5 w-full sm:w-auto"
+              >
+                <div className="relative z-10 w-4 h-4 rounded-full bg-linear-to-br from-green-400 to-green-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <CheckCircle2 className="w-2.5 h-2.5 text-white" />
+                </div>
+                <span className="relative z-10">WhatsApp</span>
+                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </a>
+            </div>
           </div>
-
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 ibm-plex-serif-bold">
-            Projenizi konuşalım mı?
-          </h2>
-
-          <p className="text-white/50 text-lg mb-10 max-w-xl mx-auto">
-            Aklınızda bir proje mi var? Bir kahve içerken konuşalım. 
-            İlk görüşme her zaman ücretsiz.
-          </p>
-
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="/iletisim"
-              title="İletişime Geç"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#38BDF8] text-[#050816] font-semibold hover:bg-[#38BDF8]/90 transition-colors"
-            >
-              <span>İletişime Geç</span>
-              <ArrowRight className="w-5 h-5" />
-            </a>
-
-            <a
-              href="https://wa.me/905307464899?text=Merhaba%20Arlan%20Medya%2C%20hizmetleriniz%20hakk%C4%B1nda%20detayl%C4%B1%20bilgi%20almak%20istiyorum."
-              title="WhatsApp ile İletişim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/20 text-white hover:bg-white/5 transition-colors"
-            >
-              <MessageCircle className="w-5 h-5" />
-              <span>WhatsApp</span>
-            </a>
-          </div>
-
         </div>
       </div>
     </section>
@@ -969,10 +1023,13 @@ const CTASection = () => {
 export default function HakkimizdaPage() {
   return (
     <>
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <GlobalBackground />
-      </div>
-      <main className="relative z-10 min-h-screen bg-[#050816]/70">
+      <main className="relative z-10 min-h-screen bg-[#050816]">
+        {/* Global Grid Pattern - Diğer sayfalarla aynı */}
+        <div className="fixed inset-0 z-0 pointer-events-none" style={{
+          backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.02) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px',
+        }} />
+        
         <HeroSection />
         <FounderSection />
         <MissionVisionSection />

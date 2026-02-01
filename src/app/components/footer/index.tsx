@@ -18,24 +18,19 @@ export default function Footer() {
 
   const socialLinks = [
     { href: 'https://instagram.com/arlanmedya', label: 'Instagram', Icon: SiInstagram },
-    { href: 'https://linkedin.com/company/arlanmedya', label: 'LinkedIn', Icon: SiLinkedin },
+    { href: 'https://www.linkedin.com/company/arlan-medya/', label: 'LinkedIn', Icon: SiLinkedin },
     { href: 'https://twitter.com/arlanmedya', label: 'X', Icon: SiX },
   ]
 
   return (
     <footer className="relative overflow-hidden py-16 sm:py-20 mt-20 sm:mt-32">
-      {/* Subtle static glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#38BDF8] rounded-full blur-[150px] opacity-[0.04] pointer-events-none" />
+      {/* Subtle static glow - reduced on mobile */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] h-[200px] sm:h-[300px] bg-[#38BDF8] rounded-full blur-[80px] sm:blur-[150px] opacity-[0.02] sm:opacity-[0.04] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Arlan Logo */}
         <div className="relative flex items-center justify-center mb-6 sm:mb-8">
-          <div 
-            className="relative p-6 sm:p-8"
-            style={{
-              filter: 'drop-shadow(0 0 40px rgba(56, 189, 248, 0.15))',
-            }}
-          >
+          <div className="relative p-6 sm:p-8 footer-logo">
             <Image
               src="/logolar/arlanlogonav.webp"
               alt="Arlan Medya Logo"
@@ -55,7 +50,7 @@ export default function Footer() {
               href={social.href}
               title={social.label}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               aria-label={social.label}
               className="text-white/50 hover:text-[#38BDF8] transition-colors duration-200"
             >

@@ -68,7 +68,7 @@ const Navbar = () => {
 
   const socialItems = [
     { label: 'Instagram', link: 'https://instagram.com/arlanmedya' },
-    { label: 'LinkedIn', link: 'https://linkedin.com/company/arlanmedya' },
+    { label: 'LinkedIn', link: 'https://www.linkedin.com/company/arlan-medya/' },
     { label: 'Twitter', link: 'https://twitter.com/arlanmedya' },
   ]
 
