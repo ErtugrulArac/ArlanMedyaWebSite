@@ -324,8 +324,8 @@ const MainHero = () => {
                   blurAmount={3}
                   borderColor="#38BDF8"
                   glowColor="rgba(56, 189, 248, 0.4)"
-                  animationDuration={0.2}
-                  pauseBetweenAnimations={0.5}
+                  animationDuration={0.16}
+                  pauseBetweenAnimations={0.35}
                 />
               </div>
             </motion.div>
