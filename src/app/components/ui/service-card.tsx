@@ -4,14 +4,16 @@ import React, { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'motion/react'
 
 interface ServiceCardProps {
+  id?: string
   title: string
   description: string
   icon: React.ReactNode
   gradient: string
   delay?: number
+  onClick?: () => void
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gradient, delay = 0 }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, icon, gradient, delay = 0, onClick }) => {
   const cardRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -47,6 +49,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, gra
         ref={cardRef}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onClick={onClick}
         className="relative group cursor-pointer"
       >
         {/* Glow Effect - Reduced blur */}

@@ -473,42 +473,32 @@ const KodKarti = () => {
             </motion.p>
 
             {/* CTA Buttons */}
-            <motion.div
+            <div
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              style={{ opacity: 1, transform: 'translateY(0px)' }}
             >
-              <motion.button
-                className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white overflow-hidden w-full sm:w-auto justify-center cursor-pointer"
+              <a
+                href="/iletisim"
+                className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white overflow-hidden w-full sm:w-auto justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
                 style={{
                   background: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)',
                   boxShadow: '0 20px 40px -15px rgba(56, 189, 248, 0.5)',
-                }}
-                whileHover={{ scale: 1.03, boxShadow: '0 25px 50px -12px rgba(56, 189, 248, 0.6)' }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  router.push('/iletisim')
+                  textDecoration: 'none'
                 }}
               >
                 <span className="relative z-10 text-sm sm:text-base">Ücretsiz Danışmanlık</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              </a>
               
-              <motion.button
-                className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white border border-white/20 w-full sm:w-auto justify-center cursor-pointer"
-                style={{ background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(10px)' }}
-                whileHover={{ scale: 1.03, borderColor: 'rgba(56, 189, 248, 0.5)', background: 'rgba(56, 189, 248, 0.05)' }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  window.location.href = 'tel:+905307464899'
-                }}
+              <a
+                href="tel:+905307464899"
+                className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white border border-white/20 w-full sm:w-auto justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
+                style={{ background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(10px)', textDecoration: 'none' }}
               >
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#38BDF8]" />
                 <span className="text-sm sm:text-base">Bizi Arayın</span>
-              </motion.button>
-            </motion.div>
+              </a>
+            </div>
           </motion.div>
 
           {/* ========== SAĞ - KOD KARTI + DEKORATÖR ELEMENTLER ========== */}

@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import { 
   Search, 
   Lightbulb, 
@@ -356,6 +357,7 @@ const ProcessStepCard = ({
 
 // Main Component
 const NasilCalisiyoruz = () => {
+  const router = useRouter()
   const containerRef = useRef<HTMLElement>(null)
   const titleRef = useRef<HTMLDivElement>(null)
   const isTitleInView = useInView(titleRef, { once: true, margin: "-100px" })
@@ -489,6 +491,9 @@ const NasilCalisiyoruz = () => {
                 boxShadow: '0 8px 30px rgba(56, 189, 248, 0.4)' 
               }}
               whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                router.push('/iletisim')
+              }}
             >
               <span>Ücretsiz Danışmanlık</span>
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />

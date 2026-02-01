@@ -945,7 +945,7 @@ const CTASection = () => {
             </a>
 
             <a
-              href="https://wa.me/905551234567"
+              href="https://wa.me/905307464899?text=Merhaba%20Arlan%20Medya%2C%20hizmetleriniz%20hakk%C4%B1nda%20detayl%C4%B1%20bilgi%20almak%20istiyorum."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/20 text-white hover:bg-white/5 transition-colors"

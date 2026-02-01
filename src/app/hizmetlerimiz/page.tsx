@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { 
   Monitor, 
   Smartphone, 
@@ -679,6 +680,45 @@ const ServiceMockup = ({ type, color }: { type: string; color: string }) => {
 const ServicesSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [activeService, setActiveService] = useState<number>(0)
+  const router = useRouter()
+
+  // URL hash'e göre doğru hizmeti aktif et
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (hash.startsWith('hizmet-')) {
+        const serviceId = hash.replace('hizmet-', '')
+        const serviceIndex = services.findIndex(s => s.id === serviceId)
+        if (serviceIndex !== -1) {
+          setActiveService(serviceIndex)
+          // Smooth scroll to the specific service section
+          setTimeout(() => {
+            const element = document.getElementById(hash)
+            if (element) {
+              const yOffset = 50; // Header height + some padding
+              const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+              window.scrollTo({top: y, behavior: 'smooth'});
+            } else {
+              // Fallback: scroll to services section
+              const servicesElement = document.getElementById('hizmetler')
+              if (servicesElement) {
+                const yOffset = 30;
+                const y = servicesElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({top: y, behavior: 'smooth'});
+              }
+            }
+          }, 100)
+        }
+      }
+    }
+
+    // Initial load
+    handleHashChange()
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
 
   return (
     <section id="hizmetler" className="relative py-20 sm:py-32 overflow-hidden">
@@ -690,6 +730,11 @@ const ServicesSection = () => {
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Service Anchor Points */}
+        {services.map(service => (
+          <div key={service.id} id={`hizmet-${service.id}`} className="absolute -top-32" />
+        ))}
+        
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
@@ -1026,7 +1071,7 @@ const CTASection = () => {
 
               {/* WhatsApp Button */}
               <a
-                href="https://wa.me/905551234567"
+                href="https://wa.me/905307464899?text=Merhaba%20Arlan%20Medya%2C%20dijital%20hizmetleriniz%20hakk%C4%B1nda%20%C3%BCcretsiz%20dan%C4%B1%C5%9Fmanl%C4%B1k%20almak%20istiyorum."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-medium text-sm sm:text-base text-white transition-all duration-500 hover:scale-105 border border-white/20 w-full sm:w-auto"

@@ -184,7 +184,7 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <motion.a
-            href="#contact"
+            href="/iletisim"
             className="relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] rounded-lg text-[#050816] font-semibold text-base overflow-hidden group shrink-0"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

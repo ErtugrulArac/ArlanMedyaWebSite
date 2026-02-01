@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import { LucideIcon, Shield, Zap, Clock, HeadphonesIcon, Server, RefreshCw, ArrowRight, CheckCircle2 } from 'lucide-react'
 
 // Simplified Floating Card Component
@@ -211,6 +212,7 @@ const FeatureCard = ({
 
 // Main Component
 const DestekSection = () => {
+  const router = useRouter()
   const titleRef = useRef<HTMLDivElement>(null)
   const isTitleInView = useInView(titleRef, { once: true, margin: "-100px" })
 
@@ -308,9 +310,10 @@ const DestekSection = () => {
 
             {/* CTA Button */}
             <motion.button
-              className="inline-flex items-center gap-2 px-4 sm:px-5 lg:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] text-white font-semibold text-xs sm:text-sm shadow-lg shadow-[#38BDF8]/25"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 lg:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] text-white font-semibold text-xs sm:text-sm shadow-lg shadow-[#38BDF8]/25 cursor-pointer"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
+              onClick={() => router.push('/iletisim')}
             >
               Destek Al
               <ArrowRight size={14} className="sm:w-4 sm:h-4" />

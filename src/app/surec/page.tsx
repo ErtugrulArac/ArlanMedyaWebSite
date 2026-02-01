@@ -535,7 +535,7 @@ const CTASection = () => {
                 <span>info@arlanmedya.com</span>
               </a>
               <a 
-                href="https://wa.me/905551234567"
+                href="https://wa.me/905307464899?text=Merhaba%20Arlan%20Medya%2C%20proje%20s%C3%BCreciniz%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-white/60 hover:text-[#22C55E] transition-colors font-medium"

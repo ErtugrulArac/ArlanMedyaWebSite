@@ -9,18 +9,17 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const navLinks = [
-    { label: 'Ana Sayfa', href: '/' },
-    { label: 'Hakkımızda', href: '#hakkimizda' },
+    { label: 'Anasayfa', href: '/' },
     { label: 'Hizmetler', href: '/hizmetlerimiz' },
-    { label: 'Projeler', href: '#projeler' },
-    { label: 'Yorumlar', href: '#yorumlar' },
-    { label: 'SSS', href: '#faq' },
+    { label: 'Hakkımızda', href: '/hakkimizda' },
+    { label: 'Süreç', href: '/surec' },
+    { label: 'İletişim', href: '/iletisim' },
   ]
 
   const socialLinks = [
     { href: 'https://instagram.com/arlanmedya', label: 'Instagram', Icon: SiInstagram },
-    { href: 'https://twitter.com/arlanmedya', label: 'X', Icon: SiX },
     { href: 'https://linkedin.com/company/arlanmedya', label: 'LinkedIn', Icon: SiLinkedin },
+    { href: 'https://twitter.com/arlanmedya', label: 'X', Icon: SiX },
   ]
 
   return (

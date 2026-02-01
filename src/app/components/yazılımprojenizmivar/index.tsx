@@ -334,7 +334,7 @@ export default function YazilimProjenizMiVar() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
               <a
-                href="#iletisim"
+                href="/iletisim"
                 className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white text-sm sm:text-base overflow-hidden hover-scale"
                 style={{
                   background: 'linear-gradient(135deg, #38BDF8, #0EA5E9)',
@@ -347,7 +347,7 @@ export default function YazilimProjenizMiVar() {
               </a>
               
               <a
-                href="#portfolyo"
+                href="/hakkimizda"
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white text-sm sm:text-base transition-all duration-300 hover:bg-[rgba(168,85,247,0.1)] hover:border-[rgba(168,85,247,0.3)]"
                 style={{
                   background: 'rgba(255, 255, 255, 0.05)',
@@ -355,7 +355,7 @@ export default function YazilimProjenizMiVar() {
                 }}
               >
                 <Code2 size={18} className="text-[#A855F7]" />
-                Projelerimizi Gör
+                Daha Fazla Bilgi Al
               </a>
             </div>
           </div>
@@ -410,7 +410,7 @@ export default function YazilimProjenizMiVar() {
 
                 {/* Right - CTA */}
                 <a
-                  href="https://wa.me/905551234567"
+                  href="https://wa.me/905307464899?text=Merhaba%20Arlan%20Medya%2C%20dijital%20%C3%A7%C3%B6z%C3%BCmleriniz%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex items-center gap-3 sm:gap-4 px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-white text-sm sm:text-base whitespace-nowrap overflow-hidden hover-scale"
