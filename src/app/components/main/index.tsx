@@ -487,8 +487,8 @@ const MainHero = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
             <ServiceCard
-              title="Yazılım Geliştirme"
-              description="React, Next.js ve Node.js ile ölçeklenebilir, yüksek performanslı web ve mobil uygulamaları geliştiriyoruz."
+              title="Web Geliştirme"
+              description="Next.js, React ve modern teknolojilerle kurumsal web siteleri. Core Web Vitals optimizasyonu ile Google'da üst sıralarda yer alın."
               gradient="from-blue-500 via-cyan-400 to-teal-500"
               delay={0}
               href="/hizmetlerimiz#hizmet-web"
@@ -500,8 +500,8 @@ const MainHero = () => {
             />
 
             <ServiceCard
-              title="Dijital Yönetim"
-              description="SEO, SEM, sosyal medya ve içerik yönetimi ile online varlığınızı güçlendirin ve arama motorlarında üst sıralara çıkın."
+              title="Medya Yönetimi"
+              description="Instagram, Facebook, LinkedIn ve TikTok'ta profesyonel hesap yönetimi. İçerik üretimi, strateji geliştirme ve analiz raporlaması ile markanızı güçlendiriyoruz."
               gradient="from-purple-500 via-pink-500 to-rose-500"
               delay={0.1}
               href="/hizmetlerimiz#hizmet-media"
@@ -513,11 +513,11 @@ const MainHero = () => {
             />
 
             <ServiceCard
-              title="Web Tasarım & UX/UI"
-              description="Kullanıcı deneyimi odaklı, dönüşüme uygun modern web tasarımları ile markanızı profesyonel görüntüleyin."
-              gradient="from-orange-500 via-amber-500 to-yellow-500"
+              title="E-Ticaret"
+              description="Shopify, WooCommerce veya özel altyapı. Ödeme sistemleri, kargo entegrasyonu ve stok yönetimi ile satışlarınızı katlayın."
+              gradient="from-green-500 via-emerald-500 to-teal-500"
               delay={0.2}
-              href="/hizmetlerimiz#hizmet-web"
+              href="/hizmetlerimiz#hizmet-ecommerce"
               icon={
                 <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -526,10 +526,23 @@ const MainHero = () => {
             />
 
             <ServiceCard
-              title="Marka Kimliği & Strateji"
-              description="Akılda kalıcı logo, kurumsal kimlik ve marka stratejisi ile rakiplerinizden sıyrılın."
-              gradient="from-emerald-500 via-green-500 to-lime-500"
+              title="SEO"
+              description="Teknik SEO, içerik stratejisi ve backlink çalışmaları. Organik trafiğinizi 3x artırın ve Google'da zirveye çıkın."
+              gradient="from-amber-500 via-orange-500 to-yellow-500"
               delay={0.3}
+              href="/hizmetlerimiz#hizmet-seo"
+              icon={
+                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              }
+            />
+
+            <ServiceCard
+              title="Dijital Pazarlama"
+              description="Google Ads, Meta, LinkedIn. Dönüşüm odaklı stratejiler ve A/B testleri ile maksimum verim elde edin."
+              gradient="from-pink-500 via-rose-500 to-red-500"
+              delay={0.4}
               href="/hizmetlerimiz#hizmet-marketing"
               icon={
                 <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -539,24 +552,11 @@ const MainHero = () => {
             />
 
             <ServiceCard
-              title="API & Entegrasyon"
-              description="RESTful API geliştirme, üçüncü parti hizmetleri entegre edin ve otomasyonlarla verimliliği artırın."
+              title="Özel Yazılım"
+              description="CRM, ERP, otomasyon sistemleri. İş akışlarınızı dijitalleştirin, verimliliği %40 artırın."
               gradient="from-indigo-500 via-violet-500 to-purple-500"
-              delay={0.4}
-              href="/hizmetlerimiz#hizmet-web"
-              icon={
-                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              }
-            />
-
-            <ServiceCard
-              title="Güvenlik & Performans"
-              description="SSL sertifikaları, siber güvenlik önlemleri, CDN optimizasyonu ve hızlı yükleme sürelerine sahip uygulamalar."
-              gradient="from-rose-500 via-red-500 to-orange-500"
               delay={0.5}
-              href="/hizmetlerimiz#hizmet-seo"
+              href="/hizmetlerimiz#hizmet-software"
               icon={
                 <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
