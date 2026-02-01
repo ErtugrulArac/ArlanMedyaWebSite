@@ -5,17 +5,17 @@ import Image from 'next/image'
 
 // Referans logoları - placeholder olarak kullanılacak, gerçek logolar eklenecek
 const referanslar = [
-  { name: 'Şirket 1', logo: '/logolar/referanslar/1.webp' },
-  { name: 'Şirket 2', logo: '/logolar/referanslar/2.webp' },
-  { name: 'Şirket 3', logo: '/logolar/referanslar/3.webp' },
-  { name: 'Şirket 4', logo: '/logolar/referanslar/4.webp' },
-  { name: 'Şirket 5', logo: '/logolar/referanslar/5.webp' },
-  { name: 'Şirket 6', logo: '/logolar/referanslar/6.webp' },
-  { name: 'Şirket 7', logo: '/logolar/referanslar/7.webp' },
-  { name: 'Şirket 8', logo: '/logolar/referanslar/8.webp' },
-  { name: 'Şirket 9', logo: '/logolar/referanslar/9.webp' },
-  { name: 'Şirket 10', logo: '/logolar/referanslar/10.webp' },
-  { name: 'Şirket 11', logo: '/logolar/referanslar/11.webp' },
+  { name: 'Şirket 1', logo: '/referanslar/1.webp' },
+  { name: 'Şirket 2', logo: '/referanslar/2.webp' },
+  { name: 'Şirket 3', logo: '/referanslar/3.webp' },
+  { name: 'Şirket 4', logo: '/referanslar/4.webp' },
+  { name: 'Şirket 5', logo: '/referanslar/5.webp' },
+  { name: 'Şirket 6', logo: '/referanslar/6.webp' },
+  { name: 'Şirket 7', logo: '/referanslar/7.webp' },
+  { name: 'Şirket 8', logo: '/referanslar/8.webp' },
+  { name: 'Şirket 9', logo: '/referanslar/9.webp' },
+  { name: 'Şirket 10', logo: '/referanslar/10.webp' },
+  { name: 'Şirket 11', logo: '/referanslar/11.webp' },
 ]
 
 export default function Referanslar() {
@@ -43,7 +43,7 @@ export default function Referanslar() {
   const doubledReferanslar = [...referanslar, ...referanslar]
 
   return (
-    <section className="relative py-24 sm:py-32 overflow-hidden">
+    <section className="relative py-24 sm:py-28 overflow-hidden">
       {/* Content container */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Badge */}
@@ -58,7 +58,7 @@ export default function Referanslar() {
 
         {/* Title */}
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
+          <h2 className="text-4xl sm:text-5xl md:text-5xl font-bold text-white mb-2 ibm-plex-serif-bold">
             Referanslarımız
           </h2>
           <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#38BDF8]">

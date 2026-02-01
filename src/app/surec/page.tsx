@@ -48,7 +48,7 @@ const HeroSection = () => {
             </div>
             
             {/* Main Title with Gradient Animation */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.05] mb-6 sm:mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-black leading-[1.05] mb-6 sm:mb-8 ibm-plex-serif-bold">
               <span className="text-white">Hayal Et,</span>
               <br />
               <span className="relative inline-block">
@@ -207,7 +207,7 @@ const ProcessSection = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A855F7]/10 border border-[#A855F7]/20 mb-6">
             <span className="text-sm font-medium text-[#A855F7]">Sürecimiz</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 ibm-plex-serif-bold">
             4 Adımda{' '}
             <span className="bg-linear-to-r from-[#38BDF8] to-[#A855F7] bg-clip-text text-transparent">
               Başarıya
@@ -398,7 +398,7 @@ const WhyUsSection = () => {
                 <div className="w-2 h-2 rounded-full bg-[#A855F7]" />
                 <span className="text-sm font-medium text-white/60">Neden Biz?</span>
               </div>
-              <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-6">
+              <h2 className="text-5xl sm:text-6xl font-black text-white leading-tight mb-6 ibm-plex-serif-bold">
                 Markanızı Geleceğe
                 <span className="block mt-2 bg-linear-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899] bg-clip-text text-transparent">
                   Taşıyoruz
@@ -484,7 +484,7 @@ const CTASection = () => {
           
           {/* Main Title */}
           <div className="mb-8 sm:mb-10">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.1] mb-4">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[1.1] mb-4 ibm-plex-serif-bold">
               <span className="block">Projenizi</span>
               <span className="relative inline-block">
                 <span className="bg-linear-to-r from-[#38BDF8] via-[#1E40AF] to-[#374151] bg-clip-text text-transparent">

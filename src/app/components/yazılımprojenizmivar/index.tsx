@@ -260,7 +260,7 @@ export default function YazilimProjenizMiVar() {
   ]
 
   return (
-    <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden">
+    <section className="relative py-16 sm:py-24 lg:py-28 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -304,7 +304,7 @@ export default function YazilimProjenizMiVar() {
             </div>
 
             {/* Heading */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight animate-fade-in ibm-plex-serif-bold" style={{ animationDelay: '0.1s' }}>
               <span className="text-white">Yazılım Projeniz</span>
               <br />
               <span className="bg-gradient-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899] bg-clip-text text-transparent">

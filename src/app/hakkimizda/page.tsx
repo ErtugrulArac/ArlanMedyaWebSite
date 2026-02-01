@@ -311,7 +311,7 @@ const HeroSection = () => {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-center text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-[1.1] tracking-tight">
+          <h1 className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold text-white mb-8 leading-[1.1] tracking-tight ibm-plex-serif-bold">
             Kod yazıyoruz,
             <br />
             <span className="text-[#38BDF8]">markalar büyütüyoruz.</span>
@@ -364,7 +364,7 @@ const MockupSection = () => {
               <Rocket className="w-4 h-4 text-[#38BDF8]" />
               <span className="text-[#38BDF8] text-sm font-medium">Projelerimiz</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 ibm-plex-serif-bold">
               Geliştirdiğimiz Çözümler
             </h2>
             <p className="text-white/50 text-lg max-w-2xl mx-auto">
@@ -587,7 +587,7 @@ const MissionVisionSection = () => {
             <span className="text-[#38BDF8] text-sm font-medium uppercase tracking-wider">Yönümüz</span>
             <div className="w-12 h-px bg-[#38BDF8]" />
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white ibm-plex-serif-bold">
             Misyon & Vizyon
           </h2>
         </div>
@@ -608,7 +608,7 @@ const MissionVisionSection = () => {
                 </div>
               </div>
 
-              <h3 className="relative text-2xl sm:text-3xl font-bold text-white mb-4">
+              <h3 className="relative text-3xl sm:text-4xl font-bold text-white mb-4 ibm-plex-serif-semibold">
                 Misyonumuz
               </h3>
 
@@ -646,7 +646,7 @@ const MissionVisionSection = () => {
                 </div>
               </div>
 
-              <h3 className="relative text-2xl sm:text-3xl font-bold text-white mb-4">
+              <h3 className="relative text-3xl sm:text-4xl font-bold text-white mb-4 ibm-plex-serif-semibold">
                 Vizyonumuz
               </h3>
 
@@ -774,7 +774,7 @@ const FounderSection = () => {
               <span className="text-[#38BDF8] text-sm font-medium uppercase tracking-wider">Kurucu</span>
             </div>
 
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+            <h2 className="text-5xl sm:text-6xl font-bold text-white mb-6 ibm-plex-serif-bold">
               Ertuğrul Araç
             </h2>
 
@@ -862,7 +862,7 @@ const TechSection = () => {
             <div className="w-12 h-px bg-[#38BDF8]" />
             <span className="text-[#38BDF8] text-sm font-medium uppercase tracking-wider">Teknolojiler</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 ibm-plex-serif-bold">
             Kullandığımız araçlar
           </h2>
           <p className="text-white/50 text-lg max-w-2xl">
@@ -925,7 +925,7 @@ const CTASection = () => {
             />
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 ibm-plex-serif-bold">
             Projenizi konuşalım mı?
           </h2>
 

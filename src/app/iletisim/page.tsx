@@ -201,7 +201,7 @@ export default function IletisimPage() {
           <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Header */}
             <m.div className="text-center mb-10 sm:mb-14" {...motionIn(0)}>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-4">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-white mb-4 ibm-plex-serif-bold">
                 <span className="block bg-clip-text text-transparent bg-gradient-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899]">
                   Birlikte Çalışalım
                 </span>

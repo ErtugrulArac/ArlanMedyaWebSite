@@ -373,7 +373,7 @@ const NasilCalisiyoruz = () => {
     <section 
       ref={containerRef}
       id="nasil-calisiyoruz"
-      className="relative py-12 sm:py-16 md:py-24 overflow-hidden"
+      className="relative py-12 sm:py-16 md:py-20 overflow-hidden"
       aria-labelledby="process-title"
     >
       {/* Background Effects */}
@@ -430,7 +430,7 @@ const NasilCalisiyoruz = () => {
           {/* Main Title */}
           <h2 
             id="process-title"
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold ibm-plex-serif-bold"
           >
             <span className="text-white">Yazılım Geliştirme </span>
             <span className="bg-gradient-to-r from-[#38BDF8] via-cyan-400 to-blue-500 bg-clip-text text-transparent">

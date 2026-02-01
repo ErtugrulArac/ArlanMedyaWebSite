@@ -134,13 +134,13 @@ const Navbar = () => {
       
       {/* Desktop Navbar */}
       <motion.header
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block transition-all duration-300`}
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden lg:block transition-all duration-300`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <div 
-          className={`flex items-center gap-6 px-10 py-4 rounded-full border transition-all duration-300 ${
+          className={`flex items-center gap-4 px-8 py-3 rounded-full border transition-all duration-300 ${
             scrolled
               ? 'bg-[#050816]/95 backdrop-blur-xl border-white/20 shadow-xl shadow-black/30'
               : 'bg-[#0a1628]/80 backdrop-blur-lg border-white/15 shadow-lg shadow-black/20'
@@ -154,15 +154,15 @@ const Navbar = () => {
             <Image 
               src="/logolar/arlanlogonav.webp" 
               alt="Arlan Medya Logo" 
-              width={48}
-              height={48}
-              className="h-12 w-auto object-contain"
+              width={40}
+              height={40}
+              className="h-10 w-auto object-contain"
               priority
             />
           </button>
 
           {/* Divider */}
-          <div className="w-px h-6 bg-white/15" />
+          <div className="w-px h-5 bg-white/15" />
 
           {/* Desktop Menu Links */}
           <nav className="flex items-center">
@@ -171,7 +171,7 @@ const Navbar = () => {
                 key={idx}
                 data-nav-link={item.link}
                 onClick={() => handleNavigation(item.link)}
-                className="relative px-5 py-2.5 text-base font-medium text-white/70 hover:text-white transition-colors group"
+                className="relative px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors group poppins-medium"
               >
                 <span className="relative z-10">{item.label}</span>
                 <span className="absolute inset-0 rounded-lg bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -180,12 +180,12 @@ const Navbar = () => {
           </nav>
 
           {/* Divider */}
-          <div className="w-px h-6 bg-white/15" />
+          <div className="w-px h-5 bg-white/15" />
 
           {/* CTA Button */}
           <motion.a
             href="/iletisim"
-            className="relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] rounded-lg text-[#050816] font-semibold text-base overflow-hidden group shrink-0"
+            className="relative inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] rounded-lg text-[#050816] font-semibold text-sm overflow-hidden group shrink-0 poppins-semibold"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

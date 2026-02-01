@@ -96,7 +96,7 @@ export default function FAQ() {
             <span className="text-white/70 text-sm font-medium">SSS</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-white mb-4 ibm-plex-serif-bold">
             Bizimle Başlamadan Önce{' '}
             <span className="bg-gradient-to-r from-[#38BDF8] via-[#A855F7] to-[#EC4899] bg-clip-text text-transparent">
               Bilmeniz Gerekenler

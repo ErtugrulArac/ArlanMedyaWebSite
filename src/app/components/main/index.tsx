@@ -487,12 +487,10 @@ const MainHero = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
             <ServiceCard
-              id="web"
-              title="Web Geliştirme"
-              description="Next.js, React ve modern teknolojilerle kurumsal web siteleri. Core Web Vitals optimizasyonu ile Google'da üst sıralarda yer alın."
+              title="Yazılım Geliştirme"
+              description="React, Next.js ve Node.js ile ölçeklenebilir, yüksek performanslı web ve mobil uygulamaları geliştiriyoruz."
               gradient="from-blue-500 via-cyan-400 to-teal-500"
               delay={0}
-              onClick={() => router.push('/hizmetlerimiz#hizmet-web')}
               icon={
                 <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -501,71 +499,61 @@ const MainHero = () => {
             />
 
             <ServiceCard
-              id="media"
-              title="Medya Yönetimi"
-              description="Instagram, Facebook, LinkedIn ve TikTok'ta profesyonel hesap yönetimi. İçerik üretimi, strateji geliştirme ve analiz raporlaması ile markanızı güçlendiriyoruz."
+              title="Dijital Yönetim"
+              description="SEO, SEM, sosyal medya ve içerik yönetimi ile online varlığınızı güçlendirin ve arama motorlarında üst sıralara çıkın."
               gradient="from-purple-500 via-pink-500 to-rose-500"
               delay={0.1}
-              onClick={() => router.push('/hizmetlerimiz#hizmet-media')}
+              icon={
+                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+              }
+            />
+
+            <ServiceCard
+              title="Web Tasarım & UX/UI"
+              description="Kullanıcı deneyimi odaklı, dönüşüme uygun modern web tasarımları ile markanızı profesyonel görüntüleyin."
+              gradient="from-orange-500 via-amber-500 to-yellow-500"
+              delay={0.2}
+              icon={
+                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              }
+            />
+
+            <ServiceCard
+              title="Marka Kimliği & Strateji"
+              description="Akılda kalıcı logo, kurumsal kimlik ve marka stratejisi ile rakiplerinizden sıyrılın."
+              gradient="from-emerald-500 via-green-500 to-lime-500"
+              delay={0.3}
+              icon={
+                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              }
+            />
+
+            <ServiceCard
+              title="API & Entegrasyon"
+              description="RESTful API geliştirme, üçüncü parti hizmetleri entegre edin ve otomasyonlarla verimliliği artırın."
+              gradient="from-indigo-500 via-violet-500 to-purple-500"
+              delay={0.4}
+              icon={
+                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              }
+            />
+
+            <ServiceCard
+              title="Güvenlik & Performans"
+              description="SSL sertifikaları, siber güvenlik önlemleri, CDN optimizasyonu ve hızlı yükleme sürelerine sahip uygulamalar."
+              gradient="from-rose-500 via-red-500 to-orange-500"
+              delay={0.5}
               icon={
                 <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              }
-            />
-
-            <ServiceCard
-              id="ecommerce"
-              title="E-Ticaret"
-              description="Shopify, WooCommerce veya özel altyapı. Ödeme sistemleri, kargo entegrasyonu ve stok yönetimi ile satışlarınızı katlayın."
-              gradient="from-orange-500 via-amber-500 to-yellow-500"
-              delay={0.2}
-              onClick={() => router.push('/hizmetlerimiz#hizmet-ecommerce')}
-              icon={
-                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4m1.6 8L5 3H2m5 10v6a2 2 0 002 2h4a2 2 0 002-2v-6m-4 0V9a2 2 0 00-2-2m0 0V5a2 2 0 012-2h0a2 2 0 012 2v2M9 13h6" />
-                </svg>
-              }
-            />
-
-            <ServiceCard
-              id="seo"
-              title="SEO Optimizasyonu"
-              description="Teknik SEO, içerik stratejisi ve backlink çalışmaları. Organik trafiğinizi 3x artırın ve Google'da zirveye çıkın."
-              gradient="from-emerald-500 via-green-500 to-lime-500"
-              delay={0.3}
-              onClick={() => router.push('/hizmetlerimiz#hizmet-seo')}
-              icon={
-                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              }
-            />
-
-            <ServiceCard
-              id="marketing"
-              title="Dijital Pazarlama"
-              description="Google Ads, Meta, LinkedIn. Dönüşüm odaklı stratejiler ve A/B testleri ile maksimum verim elde edin."
-              gradient="from-indigo-500 via-violet-500 to-purple-500"
-              delay={0.4}
-              onClick={() => router.push('/hizmetlerimiz#hizmet-marketing')}
-              icon={
-                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                </svg>
-              }
-            />
-
-            <ServiceCard
-              id="software"
-              title="Özel Yazılım"
-              description="CRM, ERP, otomasyon sistemleri. İş akışlarınızı dijitalleştirin, verimliliği %40 artırın."
-              gradient="from-rose-500 via-red-500 to-orange-500"
-              delay={0.5}
-              onClick={() => router.push('/hizmetlerimiz#hizmet-software')}
-              icon={
-                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                 </svg>
               }
             />

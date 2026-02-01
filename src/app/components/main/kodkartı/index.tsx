@@ -342,7 +342,7 @@ const KodKarti = () => {
   const router = useRouter()
 
   return (
-    <section className="relative py-16 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
+    <section className="relative py-16 sm:py-24 md:py-32 lg:py-32 overflow-hidden">
       {/* ========== BACKGROUND ELEMENTS ========== */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Large Gradient Orbs */}
@@ -436,7 +436,7 @@ const KodKarti = () => {
 
             {/* Ana Başlık */}
             <motion.h2
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 leading-[1.1]"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-6 sm:mb-8 leading-[1.1] ibm-plex-serif-bold"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

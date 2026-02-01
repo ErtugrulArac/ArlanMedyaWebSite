@@ -153,7 +153,7 @@ const StatItem = ({
       transition={{ duration: 0.5, delay }}
     >
       <motion.div
-        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1"
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-white mb-1 ibm-plex-serif-bold"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.8, delay: delay + 0.2 }}
@@ -252,7 +252,7 @@ const DestekSection = () => {
   return (
     <section 
       id="destek"
-      className="relative py-12 sm:py-16 md:py-20 lg:py-28 overflow-hidden"
+      className="relative py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden"
       aria-labelledby="support-title"
     >
       {/* Background */}

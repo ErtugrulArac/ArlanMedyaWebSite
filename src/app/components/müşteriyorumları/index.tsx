@@ -431,7 +431,7 @@ const MusteriYorumlari = () => {
   const activeVariant = colorVariants[activeTestimonial.color as keyof typeof colorVariants]
 
   return (
-    <section className="relative py-20 lg:py-32 overflow-hidden">
+    <section className="relative py-20 lg:py-28 overflow-hidden">
       {/* Background Elements - Simplified */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Static Gradient Orbs - Removed animations */}
@@ -468,7 +468,7 @@ const MusteriYorumlari = () => {
             <span className="text-[#38BDF8] text-sm font-medium">Müşteri Yorumları</span>
           </motion.div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold mb-4 ibm-plex-serif-bold">
             <span className="text-white">Müşterilerimiz</span>{' '}
             <span className="bg-gradient-to-r from-[#38BDF8] via-cyan-400 to-blue-500 bg-clip-text text-transparent">
               Ne Diyor?

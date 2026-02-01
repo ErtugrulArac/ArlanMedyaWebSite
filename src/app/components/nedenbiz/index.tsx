@@ -246,7 +246,7 @@ const NedenBiz = () => {
   return (
     <section
       id="neden-biz"
-      className="relative py-16 sm:py-24 md:py-32 overflow-hidden"
+      className="relative py-16 sm:py-24 md:py-28 overflow-hidden"
       aria-labelledby="why-us-title"
     >
       {/* Subtle Background */}
@@ -281,7 +281,7 @@ const NedenBiz = () => {
             <AnimatedTextLine delay={0.2}>
               <h2
                 id="why-us-title"
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.15] mb-4"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-white leading-[1.15] mb-4 ibm-plex-serif-bold"
               >
                 Yazılım Projelerinizde
                 <br />
@@ -311,7 +311,7 @@ const NedenBiz = () => {
               <div className={`lg:w-1/4 ${index % 2 === 1 ? 'lg:text-right' : ''}`}>
                 <div className="inline-flex items-center gap-2 animate-fade-in" style={{ animationDelay: '0.1s' }}>
                   <span
-                    className="text-3xl sm:text-4xl lg:text-5xl font-bold"
+                    className="text-4xl sm:text-5xl lg:text-5xl font-bold ibm-plex-serif-bold"
                     style={{
                       color: section.color,
                       textShadow: `0 0 40px ${section.color}30`
