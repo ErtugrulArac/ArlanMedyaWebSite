@@ -408,13 +408,13 @@ const DestekSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
             <motion.a
-              href="tel:+905551234567"
+              href="tel:+905307464899"
               className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs sm:text-sm hover:bg-white/10 transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               <HeadphonesIcon size={14} className="sm:w-4 sm:h-4" />
-              +90 555 123 45 67
+              +90 530 746 48 99
             </motion.a>
             <motion.a
               href="mailto:destek@arlanmedya.com"

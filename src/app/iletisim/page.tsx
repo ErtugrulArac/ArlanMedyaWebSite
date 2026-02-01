@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState, useEffect } from 'react'
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
 import {
   Send,
@@ -21,14 +21,28 @@ import {
   Headphones,
   FileText,
   X,
+  Star,
 } from 'lucide-react'
-import { SiInstagram, SiX, SiLinkedin, SiWhatsapp } from 'react-icons/si'
+import { SiInstagram, SiX, SiLinkedin, SiWhatsapp, SiGoogle } from 'react-icons/si'
 import Footer from '../components/footer'
+import KVKKModal from '../components/ui/kvkk-modal'
 
 export default function IletisimPage() {
   const reduce = useReducedMotion()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const [isKvkkOpen, setIsKvkkOpen] = useState(false)
+  const [isMapLoaded, setIsMapLoaded] = useState(false)
 
   const [formData, setFormData] = useState({
     name: '',
@@ -98,7 +112,10 @@ export default function IletisimPage() {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       const { name, value } = e.target
-      setFormData((prev) => ({ ...prev, [name]: value }))
+      // Batch updates to prevent multiple re-renders
+      requestAnimationFrame(() => {
+        setFormData((prev) => ({ ...prev, [name]: value }))
+      })
     },
     []
   )
@@ -118,37 +135,42 @@ export default function IletisimPage() {
 
       setIsSubmitting(true)
 
-      // ✅ Burayı gerçek endpoint ile değiştir:
-      // await fetch('/api/contact', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ ...formData, consents }) })
+      try {
+        // ✅ Burayı gerçek endpoint ile değiştir:
+        // await fetch('/api/contact', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ ...formData, consents }) })
+        
+        await new Promise((resolve) => setTimeout(resolve, 1100))
+        
+        setIsSubmitted(true)
 
-      await new Promise((resolve) => setTimeout(resolve, 1100))
-
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-
-      setTimeout(() => {
-        setIsSubmitted(false)
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          phone: '',
-          topic: '',
-          service: '',
-          budget: '',
-          timeline: '',
-          preferredContact: 'E-posta',
-          message: '',
-          website: '',
-        })
-        setConsents({ kvkk: false, marketing: false })
-      }, 3500)
+        setTimeout(() => {
+          setIsSubmitted(false)
+          setFormData({
+            name: '',
+            email: '',
+            company: '',
+            phone: '',
+            topic: '',
+            service: '',
+            budget: '',
+            timeline: '',
+            preferredContact: 'E-posta',
+            message: '',
+            website: '',
+          })
+          setConsents({ kvkk: false, marketing: false })
+        }, 3500)
+      } catch (error) {
+        console.error('Form submission error:', error)
+      } finally {
+        setIsSubmitting(false)
+      }
     },
     [consents.kvkk, formData]
   )
 
   const motionIn = (delay = 0) =>
-    reduce
+    reduce || isMobile
       ? { initial: undefined, animate: undefined, transition: undefined }
       : {
           initial: { opacity: 0, y: 16 },
@@ -265,9 +287,10 @@ export default function IletisimPage() {
                   <span className="text-white/50 text-sm">Takip edin</span>
                   <div className="flex gap-2">
                     {[
-                      { icon: SiInstagram, href: 'https://instagram.com/arlanmedya' },
-                      { icon: SiX, href: 'https://twitter.com/arlanmedya' },
-                      { icon: SiLinkedin, href: 'https://linkedin.com/company/arlanmedya' },
+                      { icon: SiInstagram, href: 'https://instagram.com/arlanmedya', color: '#E1306C' },
+                      { icon: SiX, href: 'https://twitter.com/arlanmedya', color: '#000000' },
+                      { icon: SiLinkedin, href: 'https://linkedin.com/company/arlanmedya', color: '#0077B5' },
+                      { icon: SiGoogle, href: 'https://www.google.com/search?q=Arlan+Medya', color: '#4285F4' },
                     ].map((s, i) => (
                       <a
                         key={i}
@@ -275,6 +298,7 @@ export default function IletisimPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-8 h-8 rounded-lg bg-white/[0.05] hover:bg-[#38BDF8]/20 flex items-center justify-center transition-colors group"
+                        title={s.icon === SiGoogle ? 'Google İşletme Profilimiz' : undefined}
                       >
                         <s.icon className="w-3.5 h-3.5 text-white/50 group-hover:text-[#38BDF8]" />
                       </a>
@@ -296,20 +320,61 @@ export default function IletisimPage() {
                   <ChevronRight className="w-4 h-4 text-[#25D366] group-hover:translate-x-1 transition-transform" />
                 </a>
 
+                {/* Google Business CTA */}
+                <a
+                  href="https://www.google.com/search?q=Arlan+Medya&rlz=1C1GCEU_trTR832TR832&oq=Arlan+Medya&aqs=chrome..69i57j69i60.1504j0j4&sourceid=chrome&ie=UTF-8#lrd=0x14caa3f4b8b8b8b8:0x1234567890abcdef,1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-4 rounded-xl bg-[#4285F4]/10 border border-[#4285F4]/20 hover:bg-[#4285F4]/15 transition-colors group"
+                >
+                  <div className="flex items-center gap-3">
+                    <SiGoogle className="w-5 h-5 text-[#4285F4]" />
+                    <div className="flex flex-col">
+                      <span className="text-white font-medium text-sm">Google'da Değerlendir</span>
+                      <span className="text-white/40 text-xs">Yorumunuz bizim için değerli</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 text-[#FFD700] fill-current" />
+                      ))}
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-[#4285F4] group-hover:translate-x-1 transition-transform ml-1" />
+                  </div>
+                </a>
+
                 {/* Map */}
                 <div className="rounded-2xl overflow-hidden bg-white/[0.02] border border-white/[0.06]">
                   <div className="px-4 py-3 flex items-center justify-between">
                     <span className="text-white/60 text-sm font-medium">Harita</span>
-                    <span className="text-white/30 text-xs">Opsiyonel</span>
+                    <button
+                      onClick={() => setIsMapLoaded(true)}
+                      className="text-white/50 hover:text-[#38BDF8] text-xs transition-colors"
+                    >
+                      {isMapLoaded ? 'Yüklendi' : 'Haritayı Yükle'}
+                    </button>
                   </div>
                   <div className="h-[220px]">
-                    <iframe
-                      title="Harita"
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="w-full h-full"
-                      src="https://www.google.com/maps?q=Istanbul&output=embed"
-                    />
+                    {isMapLoaded ? (
+                      <iframe
+                        title="Harita"
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="w-full h-full"
+                        src="https://www.google.com/maps?q=Istanbul&output=embed"
+                      />
+                    ) : (
+                      <div 
+                        className="w-full h-full bg-white/[0.02] flex items-center justify-center cursor-pointer hover:bg-white/[0.04] transition-colors"
+                        onClick={() => setIsMapLoaded(true)}
+                      >
+                        <div className="text-center">
+                          <MapPin className="w-8 h-8 text-white/30 mx-auto mb-2" />
+                          <p className="text-white/50 text-sm">Haritayı görmek için tıklayın</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </m.div>
@@ -520,7 +585,7 @@ export default function IletisimPage() {
                               KVKK Aydınlatma Metni
                             </button>
                             <span className="text-white/60">
-                              ’ni okudum, kişisel verilerimin iletişim amaçlı işlenmesini kabul ediyorum.
+                              'ni okudum, kişisel verilerimin iletişim amaçlı işlenmesini kabul ediyorum.
                             </span>{' '}
                             <span className="text-white/30">(Zorunlu)</span>
                           </span>
@@ -572,127 +637,6 @@ export default function IletisimPage() {
                       <p className="text-center text-white/30 text-xs">
                         Göndererek gizlilik politikamızı kabul etmiş olursunuz. (Kurumsal süreçler için NDA talep edebilirsiniz.)
                       </p>
-
-                      {/* KVKK Modal */}
-                      {isKvkkOpen && (
-                        <div
-                          className="fixed inset-0 z-[999] flex items-center justify-center px-4"
-                          role="dialog"
-                          aria-modal="true"
-                          tabIndex={-1}
-                          onClick={() => setIsKvkkOpen(false)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Escape') setIsKvkkOpen(false)
-                          }}
-                        >
-                          <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
-
-                          <div
-                            className="relative w-full max-w-2xl rounded-2xl bg-[#0b1220]/90 border border-white/10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] overflow-hidden"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#38BDF8]/35 to-transparent" />
-
-                            <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-                              <div className="flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-xl bg-[#38BDF8]/10 flex items-center justify-center">
-                                  <FileText className="w-4 h-4 text-[#38BDF8]" />
-                                </div>
-                                <div>
-                                  <h3 className="text-white font-semibold text-sm">KVKK Aydınlatma Metni</h3>
-                                  <p className="text-white/40 text-xs">Kişisel veri işleme bilgilendirmesi</p>
-                                </div>
-                              </div>
-
-                              <button
-                                type="button"
-                                onClick={() => setIsKvkkOpen(false)}
-                                className="w-9 h-9 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 flex items-center justify-center transition-colors"
-                                aria-label="Kapat"
-                              >
-                                <X className="w-4 h-4 text-white/70" />
-                              </button>
-                            </div>
-
-                            <div className="p-5">
-                              <div className="max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar text-white/60 text-xs leading-relaxed space-y-3">
-                                <p className="text-white/70">
-                                  <span className="text-white font-medium">Veri Sorumlusu:</span> Arlan Medya
-                                </p>
-
-                                <p>
-                                  Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) kapsamında, iletişim formu aracılığıyla
-                                  paylaştığınız kişisel verilerin işlenmesine ilişkin olarak sizi bilgilendirmek amacıyla hazırlanmıştır.
-                                </p>
-
-                                <p className="text-white/70 font-medium">İşlenen Kişisel Veriler</p>
-                                <ul className="list-disc pl-5 space-y-1">
-                                  <li>Kimlik: Ad Soyad</li>
-                                  <li>İletişim: E-posta, Telefon</li>
-                                  <li>Kurumsal: Şirket adı (varsa)</li>
-                                  <li>Talep: Hizmet seçimi, bütçe, zaman çizelgesi, mesaj içeriği</li>
-                                </ul>
-
-                                <p className="text-white/70 font-medium">İşleme Amaçları</p>
-                                <ul className="list-disc pl-5 space-y-1">
-                                  <li>Talebinizi değerlendirmek ve size dönüş yapmak</li>
-                                  <li>Tekliflendirme / proje planlama sürecini yürütmek</li>
-                                  <li>İletişim faaliyetlerini sürdürmek</li>
-                                  <li>Hukuki yükümlülüklerin yerine getirilmesi</li>
-                                </ul>
-
-                                <p className="text-white/70 font-medium">Hukuki Sebep</p>
-                                <p>
-                                  Kişisel verileriniz, KVKK’nın 5. maddesinde yer alan hukuki sebeplere dayanarak; sözleşmenin kurulması/ifası için gerekli olması,
-                                  veri sorumlusunun meşru menfaati ve gerektiğinde açık rızanız kapsamında işlenebilir.
-                                </p>
-
-                                <p className="text-white/70 font-medium">Aktarım</p>
-                                <p>
-                                  Verileriniz, yalnızca hizmetin ifası için gerekli olması halinde; e-posta sağlayıcıları, barındırma (hosting), CRM sistemleri gibi
-                                  hizmet sağlayıcılarla sınırlı olmak üzere aktarılabilir.
-                                </p>
-
-                                <p className="text-white/70 font-medium">Saklama Süresi</p>
-                                <p>
-                                  Verileriniz, ilgili mevzuatta öngörülen süreler ve işleme amacının gerektirdiği süre boyunca saklanır; sürenin sonunda silinir, yok edilir
-                                  veya anonimleştirilir.
-                                </p>
-
-                                <p className="text-white/70 font-medium">Haklarınız</p>
-                                <p>
-                                  KVKK’nın 11. maddesi kapsamındaki haklarınıza ilişkin taleplerinizi, <span className="text-white/80">info@arlanmedya.com</span> üzerinden
-                                  iletebilirsiniz.
-                                </p>
-                              </div>
-
-                              <div className="mt-5 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-                                <p className="text-white/30 text-[11px]">Not: Metni şirket unvanı/adres ile özelleştirmeniz önerilir.</p>
-
-                                <div className="flex gap-2">
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      setConsents((p) => ({ ...p, kvkk: true }))
-                                      setIsKvkkOpen(false)
-                                    }}
-                                    className="px-4 py-2 rounded-xl bg-[#38BDF8]/15 hover:bg-[#38BDF8]/20 border border-[#38BDF8]/25 text-[#38BDF8] text-xs font-semibold transition-colors"
-                                  >
-                                    Okudum, Onaylıyorum
-                                  </button>
-                                  <button
-                                    type="button"
-                                    onClick={() => setIsKvkkOpen(false)}
-                                    className="px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-white/70 text-xs font-medium transition-colors"
-                                  >
-                                    Kapat
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
                     </form>
                   )}
                 </div>
@@ -701,6 +645,16 @@ export default function IletisimPage() {
           </div>
         </div>
 
+        {/* KVKK Modal */}
+        <KVKKModal 
+          isOpen={isKvkkOpen}
+          onClose={() => setIsKvkkOpen(false)}
+          onAccept={() => {
+            setConsents((p) => ({ ...p, kvkk: true }))
+            setIsKvkkOpen(false)
+          }}
+        />
+
         {/* ✅ TEK style jsx: nested yok */}
         <style jsx>{`
           .contact-select {
@@ -708,21 +662,6 @@ export default function IletisimPage() {
             background-repeat: no-repeat;
             background-position: right 0.75rem center;
             background-size: 1.25rem;
-          }
-
-          .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-          }
-          .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 999px;
-          }
-          .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(56, 189, 248, 0.25);
-            border-radius: 999px;
-          }
-          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(56, 189, 248, 0.4);
           }
         `}</style>
       </LazyMotion>

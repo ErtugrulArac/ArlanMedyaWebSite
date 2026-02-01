@@ -708,7 +708,7 @@ const AboutSection = () => {
           {/* Main Text */}
           <div className="space-y-8 text-lg sm:text-xl text-white/70 leading-relaxed">
             <p>
-              <span className="text-white font-medium">Arlan Medya</span>, 2016 yılında 
+              <span className="text-white font-medium">Arlan Medya</span>, 2021 yılında 
               <span className="text-white"> Ertuğrul Araç</span> tarafından kuruldu. 
               Amacımız basit: işletmelerin dijital dünyada güçlü bir şekilde var olmasını sağlamak.
             </p>
@@ -734,7 +734,7 @@ const AboutSection = () => {
             </ul>
 
             <p>
-              4 yılda onlarca proje tamamladık. Her biri farklı, her biri 
+              5 yılda onlarca proje tamamladık. Her biri farklı, her biri 
               müşterisinin ihtiyacına göre tasarlandı. Çünkü kopyala-yapıştır iş yapmıyoruz.
             </p>
           </div>
@@ -779,7 +779,7 @@ const FounderSection = () => {
             </h2>
 
             <p className="text-white/50 text-lg leading-relaxed mb-8">
-              Yazılım geliştirme ve dijital pazarlama alanında 10+ yıllık deneyim. 
+              Yazılım geliştirme ve dijital pazarlama alanında 5+ yıllık deneyim. 
               İşlerin doğru yapılması gerektiğine inanan, detaylara takılan biri. 
               Ekibiyle birlikte her projeye aynı özenle yaklaşıyor.
             </p>
@@ -810,6 +810,7 @@ const FounderSection = () => {
                   </div>
                   <div className="text-white font-medium">CEO & Founder</div>
                   <div className="text-white/40 text-sm">Arlan Medya</div>
+                  <div className="text-white font-semibold text-lg mt-2">Ertuğrul Araç</div>
                 </div>
               </div>
 

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import { FileCode, ArrowRight, Phone, Sparkles, Terminal, GitBranch, Database, Cpu, Code2, Braces, Cloud, Server } from 'lucide-react'
 
 // ==================== TYPEWRITER SLOGANS ====================
@@ -338,6 +339,8 @@ const GlowingOrb = ({
 
 // ==================== ANA COMPONENT ====================
 const KodKarti = () => {
+  const router = useRouter()
+
   return (
     <section className="relative py-16 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
       {/* ========== BACKGROUND ELEMENTS ========== */}
@@ -478,23 +481,29 @@ const KodKarti = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <motion.button
-                className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white overflow-hidden w-full sm:w-auto justify-center"
+                className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white overflow-hidden w-full sm:w-auto justify-center cursor-pointer"
                 style={{
                   background: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)',
                   boxShadow: '0 20px 40px -15px rgba(56, 189, 248, 0.5)',
                 }}
                 whileHover={{ scale: 1.03, boxShadow: '0 25px 50px -12px rgba(56, 189, 248, 0.6)' }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  router.push('/iletisim')
+                }}
               >
                 <span className="relative z-10 text-sm sm:text-base">Ücretsiz Danışmanlık</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
               </motion.button>
               
               <motion.button
-                className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white border border-white/20 w-full sm:w-auto justify-center"
+                className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white border border-white/20 w-full sm:w-auto justify-center cursor-pointer"
                 style={{ background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(10px)' }}
                 whileHover={{ scale: 1.03, borderColor: 'rgba(56, 189, 248, 0.5)', background: 'rgba(56, 189, 248, 0.05)' }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  window.location.href = 'tel:+905307464899'
+                }}
               >
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#38BDF8]" />
                 <span className="text-sm sm:text-base">Bizi Arayın</span>

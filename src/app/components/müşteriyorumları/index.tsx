@@ -802,8 +802,8 @@ const MusteriYorumlari = () => {
           >
             <Quote className="w-12 h-12 mx-auto mb-6 text-[#38BDF8]/30" />
             <p className="text-xl sm:text-2xl lg:text-3xl font-light text-white/80 leading-relaxed italic">
-              &ldquo;Başarı, doğru zamanda doğru stratejiyle buluştuğunda ortaya çıkar. 
-              Biz sadece dijital pazarlama yapmıyoruz; <span className="text-[#38BDF8] font-medium not-italic">markanızın hikayesini</span> yazıyoruz.&rdquo;
+              &ldquo;Dijital dönüşümünüzün  
+                <span className="text-[#38BDF8] font-medium not-italic"> bir partneri olarak </span>yanınızdayız..&rdquo;
             </p>
             <motion.div 
               className="mt-8 flex items-center justify-center gap-3"

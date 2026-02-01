@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 // Heavy UI components are dynamically imported for better performance
 const ServiceCard = dynamic(() => import('../ui/service-card'))
 const LogoLoop = dynamic(() => import('../ui/logo-loop'))
 const TrueFocus = dynamic(() => import('../ui/true-focus'))
-import { SiGoogle, SiMeta, SiLinkedin, SiX, SiInstagram, SiYoutube, SiTiktok, SiSpotify } from 'react-icons/si'
+import { SiGoogle, SiMeta, SiLinkedin, SiX, SiInstagram, SiYoutube, SiTiktok, SiSpotify, SiReact, SiNextdotjs, SiNodedotjs, SiTypescript, SiTailwindcss, SiMongodb, SiPostgresql, SiFigma } from 'react-icons/si'
 import { Sparkles, ArrowRight, Code, Palette, Globe, Zap, Database, Cloud, Shield, Cpu, Layers, Box, Rocket, Smartphone, Monitor, Server, Wifi, Lock } from 'lucide-react'
 
 // Premium Animated Background with Expanding Rings and Floating Icons
@@ -274,6 +275,7 @@ AnimatedCounter.displayName = 'AnimatedCounter'
 // <Image src="/path/to/image.jpg" width={400} height={300} alt="Açıklama" priority />
 
 const MainHero = () => {
+  const router = useRouter()
   return (
     <section className="relative overflow-hidden pt-16 lg:pt-32">
       {/* Premium Animated Background with Rings and Icons */}
@@ -368,13 +370,16 @@ const MainHero = () => {
             >
               {/* Primary Button */}
               <motion.button
-                className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-[#0F172A] overflow-hidden"
+                className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-[#0F172A] overflow-hidden cursor-pointer"
                 style={{
                   background: 'linear-gradient(135deg, #38BDF8 0%, rgba(56, 189, 248, 0.8) 100%)',
                   boxShadow: '0 4px 24px rgba(56, 189, 248, 0.35)',
                 }}
                 whileHover={{ scale: 1.02, y: -3, boxShadow: '0 8px 32px rgba(56, 189, 248, 0.5)' }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  router.push('/iletisim')
+                }}
               >
                 <span>Hemen Başlayın</span>
                 <motion.span
@@ -386,7 +391,7 @@ const MainHero = () => {
 
               {/* Secondary Button */}
               <motion.button 
-                className="group relative px-8 py-4 rounded-full font-medium text-white/90 overflow-hidden"
+                className="group relative px-8 py-4 rounded-full font-medium text-white/90 overflow-hidden cursor-pointer"
                 style={{
                   background: 'rgba(248, 251, 255, 0.08)',
                   border: '1px solid rgba(248, 251, 255, 0.18)',
@@ -394,6 +399,9 @@ const MainHero = () => {
                 }}
                 whileHover={{ scale: 1.02, y: -2, background: 'rgba(248, 251, 255, 0.14)', borderColor: 'rgba(248, 251, 255, 0.3)' }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  router.push('/hizmetlerimiz')
+                }}
               >
                 <span>Hizmetleri İncele</span>
               </motion.button>
@@ -420,6 +428,14 @@ const MainHero = () => {
                     { node: <SiYoutube className="text-slate-400 hover:text-white transition-colors" />, title: "YouTube" },
                     { node: <SiTiktok className="text-slate-400 hover:text-white transition-colors" />, title: "TikTok" },
                     { node: <SiSpotify className="text-slate-400 hover:text-white transition-colors" />, title: "Spotify" },
+                    { node: <SiReact className="text-slate-400 hover:text-[#61DAFB] transition-colors" />, title: "React" },
+                    { node: <SiNextdotjs className="text-slate-400 hover:text-white transition-colors" />, title: "Next.js" },
+                    { node: <SiNodedotjs className="text-slate-400 hover:text-[#339933] transition-colors" />, title: "Node.js" },
+                    { node: <SiTypescript className="text-slate-400 hover:text-[#3178C6] transition-colors" />, title: "TypeScript" },
+                    { node: <SiTailwindcss className="text-slate-400 hover:text-[#06B6D4] transition-colors" />, title: "Tailwind CSS" },
+                    { node: <SiMongodb className="text-slate-400 hover:text-[#47A248] transition-colors" />, title: "MongoDB" },
+                    { node: <SiPostgresql className="text-slate-400 hover:text-[#336791] transition-colors" />, title: "PostgreSQL" },
+                    { node: <SiFigma className="text-slate-400 hover:text-[#F24E1E] transition-colors" />, title: "Figma" },
                   ]}
                   speed={80}
                   direction="left"

@@ -368,7 +368,7 @@ const WhyUsSection = () => {
                     Dijital Mükemmellik
                   </h3>
                   <p className="text-white/40 text-lg">
-                    2017'den beri premium dijital çözümler
+                    2021'den beri premium dijital çözümler
                   </p>
                 </div>
                 
@@ -405,7 +405,7 @@ const WhyUsSection = () => {
                 </span>
               </h2>
               <p className="text-lg text-white/50 leading-relaxed">
-                8 yılı aşkın deneyimimizle, markaların dijital dönüşüm yolculuğunda 
+                5 yılı aşkın deneyimimizle, markaların dijital dönüşüm yolculuğunda 
                 güvenilir iş ortağı olmaya devam ediyoruz.
               </p>
             </div>

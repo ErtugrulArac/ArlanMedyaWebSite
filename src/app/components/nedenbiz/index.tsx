@@ -7,7 +7,7 @@ const Rotating3DCube = React.memo(() => {
     <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64" style={{ perspective: '1200px' }}>
       {/* Outer Rotating Ring */}
       <div className="absolute inset-0 animate-spin-slow">
-        <div 
+        <div
           className="absolute inset-0 rounded-full"
           style={{
             border: '2px dashed rgba(56, 189, 248, 0.3)',
@@ -32,7 +32,7 @@ const Rotating3DCube = React.memo(() => {
 
       {/* Secondary Ring - Counter Rotate */}
       <div className="absolute inset-4 sm:inset-5 md:inset-6 animate-spin-reverse">
-        <div 
+        <div
           className="absolute inset-0 rounded-full"
           style={{
             border: '1px solid rgba(168, 85, 247, 0.2)',
@@ -46,9 +46,9 @@ const Rotating3DCube = React.memo(() => {
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* Front Face - Main Logo Display */}
-        <div 
+        <div
           className="absolute inset-0 flex items-center justify-center rounded-2xl sm:rounded-3xl overflow-hidden"
-          style={{ 
+          style={{
             transform: 'translateZ(40px)',
             background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))',
             border: '1px solid rgba(56, 189, 248, 0.3)',
@@ -56,17 +56,17 @@ const Rotating3DCube = React.memo(() => {
           }}
         >
           {/* Inner Glow */}
-          <div 
+          <div
             className="absolute inset-0"
             style={{
               background: 'radial-gradient(circle at center, rgba(56, 189, 248, 0.1) 0%, transparent 70%)',
             }}
           />
-          
+
           {/* Logo */}
-          <img 
-            src="/logolar/arlanlogonav.webp" 
-            alt="Arlan Logo" 
+          <img
+            src="/logolar/arlanlogonav.webp"
+            alt="Arlan Logo"
             className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain animate-logo-glow"
           />
 
@@ -76,26 +76,26 @@ const Rotating3DCube = React.memo(() => {
           <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-[#38BDF8]/40 rounded-bl" />
           <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-[#38BDF8]/40 rounded-br" />
         </div>
-        
+
         {/* Back Face */}
-        <div 
+        <div
           className="absolute inset-0 flex items-center justify-center rounded-2xl sm:rounded-3xl"
-          style={{ 
+          style={{
             transform: 'rotateY(180deg) translateZ(40px)',
             background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))',
             border: '1px solid rgba(168, 85, 247, 0.3)',
             boxShadow: '0 0 40px rgba(168, 85, 247, 0.2)',
           }}
         >
-          <div 
+          <div
             className="absolute inset-0"
             style={{
               background: 'radial-gradient(circle at center, rgba(168, 85, 247, 0.1) 0%, transparent 70%)',
             }}
           />
-          <img 
-            src="/logolar/arlanlogonav.webp" 
-            alt="Arlan Logo" 
+          <img
+            src="/logolar/arlanlogonav.webp"
+            alt="Arlan Logo"
             className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain opacity-80"
             style={{ filter: 'hue-rotate(60deg)' }}
           />
@@ -170,11 +170,11 @@ const Rotating3DCube = React.memo(() => {
 Rotating3DCube.displayName = 'Rotating3DCube'
 
 // Animated Text Line Component
-const AnimatedTextLine = ({ 
-  children, 
+const AnimatedTextLine = ({
+  children,
   delay = 0,
   className = ""
-}: { 
+}: {
   children: React.ReactNode
   delay?: number
   className?: string
@@ -192,15 +192,15 @@ const AnimatedTextLine = ({
 }
 
 // Highlight Text Component
-const HighlightText = ({ 
-  children, 
-  color = "#38BDF8" 
-}: { 
+const HighlightText = ({
+  children,
+  color = "#38BDF8"
+}: {
   children: React.ReactNode
-  color?: string 
+  color?: string
 }) => {
   return (
-    <span 
+    <span
       className="relative inline-block"
       style={{ color }}
     >
@@ -244,14 +244,14 @@ const contentSections = [
 // Main Component
 const NedenBiz = () => {
   return (
-    <section 
+    <section
       id="neden-biz"
       className="relative py-16 sm:py-24 md:py-32 overflow-hidden"
       aria-labelledby="why-us-title"
     >
       {/* Subtle Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             background: `
@@ -277,9 +277,9 @@ const NedenBiz = () => {
                 Farkımız
               </span>
             </AnimatedTextLine>
-            
+
             <AnimatedTextLine delay={0.2}>
-              <h2 
+              <h2
                 id="why-us-title"
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.15] mb-4"
               >
@@ -310,9 +310,9 @@ const NedenBiz = () => {
               {/* Section Label */}
               <div className={`lg:w-1/4 ${index % 2 === 1 ? 'lg:text-right' : ''}`}>
                 <div className="inline-flex items-center gap-2 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-                  <span 
+                  <span
                     className="text-3xl sm:text-4xl lg:text-5xl font-bold"
-                    style={{ 
+                    style={{
                       color: section.color,
                       textShadow: `0 0 40px ${section.color}30`
                     }}
@@ -320,7 +320,7 @@ const NedenBiz = () => {
                     0{index + 1}
                   </span>
                 </div>
-                <h3 
+                <h3
                   className="text-xs sm:text-sm font-semibold tracking-widest uppercase mt-1"
                   style={{ color: `${section.color}90` }}
                 >
@@ -336,7 +336,7 @@ const NedenBiz = () => {
                     {' '}Çalışma Prensibi
                   </h4>
                 </AnimatedTextLine>
-                
+
                 <AnimatedTextLine delay={0.2}>
                   <p className="text-xs sm:text-sm lg:text-base text-white/60 leading-relaxed max-w-xl">
                     {section.description}
@@ -346,7 +346,7 @@ const NedenBiz = () => {
                 {/* Decorative Line */}
                 <div
                   className="mt-4 sm:mt-6 h-px max-w-xs sm:max-w-md animate-expand-width"
-                  style={{ 
+                  style={{
                     background: `linear-gradient(90deg, ${section.color}30, transparent)`,
                     animationDelay: '0.4s'
                   }}
@@ -360,18 +360,18 @@ const NedenBiz = () => {
         <div className="mt-24 sm:mt-32 text-center animate-fade-in">
           <blockquote className="relative max-w-4xl mx-auto">
             {/* Quote Mark */}
-            <span 
+            <span
               className="absolute -top-8 left-1/2 -translate-x-1/2 text-8xl sm:text-9xl font-serif opacity-10 text-[#38BDF8]"
               aria-hidden="true"
             >
               "
             </span>
-            
+
             <AnimatedTextLine delay={0.1}>
               <p className="text-2xl sm:text-3xl md:text-4xl font-medium text-white leading-relaxed">
-                Bizimle çalışmak, sadece bir ajans tutmak değil;
-                <span className="text-[#38BDF8]"> dijital dönüşümünüzde güvenilir bir partner </span>
-                kazanmaktır.
+                Başarı, zamanla yoğrulan kusursuz stratejinin sakin zaferidir
+                <span className="text-[#38BDF8]"> Biz yalnızca pazarlama yapmıyor markanıza güven veren bir gelecek  </span>
+                yazıyoruz.
               </p>
             </AnimatedTextLine>
 
@@ -390,13 +390,13 @@ const NedenBiz = () => {
         {/* CTA */}
         <div className="mt-16 sm:mt-20 text-center animate-fade-in" style={{ animationDelay: '0.3s' }}>
           <a
-            href="#contact"
+            href="/iletisim"
             className="group inline-flex items-center gap-3 text-lg font-medium text-[#38BDF8] hover:text-white transition-all duration-300 hover:translate-x-2"
           >
             <span>Birlikte çalışalım</span>
-            <ArrowRight 
-              size={20} 
-              className="group-hover:translate-x-2 transition-transform" 
+            <ArrowRight
+              size={20}
+              className="group-hover:translate-x-2 transition-transform"
             />
           </a>
         </div>
