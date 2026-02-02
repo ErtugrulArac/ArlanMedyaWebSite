@@ -164,7 +164,8 @@ export async function POST(request: NextRequest) {
       console.log('✅ SMTP bağlantısı başarılı')
     } catch (smtpError) {
       console.error('❌ SMTP bağlantı hatası:', smtpError)
-      throw new Error(`SMTP bağlantı hatası: ${smtpError.message}`)
+      const errorMessage = smtpError instanceof Error ? smtpError.message : String(smtpError)
+      throw new Error(`SMTP bağlantı hatası: ${errorMessage}`)
     }
 
     // Email HTML template
@@ -288,7 +289,8 @@ export async function POST(request: NextRequest) {
       })
     } catch (mailError) {
       console.error('❌ Mail gönderim hatası:', mailError)
-      throw new Error(`Mail gönderim hatası: ${mailError.message}`)
+      const errorMessage = mailError instanceof Error ? mailError.message : String(mailError)
+      throw new Error(`Mail gönderim hatası: ${errorMessage}`)
     }
 
     console.log('✅ İşlem tamamlandı')
