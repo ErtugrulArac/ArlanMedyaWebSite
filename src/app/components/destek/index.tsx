@@ -427,7 +427,7 @@ const DestekSection = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              destek@arlanmedya.com
+              info@arlanmedya.com
             </motion.a>
           </div>
         </motion.div>

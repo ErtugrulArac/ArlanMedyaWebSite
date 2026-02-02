@@ -47,11 +47,7 @@ const Navbar = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
         return
       }
-      setShowLoader(true)
-      setTimeout(() => {
-        router.push('/')
-        setTimeout(() => setShowLoader(false), 800)
-      }, 100)
+      router.push('/')
       return
     }
 
@@ -59,11 +55,7 @@ const Navbar = () => {
     if (link === pathname) return
 
     // Normal yönlendirme
-    setShowLoader(true)
-    setTimeout(() => {
-      router.push(link)
-      setTimeout(() => setShowLoader(false), 800)
-    }, 100)
+    router.push(link)
   }, [pathname, router])
 
   const socialItems = [
@@ -78,12 +70,8 @@ const Navbar = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
-    // Değilsek anasayfaya yönlendir ve scroll'u en üste yap
-    setShowLoader(true)
-    setTimeout(() => {
-      router.push('/')
-      setTimeout(() => setShowLoader(false), 800)
-    }, 100)
+    // Değilsek anasayfaya yönlendir
+    router.push('/')
   }, [pathname, router])
 
   return (

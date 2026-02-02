@@ -20,7 +20,6 @@ import {
   Briefcase,
   Headphones,
   FileText,
-  X,
   Star,
 } from 'lucide-react'
 import { SiInstagram, SiX, SiLinkedin, SiWhatsapp, SiGoogle } from 'react-icons/si'
@@ -34,13 +33,13 @@ export default function IletisimPage() {
 
   useEffect(() => {
     setIsClient(true)
-    
+
     const checkMobile = () => {
       if (typeof window !== 'undefined') {
         setIsMobile(window.innerWidth < 768)
       }
     }
-    
+
     checkMobile()
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
@@ -100,10 +99,7 @@ export default function IletisimPage() {
     []
   )
 
-  const timelines = useMemo(
-    () => ['Acil (1-2 hafta)', 'Kısa (2-4 hafta)', 'Orta (1-2 ay)', 'Uzun (3 ay+)', 'Esnek'],
-    []
-  )
+  const timelines = useMemo(() => ['Acil (1-2 hafta)', 'Kısa (2-4 hafta)', 'Orta (1-2 ay)', 'Uzun (3 ay+)', 'Esnek'], [])
 
   const features = useMemo(
     () => [
@@ -114,16 +110,12 @@ export default function IletisimPage() {
     []
   )
 
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      const { name, value } = e.target
-      // Batch updates to prevent multiple re-renders
-      requestAnimationFrame(() => {
-        setFormData((prev) => ({ ...prev, [name]: value }))
-      })
-    },
-    []
-  )
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    requestAnimationFrame(() => {
+      setFormData((prev) => ({ ...prev, [name]: value }))
+    })
+  }, [])
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -141,11 +133,18 @@ export default function IletisimPage() {
       setIsSubmitting(true)
 
       try {
-        // ✅ Burayı gerçek endpoint ile değiştir:
-        // await fetch('/api/contact', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ ...formData, consents }) })
-        
-        await new Promise((resolve) => setTimeout(resolve, 1100))
-        
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...formData, consents }),
+        })
+
+        const result = await response.json()
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Bir hata oluştu')
+        }
+
         setIsSubmitted(true)
 
         setTimeout(() => {
@@ -167,6 +166,7 @@ export default function IletisimPage() {
         }, 3500)
       } catch (error) {
         console.error('Form submission error:', error)
+        alert(error instanceof Error ? error.message : 'Bir hata oluştu. Lütfen tekrar deneyin.')
       } finally {
         setIsSubmitting(false)
       }
@@ -183,15 +183,19 @@ export default function IletisimPage() {
           transition: { duration: 0.55, delay },
         }
 
+  // ✅ Footer'ı da client hazır olduktan sonra render ediyoruz (tasarım aynı, teknik daha stabil)
+  if (!isClient) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-white">Yükleniyor...</div>
+      </div>
+    )
+  }
+
   return (
-    <>
-      {!isClient ? (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-white">Yükleniyor...</div>
-        </div>
-      ) : (
-        <LazyMotion features={domAnimation}>
-          <div className="min-h-screen pt-28 pb-12 sm:pt-36 sm:pb-20 relative overflow-hidden">
+    <LazyMotion features={domAnimation}>
+      <>
+        <div className="min-h-screen pt-28 pb-12 sm:pt-36 sm:pb-20 relative overflow-hidden">
           {/* Minimal Background */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#38BDF8] rounded-full blur-[200px] opacity-[0.04]" />
@@ -299,10 +303,10 @@ export default function IletisimPage() {
                   <span className="text-white/50 text-sm">Takip edin</span>
                   <div className="flex gap-2">
                     {[
-                      { icon: SiInstagram, href: 'https://instagram.com/arlanmedya', color: '#E1306C', label: 'Instagram' },
-                      { icon: SiX, href: 'https://twitter.com/arlanmedya', color: '#000000', label: 'Twitter' },
-                      { icon: SiLinkedin, href: 'https://linkedin.com/company/arlanmedya', color: '#0077B5', label: 'LinkedIn' },
-                      { icon: SiGoogle, href: 'https://www.google.com/search?q=Arlan+Medya', color: '#4285F4', label: 'Google İşletme Profilimiz' },
+                      { icon: SiInstagram, href: 'https://instagram.com/arlanmedya', label: 'Instagram' },
+                      { icon: SiX, href: 'https://twitter.com/arlanmedya', label: 'Twitter' },
+                      { icon: SiLinkedin, href: 'https://linkedin.com/company/arlanmedya', label: 'LinkedIn' },
+                      { icon: SiGoogle, href: 'https://www.google.com/search?q=Arlan+Medya', label: 'Google İşletme Profilimiz' },
                     ].map((s, i) => (
                       <a
                         key={i}
@@ -361,10 +365,7 @@ export default function IletisimPage() {
                 <div className="rounded-2xl overflow-hidden bg-white/[0.02] border border-white/[0.06]">
                   <div className="px-4 py-3 flex items-center justify-between">
                     <span className="text-white/60 text-sm font-medium">Harita</span>
-                    <button
-                      onClick={() => setIsMapLoaded(true)}
-                      className="text-white/50 hover:text-[#38BDF8] text-xs transition-colors"
-                    >
+                    <button onClick={() => setIsMapLoaded(true)} className="text-white/50 hover:text-[#38BDF8] text-xs transition-colors">
                       {isMapLoaded ? 'Yüklendi' : 'Haritayı Yükle'}
                     </button>
                   </div>
@@ -378,7 +379,7 @@ export default function IletisimPage() {
                         src="https://www.google.com/maps?q=Istanbul&output=embed"
                       />
                     ) : (
-                      <div 
+                      <div
                         className="w-full h-full bg-white/[0.02] flex items-center justify-center cursor-pointer hover:bg-white/[0.04] transition-colors"
                         onClick={() => setIsMapLoaded(true)}
                       >
@@ -435,7 +436,9 @@ export default function IletisimPage() {
                             onChange={handleChange}
                             className="w-full px-4 py-3.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#38BDF8]/40 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer contact-select"
                           >
-                            <option value="" className="bg-slate-900 text-white/50">Konu Seçin</option>
+                            <option value="" className="bg-slate-900 text-white/50">
+                              Konu Seçin
+                            </option>
                             {topics.map((t) => (
                               <option key={t.value} value={t.value} className="bg-slate-900">
                                 {t.label}
@@ -528,9 +531,13 @@ export default function IletisimPage() {
                             onChange={handleChange}
                             className="w-full px-4 py-3.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#38BDF8]/40 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer contact-select"
                           >
-                            <option value="" className="bg-slate-900 text-white/50">Hizmet Seçin</option>
+                            <option value="" className="bg-slate-900 text-white/50">
+                              Hizmet Seçin
+                            </option>
                             {services.map((s) => (
-                              <option key={s} value={s} className="bg-slate-900">{s}</option>
+                              <option key={s} value={s} className="bg-slate-900">
+                                {s}
+                              </option>
                             ))}
                           </select>
                           <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 rotate-90 pointer-events-none" />
@@ -543,9 +550,13 @@ export default function IletisimPage() {
                             onChange={handleChange}
                             className="w-full px-4 py-3.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#38BDF8]/40 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer contact-select"
                           >
-                            <option value="" className="bg-slate-900 text-white/50">Bütçe Aralığı (Opsiyonel)</option>
+                            <option value="" className="bg-slate-900 text-white/50">
+                              Bütçe Aralığı (Opsiyonel)
+                            </option>
                             {budgetRanges.map((b) => (
-                              <option key={b} value={b} className="bg-slate-900">{b}</option>
+                              <option key={b} value={b} className="bg-slate-900">
+                                {b}
+                              </option>
                             ))}
                           </select>
                           <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 rotate-90 pointer-events-none" />
@@ -560,9 +571,13 @@ export default function IletisimPage() {
                           onChange={handleChange}
                           className="w-full px-4 py-3.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#38BDF8]/40 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer contact-select"
                         >
-                          <option value="" className="bg-slate-900 text-white/50">Zaman Çizelgesi (Opsiyonel)</option>
+                          <option value="" className="bg-slate-900 text-white/50">
+                            Zaman Çizelgesi (Opsiyonel)
+                          </option>
                           {timelines.map((t) => (
-                            <option key={t} value={t} className="bg-slate-900">{t}</option>
+                            <option key={t} value={t} className="bg-slate-900">
+                              {t}
+                            </option>
                           ))}
                         </select>
                         <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 transition-colors group-focus-within:text-[#38BDF8] pointer-events-none" />
@@ -597,9 +612,7 @@ export default function IletisimPage() {
                             >
                               KVKK Aydınlatma Metni
                             </button>
-                            <span className="text-white/60">
-                              'ni okudum, kişisel verilerimin iletişim amaçlı işlenmesini kabul ediyorum.
-                            </span>{' '}
+                            <span className="text-white/60">’ni okudum, kişisel verilerimin iletişim amaçlı işlenmesini kabul ediyorum.</span>{' '}
                             <span className="text-white/30">(Zorunlu)</span>
                           </span>
                         </label>
@@ -659,7 +672,7 @@ export default function IletisimPage() {
         </div>
 
         {/* KVKK Modal */}
-        <KVKKModal 
+        <KVKKModal
           isOpen={isKvkkOpen}
           onClose={() => setIsKvkkOpen(false)}
           onAccept={() => {
@@ -677,10 +690,9 @@ export default function IletisimPage() {
             background-size: 1.25rem;
           }
         `}</style>
-        </LazyMotion>
-      )}
 
-      <Footer />
-    </>
+        <Footer />
+      </>
+    </LazyMotion>
   )
 }

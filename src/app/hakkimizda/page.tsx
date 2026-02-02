@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import Head from 'next/head'
 import Image from 'next/image'
 import { 
   ArrowRight,
@@ -320,8 +321,7 @@ const HeroSection = () => {
 
           {/* Subtitle */}
           <p className="text-center text-lg sm:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed">
-            2021'den bu yana işletmelerin dijital varlıklarını oluşturuyor, 
-            geliştiriyor ve yönetiyoruz. Laf değil, iş üretiyoruz.
+            Arlan Medya, markaların dijital dünyada güçlü ve sürdürülebilir bir konum elde etmesini sağlayan profesyonel bir dijital pazarlama ajansıdır. Kurumsal web sitesi tasarımı, SEO çalışmaları ve dijital yönetim hizmetleriyle işletmelerin çevrimiçi görünürlüğünü artırır; stratejik, ölçülebilir ve performans odaklı çözümler geliştirir.
           </p>
         </div>
       </div>

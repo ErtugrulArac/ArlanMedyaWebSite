@@ -10,6 +10,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@tabler/icons-react": "^3.36.1",
@@ -20,6 +21,7 @@
     "lucide-react": "^0.562.0",
     "motion": "^12.28.1",
     "next": "16.1.4",
+    "nodemailer": "^7.0.13",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-icons": "^5.5.0",
@@ -30,6 +32,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^7.0.9",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",

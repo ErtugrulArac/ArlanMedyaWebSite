@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import Head from 'next/head'
 import { useRouter } from 'next/navigation'
 import { 
   Monitor, 
@@ -771,8 +772,8 @@ const ServicesSection = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
             Hizmetlerimiz
           </h2>
-          <p className="text-white/50 text-base sm:text-lg max-w-2xl mx-auto px-4">
-            Her biri alanında uzman ekiplerle, işletmenizin dijital ihtiyaçlarını karşılıyoruz.
+          <p className="text-white/50  text-base sm:text-lg max-w-2xl mx-auto px-4">
+           Arlan Medya olarak işletmelere özel kurumsal web sitesi tasarımı, SEO hizmetleri ve dijital pazarlama çözümleri sunuyoruz. Her markanın ihtiyacına uygun strateji geliştirerek dijital görünürlüğünüzü artırıyor, hedef kitlenize daha hızlı ulaşmanızı sağlıyoruz. <br /> <br /> Performans odaklı yaklaşımımız sayesinde web siteniz yalnızca güzel görünmez, aynı zamanda Google’da üst sıralara çıkacak şekilde optimize edilir.
           </p>
         </div>
 
@@ -1156,7 +1157,7 @@ export default function HizmetlerimizPage() {
   
   return (
     <>
-      <main className="relative z-10 min-h-screen bg-[#050816]">
+      <main className="relative z-10 min-h-screen bg-[#050816] overflow-x-hidden">
         {/* Global Grid Pattern */}
         <div className="fixed inset-0 z-0 pointer-events-none" style={{
           backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.02) 1px, transparent 1px)`,

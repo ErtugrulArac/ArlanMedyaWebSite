@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Head from 'next/head'
 import Link from 'next/link'
 import { ArrowRight, Sparkles, Zap, Palette, Code2, Rocket, Check, Star, Trophy, Users, Clock, ShieldCheck, Target, Gem, Handshake } from 'lucide-react'
 import Footer from '../components/footer'
