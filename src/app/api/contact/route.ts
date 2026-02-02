@@ -147,7 +147,7 @@ export async function POST(request: NextRequest) {
       hasPassword: !!process.env.SMTP_PASS
     })
 
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       service: 'gmail', // Gmail service shortcut
       auth: {
         user: process.env.SMTP_USER,
