@@ -542,8 +542,19 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                       onClick={(e) => {
                         e.preventDefault()
                         
+                        // Anasayfa linkine tıklandığında her zaman en üste scroll et
+                        if (it.link === '/') {
+                          closeMenu()
+                          setTimeout(() => {
+                            if (window.location.pathname === '/') {
+                              window.scrollTo({ top: 0, behavior: 'smooth' })
+                            } else {
+                              router.push('/')
+                            }
+                          }, 350)
+                        }
                         // Hash linkleri için scroll işlemi
-                        if (it.link.includes('#')) {
+                        else if (it.link.includes('#')) {
                           closeMenu()
                           setTimeout(() => {
                             const [path, hash] = it.link.split('#')
