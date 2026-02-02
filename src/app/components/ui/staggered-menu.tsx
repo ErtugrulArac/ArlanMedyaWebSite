@@ -432,7 +432,13 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           <button 
             onClick={() => {
               closeMenu()
-              setTimeout(() => router.push('/'), 350)
+              setTimeout(() => {
+                if (window.location.pathname === '/') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                } else {
+                  router.push('/')
+                }
+              }, 350)
             }}
             className="sm-logo flex items-center gap-3 select-none pointer-events-auto group" 
             aria-label="Logo"
