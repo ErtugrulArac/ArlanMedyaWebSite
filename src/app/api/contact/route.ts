@@ -51,8 +51,16 @@ function isValidEmail(email: string): boolean {
 // Telefon validasyonu (Türkiye formatı)
 function isValidPhone(phone: string): boolean {
   if (!phone) return true // Opsiyonel alan
-  const phoneRegex = /^(\+90|0)?[0-9]{10}$/
-  return phoneRegex.test(phone.replace(/\s/g, ''))
+  
+  // Sadece sayıları al
+  const cleanPhone = phone.replace(/\D/g, '')
+  
+  // Türkiye telefon formatları:
+  // 05xxxxxxxxx (11 rakam)
+  // 90532xxxxxxx (11 rakam, 90 ile başlayan)
+  // 532xxxxxxx (9 rakam, 0 olmadan)
+  
+  return cleanPhone.length >= 9 && cleanPhone.length <= 13
 }
 
 // Sanitize input
