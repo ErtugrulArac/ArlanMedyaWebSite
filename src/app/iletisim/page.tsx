@@ -25,6 +25,7 @@ import {
 import { SiInstagram, SiX, SiLinkedin, SiWhatsapp, SiGoogle } from 'react-icons/si'
 import Footer from '../components/footer'
 import KVKKModal from '../components/ui/kvkk-modal'
+import { CustomSelect } from '../components/ui/custom-select'
 
 export default function IletisimPage() {
   const reduce = useReducedMotion()
@@ -112,10 +113,15 @@ export default function IletisimPage() {
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
-    requestAnimationFrame(() => {
+    // Mobilde daha hızlı güncelleme
+    if (isMobile) {
       setFormData((prev) => ({ ...prev, [name]: value }))
-    })
-  }, [])
+    } else {
+      requestAnimationFrame(() => {
+        setFormData((prev) => ({ ...prev, [name]: value }))
+      })
+    }
+  }, [isMobile])
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -428,41 +434,28 @@ export default function IletisimPage() {
 
                       {/* Topic + Contact */}
                       <div className="grid sm:grid-cols-2 gap-4">
-                        <div className="relative">
-                          <select
-                            name="topic"
-                            required
-                            value={formData.topic}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#38BDF8]/40 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer contact-select"
-                          >
-                            <option value="" className="bg-slate-900 text-white/50">
-                              Konu Seçin
-                            </option>
-                            {topics.map((t) => (
-                              <option key={t.value} value={t.value} className="bg-slate-900">
-                                {t.label}
-                              </option>
-                            ))}
-                          </select>
-                          <Briefcase className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 pointer-events-none" />
-                        </div>
+                        <CustomSelect
+                          name="topic"
+                          options={topics.map(t => ({ value: t.value, label: t.label, icon: <t.icon className="w-4 h-4" /> }))}
+                          value={formData.topic}
+                          onChange={(value) => setFormData(prev => ({ ...prev, topic: value }))}
+                          placeholder="Konu Seçin"
+                          required
+                          className="flex-1"
+                        />
 
-                        <div className="relative">
-                          <select
-                            name="preferredContact"
-                            value={formData.preferredContact}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#38BDF8]/40 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer contact-select"
-                          >
-                            {['E-posta', 'Telefon', 'WhatsApp'].map((v) => (
-                              <option key={v} value={v} className="bg-slate-900">
-                                İletişim Tercihi: {v}
-                              </option>
-                            ))}
-                          </select>
-                          <Phone className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 pointer-events-none" />
-                        </div>
+                        <CustomSelect
+                          name="preferredContact"
+                          options={[
+                            { value: 'E-posta', label: 'İletişim Tercihi: E-posta', icon: <Mail className="w-4 h-4" /> },
+                            { value: 'Telefon', label: 'İletişim Tercihi: Telefon', icon: <Phone className="w-4 h-4" /> },
+                            { value: 'WhatsApp', label: 'İletişim Tercihi: WhatsApp', icon: <SiWhatsapp className="w-4 h-4" /> }
+                          ]}
+                          value={formData.preferredContact}
+                          onChange={(value) => setFormData(prev => ({ ...prev, preferredContact: value }))}
+                          placeholder="İletişim Tercihi"
+                          className="flex-1"
+                        />
                       </div>
 
                       {/* Name + Email */}
@@ -523,65 +516,37 @@ export default function IletisimPage() {
 
                       {/* Service + Budget */}
                       <div className="grid sm:grid-cols-2 gap-4">
-                        <div className="relative">
-                          <select
-                            name="service"
-                            required
-                            value={formData.service}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#38BDF8]/40 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer contact-select"
-                          >
-                            <option value="" className="bg-slate-900 text-white/50">
-                              Hizmet Seçin
-                            </option>
-                            {services.map((s) => (
-                              <option key={s} value={s} className="bg-slate-900">
-                                {s}
-                              </option>
-                            ))}
-                          </select>
-                          <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 rotate-90 pointer-events-none" />
-                        </div>
+                        <CustomSelect
+                          name="service"
+                          options={services.map(s => ({ value: s, label: s }))}
+                          value={formData.service}
+                          onChange={(value) => setFormData(prev => ({ ...prev, service: value }))}
+                          placeholder="Hizmet Seçin"
+                          required
+                          icon={<Briefcase className="w-4 h-4" />}
+                          className="flex-1"
+                        />
 
-                        <div className="relative">
-                          <select
-                            name="budget"
-                            value={formData.budget}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#38BDF8]/40 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer contact-select"
-                          >
-                            <option value="" className="bg-slate-900 text-white/50">
-                              Bütçe Aralığı (Opsiyonel)
-                            </option>
-                            {budgetRanges.map((b) => (
-                              <option key={b} value={b} className="bg-slate-900">
-                                {b}
-                              </option>
-                            ))}
-                          </select>
-                          <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 rotate-90 pointer-events-none" />
-                        </div>
+                        <CustomSelect
+                          name="budget"
+                          options={budgetRanges.map(b => ({ value: b, label: b }))}
+                          value={formData.budget}
+                          onChange={(value) => setFormData(prev => ({ ...prev, budget: value }))}
+                          placeholder="Bütçe Aralığı (Opsiyonel)"
+                          icon={<ChevronRight className="w-4 h-4 rotate-90" />}
+                          className="flex-1"
+                        />
                       </div>
 
                       {/* Timeline */}
-                      <div className="relative group">
-                        <select
-                          name="timeline"
-                          value={formData.timeline}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white text-sm focus:outline-none focus:border-[#38BDF8]/40 focus:bg-white/[0.05] transition-all appearance-none cursor-pointer contact-select"
-                        >
-                          <option value="" className="bg-slate-900 text-white/50">
-                            Zaman Çizelgesi (Opsiyonel)
-                          </option>
-                          {timelines.map((t) => (
-                            <option key={t} value={t} className="bg-slate-900">
-                              {t}
-                            </option>
-                          ))}
-                        </select>
-                        <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 transition-colors group-focus-within:text-[#38BDF8] pointer-events-none" />
-                      </div>
+                      <CustomSelect
+                        name="timeline"
+                        options={timelines.map(t => ({ value: t, label: t }))}
+                        value={formData.timeline}
+                        onChange={(value) => setFormData(prev => ({ ...prev, timeline: value }))}
+                        placeholder="Zaman Çizelgesi (Opsiyonel)"
+                        icon={<Calendar className="w-4 h-4" />}
+                      />
 
                       {/* Message */}
                       <textarea
