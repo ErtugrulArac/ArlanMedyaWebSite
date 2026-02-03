@@ -2,6 +2,7 @@
 
 import React, { useCallback, useMemo, useState, useEffect } from 'react'
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import {
   Send,
   Mail,
@@ -28,6 +29,7 @@ import KVKKModal from '../components/ui/kvkk-modal'
 import { CustomSelect } from '../components/ui/custom-select'
 
 export default function IletisimPage() {
+  const router = useRouter()
   const reduce = useReducedMotion()
   const [isMobile, setIsMobile] = useState(false)
   const [isClient, setIsClient] = useState(false)
@@ -151,25 +153,8 @@ export default function IletisimPage() {
           throw new Error(result.error || 'Bir hata oluştu')
         }
 
-        setIsSubmitted(true)
-
-        setTimeout(() => {
-          setIsSubmitted(false)
-          setFormData({
-            name: '',
-            email: '',
-            company: '',
-            phone: '',
-            topic: '',
-            service: '',
-            budget: '',
-            timeline: '',
-            preferredContact: 'E-posta',
-            message: '',
-            website: '',
-          })
-          setConsents({ kvkk: false, marketing: false })
-        }, 3500)
+        // Başarılı form gönderimi sonrası teşekkürler sayfasına yönlendir
+        router.push('/tesekkurler')
       } catch (error) {
         console.error('Form submission error:', error)
         alert(error instanceof Error ? error.message : 'Bir hata oluştu. Lütfen tekrar deneyin.')
@@ -177,7 +162,7 @@ export default function IletisimPage() {
         setIsSubmitting(false)
       }
     },
-    [consents.kvkk, formData]
+    [consents.kvkk, formData, router]
   )
 
   const motionIn = (delay = 0) =>
