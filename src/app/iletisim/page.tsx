@@ -27,9 +27,11 @@ import { SiInstagram, SiX, SiLinkedin, SiWhatsapp, SiGoogle } from 'react-icons/
 import Footer from '../components/footer'
 import KVKKModal from '../components/ui/kvkk-modal'
 import { CustomSelect } from '../components/ui/custom-select'
+import { useLoading } from '../context/LoadingContext'
 
 export default function IletisimPage() {
   const router = useRouter()
+  const { setIsLoading } = useLoading()
   const reduce = useReducedMotion()
   const [isMobile, setIsMobile] = useState(false)
   const [isClient, setIsClient] = useState(false)
@@ -153,16 +155,16 @@ export default function IletisimPage() {
           throw new Error(result.error || 'Bir hata oluştu')
         }
 
-        // Başarılı form gönderimi sonrası teşekkürler sayfasına yönlendir
+        // Global loading'i aktif et ve teşekkürler sayfasına yönlendir
+        setIsLoading(true)
         router.push('/tesekkurler')
       } catch (error) {
         console.error('Form submission error:', error)
         alert(error instanceof Error ? error.message : 'Bir hata oluştu. Lütfen tekrar deneyin.')
-      } finally {
         setIsSubmitting(false)
       }
     },
-    [consents.kvkk, formData, router]
+    [consents.kvkk, formData, router, setIsLoading]
   )
 
   const motionIn = (delay = 0) =>

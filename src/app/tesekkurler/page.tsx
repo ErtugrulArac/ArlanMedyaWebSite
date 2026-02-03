@@ -5,15 +5,19 @@ import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
 import { CheckCircle2, ArrowLeft, Home, Mail, MessageSquare, Sparkles, Heart, Star } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useLoading } from '../context/LoadingContext'
 
 export default function TesekkurlerPage() {
   const reduce = useReducedMotion()
   const [isClient, setIsClient] = useState(false)
   const router = useRouter()
+  const { setIsLoading } = useLoading()
 
   useEffect(() => {
     setIsClient(true)
-  }, [])
+    // Sayfa yüklendiğinde global loading'i kapat
+    setIsLoading(false)
+  }, [setIsLoading])
 
   const motionIn = (delay = 0) =>
     reduce || !isClient
