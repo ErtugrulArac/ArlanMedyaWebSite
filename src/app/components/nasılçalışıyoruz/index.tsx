@@ -54,7 +54,7 @@ const processSteps = [
   {
     id: 5,
     title: "Dağıtım & Destek",
-    description: "Uygulamayı üretim ortamında dağıtıyoruz, CI/CD pipeline'ını kuruyoruz. Sonrası destek ve bakım sağlıyoruz, güvenlik güncellemeleri yapıyoruz.",
+    description: "Yayına geçişten sonra da yanınızdayız; sitenizin veya sisteminizin güvenli, güncel ve sorunsuz çalışmasını sağlıyoruz.",
     icon: BarChart3,
     color: "#EC4899",
     gradient: "from-pink-500 to-rose-500",

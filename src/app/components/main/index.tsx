@@ -488,7 +488,7 @@ const MainHero = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
             <ServiceCard
               title="Web Geliştirme"
-              description="Next.js, React ve modern teknolojilerle kurumsal web siteleri. Core Web Vitals optimizasyonu ile Google'da üst sıralarda yer alın."
+              description="Next.js ve React ile modern web siteleri. Hızlı, güvenli ve SEO-optimizeli siteler geliştiriyoruz."
               gradient="from-blue-500 via-cyan-400 to-teal-500"
               delay={0}
               href="/hizmetlerimiz#hizmet-web"
@@ -501,7 +501,7 @@ const MainHero = () => {
 
             <ServiceCard
               title="Medya Yönetimi"
-              description="Instagram, Facebook, LinkedIn ve TikTok'ta profesyonel hesap yönetimi. İçerik üretimi, strateji geliştirme ve analiz raporlaması ile markanızı güçlendiriyoruz."
+              description="Sosyal medya yönetimi, içerik stratejisi ve analiz raporlaması. Markanızı dijitalde güçlendiriyoruz."
               gradient="from-purple-500 via-pink-500 to-rose-500"
               delay={0.1}
               href="/hizmetlerimiz#hizmet-media"

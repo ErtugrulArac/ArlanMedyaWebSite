@@ -109,7 +109,7 @@ const HeroSection = () => {
                   </div>
                   <div>
                     <div className="text-sm text-white/50">Toplam</div>
-                    <div className="text-2xl sm:text-3xl font-bold text-white">200+ Proje</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-white">100+ Proje</div>
                   </div>
                 </div>
                 
@@ -118,7 +118,7 @@ const HeroSection = () => {
                   {[
                     { icon: Star, value: '%97', label: 'Memnuniyet', color: 'from-[#FBBF24] to-[#F59E0B]' },
                     { icon: Users, value: '50+', label: 'Müşteri', color: 'from-[#38BDF8] to-[#0EA5E9]' },
-                    { icon: Clock, value: '8 Yıl', label: 'Deneyim', color: 'from-[#1E40AF] to-[#3B82F6]' },
+                    { icon: Clock, value: '5+ Yıl', label: 'Deneyim', color: 'from-[#1E40AF] to-[#3B82F6]' },
                   ].map((stat, i) => (
                     <div key={i} className="text-center p-3 sm:p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors group">
                       <div className={`w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3 rounded-xl bg-linear-to-br ${stat.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
@@ -287,10 +287,10 @@ const ProcessSection = () => {
 // ============================================
 const WhyUsSection = () => {
   const stats = [
-    { value: '200+', label: 'Başarılı Proje', suffix: '' },
-    { value: '8', label: 'Yıllık Deneyim', suffix: '+' },
+    { value: '100+', label: 'Başarılı Proje', suffix: '' },
+    { value: '5', label: 'Yıllık Deneyim', suffix: '+' },
     { value: '97', label: 'Müşteri Memnuniyeti', suffix: '%' },
-    { value: '50', label: 'Kurumsal Müşteri', suffix: '+' },
+    { value: '30', label: 'Kurumsal Müşteri', suffix: '+' },
   ]
 
   const values = [

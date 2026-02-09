@@ -469,7 +469,7 @@ const KodKarti = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Arlan Medya olarak, işletmenizin dijital dönüşümünü uçtan uca yönetiyoruz. 
-              Modern teknolojiler ve yaratıcı çözümlerle markanızı geleceğe taşıyoruz.
+              Modern teknolojiler ve gelişmiş çözümlerle markanızı geleceğe taşıyoruz.
             </motion.p>
 
             {/* CTA Buttons */}

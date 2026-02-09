@@ -13,10 +13,10 @@ const faqData: FAQItem[] = [
     question: 'Ajansınız işletmelerin büyümesine nasıl yardımcı oluyor?',
     answer: 'Dijital stratejiler, modern web siteleri, mobil uygulamalar ve etkili pazarlama kampanyaları ile markanızı büyütüyoruz. Her projeyi özel olarak analiz ediyor ve işletmenize en uygun çözümü sunuyoruz.'
   },
-  {
-    question: 'Uluslararası müşterilerle çalışıyor musunuz?',
-    answer: 'Kesinlikle! Türkiye, Avrupa ve Amerika\'dan 150+ global müşteri ile çalıştık. Her pazara özel çözümler sunarak uluslararası standartlarda hizmet veriyoruz.'
-  },
+ {
+  question: 'Proje başladıktan sonra sürece dahil olabiliyor muyum?',
+  answer: 'Evet. Sürecin her aşamasında sizinle iletişimde kalıyor, önemli kararları birlikte alıyoruz. Böylece ortaya çıkan iş tam olarak beklentinizi yansıtıyor.'
+},
   {
     question: 'Tipik bir proje ne kadar sürer?',
     answer: 'Proje kapsamına göre değişmekle birlikte; basit web siteleri 2-4 hafta, kapsamlı e-ticaret projeleri 6-10 hafta, mobil uygulamalar ise 8-16 hafta sürebilir. Başlangıçta net bir zaman planı sunuyoruz.'
