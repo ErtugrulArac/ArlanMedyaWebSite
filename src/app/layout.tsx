@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono, IBM_Plex_Serif, Poppins, Work_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar";
@@ -101,6 +102,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" suppressHydrationWarning data-scroll-behavior="smooth">
+      <head>
+        {/* Google Ads tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17894365829"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-config" strategy="afterInteractive">
+          {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-17894365829');
+    `}
+        </Script>
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${ibmPlexSerif.variable} ${poppins.variable} ${workSans.variable} antialiased`}
         style={{ backgroundColor: "var(--bg-primary)", color: "var(--text-primary)" }}
