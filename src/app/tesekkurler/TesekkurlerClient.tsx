@@ -17,6 +17,14 @@ export default function TesekkurlerClient() {
     setIsClient(true)
     // Sayfa yüklendiğinde global loading'i kapat
     setIsLoading(false)
+    
+    // Google Ads conversion event (Thank you page)
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'conversion', {
+        send_to: 'AW-17894365829/bZgyCJj0ufYbEIW12dRC',
+        transaction_id: '',
+      })
+    }
   }, [setIsLoading])
 
   const motionIn = (delay = 0) =>
