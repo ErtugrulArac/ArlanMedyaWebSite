@@ -1028,6 +1028,7 @@ export default function HakkimizdaClient() {
           backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.02) 1px, transparent 1px)`,
           backgroundSize: '50px 50px',
         }} />
+       
         
         <HeroSection />
         <FounderSection />
